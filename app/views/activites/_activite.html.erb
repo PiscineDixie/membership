@@ -1,0 +1,47 @@
+
+<%= form_for(@activite) do |f| %>
+
+    <%  @activite.errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>  <p>
+      
+
+  <p>
+    <b>Code</b><br />
+    <%= f.text_field :code, :size => 2 %>
+  </p>
+
+  <p>
+    <b>Description (FR)</b><br />
+    <%= f.text_field :description_fr, :size => 20 %>
+  </p>
+
+  <p>
+    <b>URL Description (FR)</b><br />
+    <%= f.text_field :url_fr, :size => 50 %>
+  </p>
+
+  <p>
+    <b>Description (EN)</b><br />
+    <%= f.text_field :description_en, :size => 20 %>
+  </p>
+
+  <p>
+    <b>URL Description (EN)</b><br />
+    <%= f.text_field :url_en, :size => 50 %>
+  </p>
+
+  <p>
+    <b>Gratuit</b><br />
+      <td><%= f.select :gratuite, {'oui' => 1, 'non' => 0}, :selected => (@activite.gratuite ? 1 : 0) %></td>
+  </p>
+
+  <p>
+    <b>Coût</b><br />
+    <%= f.text_field :cout, :size => 8 %>
+  </p>
+
+  <p>
+    <%= f.submit button_name, :class => "submit" %>
+  </p>
+<% end %>

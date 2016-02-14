@@ -1,0 +1,24 @@
+<!-- Code pour generer le rapport des notes des familles -->
+<!-- Les variables sont:
+     @debut, @fin: Date du debut et de la fin du rapport
+     @notes: Liste des records a afficher
+-->
+
+<h1>Rapports des Notes des Familles</h1>
+<p>
+Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
+</p>
+<table>
+  <thead><th>Famille</th><th>Date</th><th>Auteur</th><th>Texte</th></thead>
+  <tbody>
+    <% @notes.each do | note | %>
+      <tr>
+        <td><%= link_to Famille.find(note.famille_id).nom, Famille.find(note.famille_id) %></td>
+        <td><%= note.date %></td>
+        <td><%= note.auteur %></td>
+        <td><%= note.info %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

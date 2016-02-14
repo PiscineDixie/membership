@@ -1,0 +1,14 @@
+<%= render(:partial => 'fr.header', :locals => {:famille => @famille } ) %>
+    <tr>
+       <td width="80%"><br/>
+
+        <p>Bonjour,</p>
+        
+        <p>Un paiement a été modifié. Il s'agit du paiement: <%= @paiement.id %>
+           de la famille <%= @famille.id %>.</p>
+        
+        <p>Il est passé du <%= @dp %> au <%= @paiement.date %>.</p>
+           
+      </td>
+    </tr>
+<%= render(:partial => 'fr.footer', :locals => {:famille => @famille } ) %>

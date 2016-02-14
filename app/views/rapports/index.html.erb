@@ -1,0 +1,66 @@
+<h1>Rapports</h1>
+
+<h2>Cours de Natation</h2>
+<%= link_to "Groupes de cours de natations", :id => Activite::natation.id, :controller => 'activites', :action => 'listeMembreNatation' %>
+
+<h2>Activités</h2>
+<%= form_tag :controller => 'activites', :action => 'listeMembre' do %>
+<table>
+<tr><td>Activité: </td><td><%= select_tag :activite, options_for_select(Activite.descriptions)%></td/></tr>
+</table>
+  <%= submit_tag "Générer" %>
+<% end %>
+
+<h2>Participation communautaire</h2>
+<%= form_tag :controller => 'participations', :action => 'listeMembre' do %>
+<table>
+<tr><td>Activité: </td><td><%= select_tag :participation, options_for_select(Participation.descriptions)%></td/></tr>
+</table>
+  <%= submit_tag "Générer" %>
+<% end %>
+
+
+<h2>Membres</h2>
+<%= link_to "Statistiques", stats_familles_path  %><br/>
+<%= link_to "Cotisations",  cotisations_familles_path %><br/>
+<%= link_to "Ecussons et billets",  ecussons_familles_path %><br/>
+<%= link_to "Liste des membres séniors", :controller => 'membres', :action => 'seniors' %><br/>
+<%= link_to "Liste des familles sans courriels", :controller => 'familles', :action => 'pas_courriels' %><br/>
+<%= link_to "Liste des familles inactives", :controller => 'familles', :action => 'inactifs' %><br/>
+<%= link_to "Liste des membres", :controller => 'membres', :action => 'index' %><br/>
+
+<h2>Revenus</h2>
+<%= form_tag :controller => 'paiements', :action => 'revenus' do %>
+<table>
+<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
+<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
+</table>
+  <%= submit_tag "Générer" %>
+<% end %>
+<p/>
+
+<h2>Dépôts bancaires</h2>
+<%= form_tag :controller => 'paiements', :action => 'depots' do %>
+<table>
+<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
+<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
+</table>
+  <%= submit_tag "Générer" %>
+<% end %>
+<p/>
+
+<h2>Notes des familles</h2>
+<%= form_tag :controller => 'notes', :action => 'rapport' do %>
+<table>
+<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
+<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
+</table>
+  <%= submit_tag "Générer" %>
+<% end %>
+<p/>
+
+<h2>Cotisations dûes</h2>
+<p>
+<%= link_to "Générer rapport", {:action => "dues", :controller => 'familles'} %>
+</p>
+<p/>

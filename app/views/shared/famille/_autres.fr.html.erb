@@ -1,0 +1,27 @@
+<div id="autres">
+  <div id="billets">
+    <h2>Billets d'invités</h2>
+    <p>
+      Les billets permettent à vos invités de vous accompagner à la piscine durant la fin de semaine puisque durant
+      ces périodes il n'est pas possible de se procurer un laissez-passer à la porte. Durant la semaine, les invités peuvent
+      utiliser ces billets ou se procurer des laissez-passers au coût de $5.00 chacun.
+    </p>
+    <label>Nombres de billets (livrets de 10 au coût de $<%= number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2) %>):</label>
+    <%= select_tag 'famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets) %>
+  </div>
+  
+  <!-- on affiche seulement l'espace pour une note si interface public -->
+  <% if url.include?('public') %>
+    <div id="notes">
+      <h2>Note</h2>
+      <p>
+        Utilisez cet espace pour ajouter toute informations supplémentaire.
+      </p>
+      <%= text_area_tag 'note', @note, :rows => '3', :cols => '70' %>
+    </div>
+  <% end %>
+
+<br/>
+<%= f.submit "Enregistrer" %><br/><br/>
+
+</div> <!-- autres -->

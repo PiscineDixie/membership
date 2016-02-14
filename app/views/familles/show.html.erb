@@ -1,0 +1,120 @@
+<div id="showFamille">
+<h1>Famille <%= @famille.nom %></h1>
+
+<div id="coordonneeFamille">
+<h2>Coordonnées</h2>
+
+<table>
+  <colgroup><col id="hdr"/> <col id="data"/></colgroup>
+  <tbody>
+  <tr><td class="heading">Adresse1:</td><td><%= @famille.adresse1 %></td></tr>
+  <tr><td class="heading">Adresse2:</td><td><%= @famille.adresse2 %></td></tr>
+  <tr><td class="heading">Ville:</td><td><%= @famille.ville %></td></tr>
+  <tr><td class="heading">Province:</td><td><%= @famille.province %></td></tr>
+  <tr><td class="heading">Code postal:</td><td><%= code_postal_fmt(@famille.code_postal) %></td></tr>
+  <tr><td class="heading">Tél soir:</td><td><%= number_to_phone(@famille.tel_soir) %></td></tr>
+  <tr><td class="heading">Tél jour:</td><td><%= number_to_phone(@famille.tel_jour) %></td></tr>
+  <tr><td class="heading">Courriel1:</td>
+    <% if @famille.courriel1.empty? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @famille.courriel1, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel1 %></td>
+    <% end %>
+  </tr>
+  <tr><td class="heading">Courriel2:</td>
+    <% if @famille.courriel2.empty? %>
+      <td></td>
+    <% else %>
+      <td><%= link_to @famille.courriel2, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel2 %></td>
+    <% end %>
+  </tr>
+  <tr><td class="heading">Langue:</td><td><%= @famille.langue %></td></tr>
+  <tr><td class="heading">Etat:</td><td><%= @famille.etat %></td></tr>
+  </tbody>
+</table>
+</div>
+
+
+<h2>Membres</h2>
+<% unless @famille.membres.empty? %>
+  <table id="listeMembres">
+    <colgroup><col id="nom"/><col id="naissance"/><col id="act"/><col id="op1"/><col id="op2"/></colgroup>
+    <thead><tr>
+      <th>Nom</th><th>Naissance</th><th>Activités</th><th></th><th></th>
+    </tr></thead>
+    <tbody>
+      <%= render :partial => 'membre', :collection => @famille.membres %>
+    </tbody>
+  </table>
+<% end %>
+
+<%= link_to 'Modifier famille', edit_famille_path(@famille) %> |
+<% unless @famille.courriels.empty? %>
+  <%= link_to 'Expédier courriel', :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriels.join(' ') %> |
+<% end %>
+<%= link_to 'Expédier reçu', recu_famille_path(@famille) %> |
+<% if @famille.active? %>
+  <%= link_to 'Rendre inactive', desactive_famille_path(@famille), method: :post %> |
+<% end %>
+<%= link_to 'Enlever famille', @famille, :confirm => 'Etes-vous certain?', :method => :delete %>
+
+
+<h2>Cotisation</h2>
+<% if @famille.cotisation %>
+<table id="sommaireCotisation">
+  <colgroup><col id="hdr"/> <col id="data"/> </colgroup>
+  <tbody>
+  <% if @famille.cotisation.cout_billets > 0 %>
+    <tr><th class="heading">Billets:</th><td class="number"><%= number_with_precision(@famille.cotisation.cout_billets, :precision => 2) %></td></tr>
+  <% end %>
+  <tr><th class="heading">Total:</th><td class="number"><%= number_with_precision(@famille.cotisation.total, :precision => 2) %></td></tr>
+  <tr><th class="heading">Montant dû:</th><td class="number"><%= number_with_precision(@famille.cotisationDue, :precision => 2) %> </td></tr>
+  </tbody>
+</table>
+<% end %>
+
+<% unless @famille.paiements.empty? %>
+<h3>Paiements</h3>
+  <table id="listePaiements">
+    <colgroup><col id="date"/><col id="mon"/><col id="op1"/><col id="op2"/><col id="op3"/></colgroup>
+    <thead><tr><th>Date</th><th class="number">Montant</th><th></th><th></th><th></th></tr></thead>
+    <tbody>
+  <% @famille.paiements.each do | paiement | %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= paiement.date %> </td>
+      <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
+      <td><%= link_to 'Annuler', famille_paiement_path(@famille, paiement), :confirm => 'Etes-vous certain?', :method => :delete %></td>
+      <td><%= link_to 'Afficher', famille_paiement_path(@famille, paiement) %></td>
+      <td><%= link_to 'Modifier', edit_famille_paiement_path(@famille, paiement) %></td>
+    </tr>
+  <% end %>
+  </tbody></table>
+<% end %>
+<%= link_to 'Calculer cotisation', new_famille_cotisation_path(@famille) %>
+<% if @famille.cotisation %>
+| <%= link_to 'Ajouter paiement', new_famille_paiement_path(@famille) %>
+| <%= link_to 'Afficher détails', famille_cotisation_path(@famille) %>
+| <%= link_to 'Modifier cotisation', edit_famille_cotisation_path(@famille) %>
+<% end %>
+
+<h2>Dossier</h2>
+<% unless @famille.notes.empty? %>
+  <table id="listeNote">
+    <colgroup><col id="date"/><col id="user"/><col id="sum"/><col id="op1"/></colgroup>
+    <thead>
+      <tr><th>Date</th><th>Auteur</th><th>Sommaire</th></tr>
+    </thead>
+    <tbody>
+  <% @famille.notes.each do | note | %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= note.date %> </td>
+      <td><%= note.auteur %> </td>
+      <td><%= note.sommaire %> </td>
+      <td><%= link_to 'Afficher', [@famille, note] %></td>
+    <tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
+<%= link_to 'Ajouter note', new_famille_note_path(@famille) %>
+</div>

@@ -1,0 +1,41 @@
+
+<%= form_for([@famille, @paiement]) do |f| %>
+
+  <%  @paiement .errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+      
+  <p>
+    <b>Date</b><br />
+    <%= f.date_select :date %>
+  </p>
+
+  <p>
+    <b>Montant</b><br />
+    <%= f.text_field :montant, :size => 7, :precision => 2 %>
+  </p>
+
+  <p>
+    <b>Comptant</b>
+    <%= f.check_box :comptant %> ou 
+    <b>Numéro du chèque</b>
+    <%= f.text_field :no_cheque, :size => 10 %>
+  </p>
+  
+  <p>
+  </p>
+
+  <p>
+    <b>Note</b><br />
+    <%= f.text_field :note, :size => 30 %>
+  </p>
+
+  <p>
+    <b>Courriel de confirmation</b><br />
+    <%= check_box_tag('courriel', 1, true) %>
+  </p>
+
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>

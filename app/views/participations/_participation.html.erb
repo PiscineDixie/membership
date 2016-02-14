@@ -1,0 +1,22 @@
+
+
+<%= form_for(@participation) do |f| %>
+
+  <%  @participation.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+      
+  <p>
+    <b>Description (FR)</b><br />
+    <%= f.text_field :description_fr, :size => 20 %>
+  </p>
+
+  <p>
+    <b>Description (EN)</b><br />
+    <%= f.text_field :description_en, :size => 20 %>
+  </p>
+
+  <p>
+    <%= f.submit button_name, :class => "submit" %>
+  </p>
+<% end %>

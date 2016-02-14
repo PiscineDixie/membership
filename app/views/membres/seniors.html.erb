@@ -1,0 +1,15 @@
+
+<h1>Liste des membres séniors</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th><th colspan="2">Adresse</th><th>Téléphone Soir</th><th>Courriel</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @membres.each do | membre | %>
+      <tr><td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adresse1 %></td><td><%= membre.famille.adresse2 %></td><td><%= number_to_phone membre.famille.tel_soir%></td><td><%= membre.famille.courriels.fetch(0, '')%></td></tr>
+    <% end%>
+  </tbody>
+</table>

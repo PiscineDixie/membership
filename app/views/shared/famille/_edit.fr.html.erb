@@ -1,0 +1,34 @@
+<%= form_for :famille, :url => url, :html => { :method => method }  do |f| %>
+
+<div id="famille_tout">
+  
+<% hasErrors = !@famille.errors.full_messages.empty? %>
+<% @famille.membres.each { | membre | hasErrors = hasErrors || !membre.errors.full_messages.empty? } %>
+<% if hasErrors %>
+  <div id="errorExplanation">
+    <% @famille.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+  <% @famille.membres.each do | membre | %>
+    <% membre.errors.full_messages.each do | msg | %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
+
+<div id="header">
+  <a id="sel_coordonnees" href="coordonnees">1. Coordonnées</a>
+  <a id="sel_membres" href="membres">2. Membres</a>
+  <a id="sel_participations" href="participations">3. Implication Communautaire</a>
+  <a id="sel_autres" href="autres">4. Autres Info.</a>
+</div>
+
+<%= render :partial => 'shared/famille/coordonnees.'    + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
+<%= render :partial => 'shared/famille/membres.'        + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
+<%= render :partial => 'shared/famille/participations.' + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
+<%= render :partial => 'shared/famille/autres.'         + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f, :url => url } %>
+
+</div> <!-- famille_tout -->
+
+<% end %>

@@ -1,0 +1,26 @@
+<h1>Familles</h1>
+
+<% if @familles.nil? or @familles.empty? %>
+  <p>
+    Pour trouver une famille existante, faites une recherche dans la colonne de gauche. 
+    Vous pouvez entrer un nom, numéro de téléphone, ou code postal. Chacun en entier ou en partie.
+  </p>
+<% else %>
+  <table id="showFamilles">
+    <colgroup><col id="nom"/><col id="cp"/><col id="tel"/><col id="etat"/><col id="op1"/></colgroup>
+    <thead>
+    <tr>
+      <th>Famille</th>
+      <th>Code postal</th>
+      <th>Tél soir</th>
+      <th>Etat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%= render :partial => 'famille_show', :collection => @familles %>
+  </tbody>
+  </table>
+<% end %>
+
+
+<%= link_to 'Ajouter une famille', new_famille_path %>

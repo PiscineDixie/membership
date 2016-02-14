@@ -1,0 +1,41 @@
+<div id="participations">
+  <p>
+    A few hours will make a difference to make our pool a better place. Please select one or
+    more activities below where you would like to participate. If there are too few
+    volunteers for an activity, it will be cancelled. Don't hesitate to encourage your
+    teenagers: It's an excellent opportunity for them to learn new skills while contributing
+    to their community. Thanks.
+   </p>
+   
+  <div id="liste_participations">
+  <% idx = 0 %>
+  <% @famille.membres.each do | membre | %>
+    <div id="part_membres_<%= idx.to_s %>" class="membre">
+      <h2 id="part_nom_membres_<%= idx.to_s %>" class="nom"><%= membre.prenomNom %>&nbsp;</h2>
+      <!-- Ecrire les activites dans une tables de 3 colonnes -->
+      <div class="acts">
+        <table class="actstbl">
+          <colgroup><col id="act1box"/><col id="act1"/><col id="act2box"/><col id="act2"/><col id="act3box"/><col id="act3"/></colgroup>
+          <tbody><tr>
+            <% colIdx = 0 %>
+            <% Participation.all.each do | act | %>
+              <% if colIdx == 3 then %>
+                </tr><tr>
+                <% colIdx = 1 %>
+              <% else %>
+                <% colIdx = colIdx + 1 %>
+              <% end %>
+              <td><%= check_box_tag "famille[membres][" + idx.to_s + "][participations]["+act.id.to_s+"]", act.id, membre.participation?(act.id), :class => "box" %></td>
+              <td><%= act.description_en %></td>
+            <% end%>
+          </tr></tbody>
+        </table>
+      </div> <!-- acts -->
+    </div> <!-- un membre -->
+    <% idx = idx + 1 %>
+  <% end %>
+  </div> <!-- liste_participations -->
+
+  <br/>
+  <button id="lnk_autres" type="button">Next section</button>
+</div> 

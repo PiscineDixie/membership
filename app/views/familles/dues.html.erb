@@ -1,0 +1,23 @@
+<h1>Cotisations dûes</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th><th>Cotisation</th><th>Montant dû</th><th>Courriel</th><th>Tél Soir</th><th>Mise à jour</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @familles.each do | famille | %>
+      <% if famille.cotisationDue > 0 %>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td><%= link_to famille.nom, famille_path(famille) %></td>
+          <td align="right"><%= link_to number_with_precision(famille.cotisation.total, :precision => 2), famille_cotisation_path(famille) %></td>
+          <td align="right"><%= number_with_precision(famille.cotisationDue, :precision => 2) %></td>
+          <td><%= famille.courriels.empty? ? "" : famille.courriels[0] %></td>
+          <td><%= number_to_phone(famille.tel_soir) %></td>
+          <td><%= famille.cotisation.updated_at.to_date %></td>
+        </tr>
+      <% end %>
+    <% end %>
+  </tbody>
+</table>

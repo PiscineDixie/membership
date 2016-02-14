@@ -1,0 +1,14 @@
+<h1>Reçu d'impôt</h1>
+
+<p>Entrez le nom de la personne au nom de laquelle le reçu sera émis. Ce reçu s'applique
+aux frais payés par tous les membres éligibles. Il est expédié par courriel.</p>
+
+<%= form_tag :action => 'recu' do %>
+<table>
+  <tr><td>Nom:</td> <td><%= select_tag "parent", options_for_select(@famille.prenomNoms, '') %></td></tr>
+  <tr><td>Courriel:</td><td><%= select_tag "courriel", options_for_select(@famille.courriels, '') %></td></tr>
+</table>
+<br/><br/>
+<%= submit_tag "Envoi" %>
+<% end %>
+

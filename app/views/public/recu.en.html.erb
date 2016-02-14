@@ -1,0 +1,14 @@
+<h1>Income tax receipts</h1>
+
+<p>Enter the name of the person to which the receipts are written. A receipt is issued for each eligible child. 
+Receipts are sent to the email addresses in your family profile.</p>
+
+<%= form_tag :action => 'recu' do %>
+<table>
+  <tr><td>Name:</td> <td><%= select_tag "parent", options_for_select(@famille.prenomNoms, '') %></td></tr>
+  <tr><td>Email:</td><td><%= select_tag "courriel", options_for_select(@famille.courriels, '') %></td></tr>
+</table>
+<br/><br/>
+<%= submit_tag "Generate" %>
+<% end %>
+

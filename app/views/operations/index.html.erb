@@ -1,0 +1,26 @@
+<h1>Opérations</h1>
+
+<p>
+<%= link_to 'Expédier un courriel aux membres', :action => "courriel", :controller => 'familles' %>
+</p>
+
+
+<h2>Crédit d'impôt pour la condition physique des enfants</h2>
+<p>
+<%= button_to "Générer reçus", {:action => "recus", :controller => 'familles'} %>
+</p>
+<p>
+<%= button_to "Expédier reçus", {:action => "exp_recus", :controller => 'familles'}, :confirm => "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?" %>
+</p>
+
+<h2>Eliminer rabais de pré-inscription</h2>
+<p>Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
+de la période de pré-inscription mais qui n'ont pas envoyé au moins un paiement. Un courriel est expédié.
+<%= button_to "Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'} %>
+</p>
+
+<h2>Remise à zéro des données annuelles</h2>
+<p>
+<%= button_to "Remise à zéro", {:action => "debutAnnee", :controller => 'familles'}, :confirm => "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?" %>
+</p>
+

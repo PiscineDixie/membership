@@ -1,0 +1,306 @@
+body { background-color: #fff; color: #333; }
+
+body, p, ol, ul, td {
+  font-family: verdana, arial, helvetica, sans-serif;
+  font-size:   13px;
+  line-height: 18px;
+}
+
+h1 { font-size: 18px; }
+h2 { font-size: 16px; }
+h3 { font-size: 14px; }
+
+pre {
+  background-color: #eee;
+  padding: 10px;
+  font-size: 11px;
+}
+
+a { color: #000; }
+a:visited { color: #666; }
+a:hover { color: #fff; background-color:#000; }
+
+.fieldWithErrors {
+  padding: 2px;
+  background-color: red;
+  display: table;
+}
+
+#errorExplanation {
+  width: 40em;
+  border: 2px solid red;
+  padding: 7px;
+  padding-bottom: 12px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+}
+
+#errorExplanation h2 {
+  text-align: left;
+  font-weight: bold;
+  padding: 5px 5px 5px 15px;
+  font-size: 12px;
+  margin: -7px;
+  background-color: #c00;
+  color: #fff;
+}
+
+#errorExplanation p {
+  color: #333;
+  margin-bottom: 0;
+  padding: 5px;
+}
+
+#errorExplanation ul li {
+  font-size: 12px;
+  list-style: square;
+}
+
+div.uploadStatus {
+  margin: 5px;
+}
+
+div.progressBar {
+  margin: 5px;
+}
+
+div.progressBar div.border {
+  background-color: #fff;
+  border: 1px solid gray;
+  width: 100%;
+}
+
+div.progressBar div.background {
+  background-color: #333;
+  height: 18px;
+  width: 0%;
+}
+
+/* Styles for main page */
+#banner {
+  padding-top: 10px;
+  font: small-caps 40px/40px "Times New Roman", Times, serif;
+  margin-bottom: 0;
+}
+
+#banner img {
+}
+
+#columns {
+  margin-top: 0;
+  background: #034d94;
+}
+
+#main {
+  margin-left: 9em;
+  padding-top: 4ex;
+  padding-left: 2em;
+  background: white;
+}
+
+#side {
+  float: left;
+  margin-top: 0;
+  padding-top: 1em;
+  padding-left: 1em;
+  padding-bottom: 1em;
+  width: 8em;
+  background: #034d94;
+}
+
+#side a {
+  color: #ffffff;
+  font-size: inherit;
+  text-decoration: none;
+  margin-bottom: 2em;
+}
+
+#side a.subLink {
+  font-size: smaller;
+  margin-left: 1em;
+}
+
+#side span.lbl {
+  color: #ffffff;
+  display: block;
+}
+#side p.rech_hd {
+  color: #ffffff;
+  padding-top: 2em;
+  line-height: 0;
+}
+
+#notice {
+  border: 2px solid red;
+  padding: 1em;
+  margin-bottom: 2em;
+  background-color: #f0f0f0;
+  font: bold smaller sans-serif;
+}
+
+/*
+  Pour des belles tables
+*/
+table {
+  border-collapse: collapse;
+  width: 50em;
+}
+
+th, td {
+  padding: 0.1em 1em;
+}
+
+thead {
+  border-top: 1px solid #a5a5a5;
+  border-bottom: 1px solid #a5a5a5;
+}
+
+th {
+  font-weight: bold;
+  text-align: left;
+}
+
+/* For highlighting odd rows in a table */
+.odd {
+  background-color: #edf5ff;
+}
+
+/* Anything with a class of "number" is displayed right
+ aligned in a table cell */
+td.number, th.number {
+  text-align: right;
+}
+
+/* Used for table cells in a row leading table cell */
+td.heading {
+  font-weight: bold;
+}
+
+/*
+ * Pour les input de Firefox
+ */
+input[type="text"], textarea {
+  border-top: 2px solid #999;
+  border-left: 2px solid #999;
+  border-bottom: 1px solid #ccc;
+  border-right: 1px solid #ccc;
+}
+
+/*
+ * Display de toutes les familles
+ */
+
+table#showFamilles {
+  table-layout: fixed;
+}
+
+#showFamilles col#cp { width: 8em; }
+#showFamilles col#nom { width: 15em; }
+#showFamilles col#tel { width: 8em; }
+#showFamilles col#etat { width: 5em; }
+#showFamilles col#op1 { width: 5em; }
+#showFamilles col#op2 { width: 5em; }
+
+
+/*
+ * Display d'une famille
+*/
+
+table#listeNotes, table#listeMembres, table#sommaireCotisation,
+#coordonneeFamille table {
+  table-layout: auto;
+}
+
+table#listePaiements table {
+	table-layout: fixed;
+}
+
+#coordonneeFamille col#hdr { width: 10em; }
+
+#listeMembres col#nom { width: 12em; }
+#listeMembres col#naissance { width: 5em; }
+#listeMembres col#act { width: 10em; }
+#listeMembres col#op1 { width: 5em; }
+#listeMembres col#op2 { width: 5em; }
+#listeMembres col#op3 { width: 5em; }
+
+table#sommaireCotisation { width: 25em; }
+#sommaireCotisation col#hdr { width: 16em; }
+#sommaireCotisation col#data { width: 9em; }
+
+table#listePaiements { width: 35em; }
+#listePaiements col#date { width: 8em; }
+#listePaiements col#mon { width: 6m; }
+#listePaiements col#op1 { width: 4em; }
+#listePaiements col#op2 { width: 4em; }
+#listePaiements col#op3 { width: 4em; }
+
+#listeNotes col#date { width: 6em; }
+#listeNotes col#user { width: 6em; }
+#listeNotes col#sum  { width: 30em; }
+
+/*
+ * Entree d'une famille
+*/
+div#famille_tout p { width: 35em; text-align: left; }
+div#famille_tout div#header table { width: 45em; }
+div#famille_tout div#header a.selected { background-color: white; color: blue; font-weight: bold; text-decoration: underline; }
+div#famille_tout div#header a.unselected { background-color: yellow;  color: black; font-weight: bold; text-decoration: underline; }
+div#famille_tout div#header a { margin-right: 1em; }
+div#famille_tout table#coor { width: 35em; }
+div#famille_tout div#membres                        { position: relative; width: 600px; }
+div#famille_tout div#membres h2#infoecusson         { font-size: inherit; font-weight: bold; margin-bottom: 0; padding-bottom: 0;}
+div#famille_tout div#membres p#infoecusson          { margin-top: 0; padding-top: 0;}
+div#famille_tout div#membres ul#infoecusson         { margin-top: 0; padding-top: 0;}
+div#famille_tout div#membres p#head                 { padding-bottom: 1em; font-weight: bold; }
+div#famille_tout div#membres div.membre             { padding-bottom: 1.5em; }
+div#famille_tout div#membres label#prenom           { position: absolute; left: 1.5em; } 
+div#famille_tout div#membres label#nom              { position: absolute; left: 11em; } 
+div#famille_tout div#membres label#naissance        { position: absolute; left: 21em; } 
+div#famille_tout div#membres label#ecusson          { position: absolute; left: 36em; }
+div#famille_tout div#membres span.head              { position: absolute; left: 0; font-weight: bold}
+div#famille_tout div#membres input.prenom           { position: absolute; left: 1.5em; }
+div#famille_tout div#membres input.nom              { position: absolute; left: 11em; }
+div#famille_tout div#membres span.naissance         { position: absolute; left: 21em; }
+div#famille_tout div#membres select.ecusson         { position: absolute; left: 44em; }
+div#famille_tout div#membres div.info               { padding-bottom: 2em; }
+div#famille_tout div#membres div.acts               { position: relative; left: 1.5em; padding-bottom: .5em; }
+div#famille_tout div.acts table         { padding: 1em; width: 45em; }
+div#famille_tout div.acts td            { padding: 0em;}
+div#famille_tout div.acts input.box     { margin: 0; padding: 0; }
+div#famille_tout div.acts a.label       { margin: 0; padding: 0; }
+div#famille_tout div.acts col#act1box   { width: auto; }
+div#famille_tout div.acts col#act2box   { width: auto; }
+div#famille_tout div.acts col#act3box   { width: auto; }
+div#famille_tout div.acts col#act1      { width: 30%; }
+div#famille_tout div.acts col#act2      { width: 30%; }
+div#famille_tout div.acts col#act3      { width: 30%; }
+div#famille_tout div#membres span.enlBouton         { position: relative; left: 1.5em;  }
+div#famille_tout div#membres span.LN_details        { position: relative; left: 7em;  }
+
+div#famille_tout div#participations h2 { font-size: 12px; margin-top: 1em; margin-bottom: 0; padding-bottom: 0; }
+
+div#famille_tout div#billets h2                     { margin-top: 1.5em; margin-bottom: 0.5em;}
+div#famille_tout div#notes   h2                     { margin-top: 1.5em; margin-bottom: 0.5em;}
+
+
+/*
+ * Display pour les listes de membres
+ */
+
+table#listeMembre { width: 65em; }
+#listeMembre col#nom { width: 15em; }
+#listeMembre col#soir { width: 14em; }
+#listeMembre col#jour { width: 14em; }
+#listeMembre col#email { width: 20em; }
+
+
+/*
+ * Instructions pour impression de rapports. Enleve le menu.
+ */
+@media print {
+  div#side { display: none; width: 0; }
+  div#banner { background: #000; color: black;}
+  div#banner img { display: none; }
+  div#main { margin: 0; padding: 0;}
+}

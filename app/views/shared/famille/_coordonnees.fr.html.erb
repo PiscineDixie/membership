@@ -1,0 +1,29 @@
+<div id="coordonnees">
+  <p>Entrez les coordonnées de votre famille. Une adresse courriel est nécessaire
+     afin de recevoir un reçu d'impôt. Elle permet aussi à nos bénévoles de vous contacter
+     facilement (e.g., campagne de ré-abonnement).</p>
+  <table id="coor">
+    <colgroup><col id="cle"/><col id="data"/></colgroup>
+    <tbody>
+      <tr><td class="heading">Adresse1</td><td><%= f.text_field :adresse1 %></td></tr>
+      <tr><td class="heading">Adresse2</td><td><%= f.text_field :adresse2 %></td></tr>
+      <tr><td class="heading">Ville</td>   <td><%= f.text_field :ville %></td></tr>
+      <tr><td class="heading">Province</td><td><%= f.text_field :province, :size => 2 %></td></tr>
+      <tr><td class="heading">Code postal</td><td><%= f.text_field :code_postal, :size => 6 %></td></tr>
+      <tr><td class="heading">Tél soir</td><td><%= f.text_field :tel_soir, :size => 10 %></td></tr>
+      <tr><td class="heading">Tél jour</td><td><%= f.text_field :tel_jour, :size => 10 %></td></tr>
+      <tr><td class="heading">Courriel1</td><td><%= f.text_field :courriel1 %></td></tr>
+      <tr><td class="heading">Courriel2</td><td><%= f.text_field :courriel2 %></td></tr>
+      <tr><td class="heading">Langue</td>
+        <td>
+          <select id="famille_langue" name="famille[langue]">
+          <%= options_for_select(Famille::Langue, famille.langue) %>
+          </select>
+        </td></tr>
+      <tr><td><%= f.hidden_field :etat, :size => 2 %></td></tr>
+    </tbody>
+  </table>
+  
+  <br/>
+  <button id="lnk_membres" type="button">Section suivante</button>
+</div>

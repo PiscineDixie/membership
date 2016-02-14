@@ -1,0 +1,85 @@
+<div id="showProfil">
+<h1>Profile</h1>
+
+<div id="coordonneeFamille">
+<h2>Basic Data</h2>
+
+<table>
+  <colgroup><col id="hdr"/> <col id="data"/></colgroup>
+  <tbody>
+  <td class="heading">Address1:</th><td><%=h @famille.adresse1 %></td></tr>
+  <td class="heading">Address2:</th><td><%=h @famille.adresse2 %></td></tr>
+  <td class="heading">City:</th><td><%=h @famille.ville %></td></tr>
+  <td class="heading">Province:</th><td><%=h @famille.province %></td></tr>
+  <td class="heading">Postal code:</th><td><%= code_postal_fmt(@famille.code_postal) %></td></tr>
+  <td class="heading">Evening phone:</th><td><%= number_to_phone(@famille.tel_soir) %></td></tr>
+  <td class="heading">Day phone:</th><td><%= number_to_phone(@famille.tel_jour) %></td></tr>
+  <td class="heading">Email1:</th><td><%=h @famille.courriel1 %></td></tr>
+  <td class="heading">Email2:</th><td><%=h @famille.courriel2 %></td></tr>
+  <td class="heading">Language:</th><td><%= @famille.langue %></td></tr>
+  <td class="heading">State:</th><td><%= @famille.etat %></td></tr>
+  </tbody>
+</table>
+</p>
+</div>
+
+<h2>Members</h2>
+<% unless @famille.membres.empty? %>
+  <table id="listeMembres">
+    <colgroup><col id="nom"/> <col id="naissance"/><col id="act"/></colgroup>
+    <thead><tr>
+      <th>Name</th><th>Birthday</th><th>Activities</th>
+    </tr></thead>
+    <tbody>
+      <% @famille.membres.each do | membre | %>
+        <tr class="<%= cycle('odd', 'even') %>">
+          <td><%= membre.nomPrenom %></td>
+          <td><%= membre.naissance %></td>
+          <td><%= membre.listeActivites %></td>
+        <tr>
+      <% end %>
+    </tbody>
+  </table>
+<% end %>
+
+
+<h2>Fees</h2>
+<% if @famille.cotisation %>
+<%= render :partial => "cotisation.en", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+<% end %>
+
+<% unless @famille.paiements.empty? %>
+<h3>Payments Received</h3>
+  <table id="listePaiements">
+    <colgroup><col id="date"/><col id="mon"/><col id="op1"/><col id="op2"/></colgroup>
+    <thead><tr><th>Date</th><th class="number">Amount</th><th></th><th></th></tr></thead>
+    <tbody>
+  <% @famille.paiements.each do | paiement | %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= paiement.date %> </td>
+      <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
+    <tr>
+  <% end %>
+  </tbody></table>
+<% end %>
+
+<% famNotes = @famille.notes.where(auteur: 'famille') %>
+<% unless famNotes.empty? %>
+<h2>Notes</h2>
+  <table id="listeNote">
+    <colgroup><col id="date"/><col id="sum"/></colgroup>
+    <thead>
+      <tr><th>Date</th><th>Text</th></tr>
+    </thead>
+    <tbody>
+  <% famNotes.each do | note | %>
+    <tr class="<%= cycle('odd', 'even') %>">
+      <td><%= note.date %> </td>
+      <td><%= note.sommaire %> </td>
+    <tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
+
+</div>

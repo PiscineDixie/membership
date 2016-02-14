@@ -1,0 +1,16 @@
+<h1>Listes des activités</h1>
+
+<table id="listeparticipations">
+  <thead><tr>
+    <th>Code</th>
+    <th>Description</th>
+  </tr></thead>
+
+  <tbody>
+    <%= render :partial => 'participation_show', :collection => @participations %>
+  </tbody>
+</table>
+
+<br />
+
+<%= link_to 'Créer une activité', new_participation_path %>

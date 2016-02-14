@@ -1,0 +1,14 @@
+<h1>Données de: <%=@participation.description_fr -%></h1>
+
+<p>
+  <b>Description (FR):</b>
+  <%=h @participation.description_fr %>
+</p>
+
+<p>
+  <b>Description (EN):</b>
+  <%=h @participation.description_en %>
+</p>
+
+<%= link_to 'Modifier', edit_participation_path(@participation) %> |
+<%= link_to 'Retour', participations_path %>

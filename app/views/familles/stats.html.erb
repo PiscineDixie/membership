@@ -1,0 +1,35 @@
+<h1>Statistiques des Abonnements</h1>
+
+<table>
+	<thead><th/><th class="number">En règle</th><th class="number">Inscrits</th><th class="number">Inactifs</th></thead>
+  <tr>
+    <td>Total des membres</td>
+    <td align="right"><%= Famille.nombreMembres(:enRegle) %></td>
+    <td align="right"><%= Famille.nombreMembres(:inscrit) %></td>
+    <td align="right"><%= Famille.nombreMembres(:inactif) %></td>
+  </tr>
+  <tr>
+    <td>Total des abonnements familiaux</td>
+    <td align="right"><%= Famille.nombreFamilles(:enRegle) %></td>
+    <td align="right"><%= Famille.nombreFamilles(:inscrit) %></td>
+    <td align="right"><%= Famille.nombreFamilles(:inactif) %></td>
+  </tr>
+  <tr>
+    <td>Total des abonnements individuels</td>
+    <td align="right"><%= Famille.nombreIndividus(:enRegle) %></td>
+    <td align="right"><%= Famille.nombreIndividus(:inscrit) %></td>
+    <td align="right"><%= Famille.nombreIndividus(:inactif) %></td>
+  </tr>
+  <tr>
+    <td>Total des abonnements séniors</td>
+    <td align="right"><%= Famille.nombreSeniors(:enRegle) %></td>
+    <td align="right"><%= Famille.nombreSeniors(:inscrit) %></td>
+    <td align="right"><%= Famille.nombreSeniors(:inactif) %></td>
+  </tr>
+  <tr>
+    <td>Total des activités (personnes)</td>
+    <td align="right"><%= Famille.nombresActivites(:enRegle) %></td>
+    <td align="right"><%= Famille.nombresActivites(:inscrit) %></td>
+    <td align="right"><%= Famille.nombresActivites(:inactif) %></td>
+  </tr>
+</table>

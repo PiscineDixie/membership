@@ -1,0 +1,39 @@
+<h1>Données de: <%=@activite.description_fr -%></h1>
+
+<p>
+  <b>Code:</b>
+  <%=h @activite.code %>
+</p>
+
+<p>
+  <b>Description (FR):</b>
+  <%=h @activite.description_fr %>
+</p>
+
+<p>
+  <b>URL (FR):</b>
+  <%=h @activite.url_fr %>
+</p>
+
+<p>
+  <b>Description (EN):</b>
+  <%=h @activite.description_en %>
+</p>
+
+<p>
+  <b>URL (EN):</b>
+  <%=h @activite.url_en %>
+</p>
+
+<p>
+  <b>Gratuite:</b>
+  <%=h @activite.gratuite == true ? 'oui' : 'non'%>
+</p>
+
+<p>
+  <b>Coût:</b>
+  <%= number_with_precision(@activite.cout, :precision => 2) %>
+</p>
+
+<%= link_to 'Modifier', edit_activite_path(@activite) %> |
+<%= link_to 'Retour', activites_path %>

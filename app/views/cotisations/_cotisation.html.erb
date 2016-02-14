@@ -1,0 +1,30 @@
+<%= form_for([:famille, @cotisation], :url => famille_cotisation_path(@famille)) do |f| %>
+
+  <%  @cotisation.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+      
+  <p>
+    <b>Montant</b><br />
+    <%= number_with_precision(@cotisation.cotisation_calculee, :precision => 2) %>
+  </p>
+
+  <p>
+    <b>Exemption</b><br />
+    <%= f.text_field :cotisation_exemption, :size => 7 %>
+  </p>
+  
+  <p>
+    <b>Rabais pre-inscription</b><br />
+    <%= f.text_field :rabais_preinscription, :size => 7 %>
+  </p>
+  
+  <p>
+    <b>Frais additionels</b><br />
+    <%= f.text_field :frais_supplementaires, :size => 7 %>
+  </p>
+  
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>

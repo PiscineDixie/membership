@@ -1,0 +1,6 @@
+<tr class="<%= cycle('odd', 'even') %>">
+  <td><%=h participation_show.description_fr %></td>
+  <td><%= link_to 'Afficher', participation_show %></td>
+  <td><%= link_to 'Modifier', edit_participation_path(participation_show) %></td>
+  <td><%= link_to 'Enlever', participation_show, :confirm => 'Etes-vous certain?', :method => :delete %></td>
+</tr>

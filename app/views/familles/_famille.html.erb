@@ -1,0 +1,69 @@
+<%= form_for(@famille) do |f| %>
+
+  <%  @famille.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+
+  <p>
+    <b>Adresse1</b><br />
+    <%= f.text_field :adresse1 %>
+  </p>
+
+  <p>
+    <b>Adresse2 (si nécessaire)</b><br />
+    <%= f.text_field :adresse2 %>
+  </p>
+
+  <p>
+    <b>Ville</b><br />
+    <%= f.text_field :ville %>
+  </p>
+
+  <p>
+    <b>Province</b><br />
+    <%= f.text_field :province, :size => 2 %>
+  </p>
+
+  <p>
+    <b>Code postal (sans espace)</b><br />
+    <%= f.text_field :code_postal, :size => 6 %>
+  </p>
+
+  <p>
+    <b>Tél soir (chiffres seulement)</b><br />
+    <%= f.text_field :tel_soir, :size => 10 %>
+  </p>
+
+  <p>
+    <b>Tél jour (chiffres seulement)</b><br />
+    <%= f.text_field :tel_jour, :size => 10 %>
+  </p>
+
+  <p>
+    <b>Courriel1</b><br />
+    <%= f.text_field :courriel1 %>
+  </p>
+
+  <p>
+    <b>Courriel2</b><br />
+    <%= f.text_field :courriel2 %>
+  </p>
+
+  <p>
+    <b>Langue de correspondance</b><br />
+    <select id="famille_langue" name="famille[langue]">
+    <%= options_for_select(Famille::Langue, @famille.langue) %>
+    </select>
+  </p>
+
+  <p>
+    <b>Etat</b><br />
+    <select id="famille_etat" name="famille[etat]">
+    <%= options_for_select(Famille::Etats, @famille.etat) %>
+    </select>
+  </p>
+
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>

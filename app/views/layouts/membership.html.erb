@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Abonnements <%= controller.action_name %></title>
+  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <%= stylesheet_link_tag "main", :media => "all", "data-turbolinks-track" => true %>
+  <script src="//apis.google.com/js/client:plus.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  
+  <div id="banner">
+    <%= image_tag("entete.jpg") %>
+  </div>
+  
+  <div id="columns">
+    <div id="side">
+      <p>
+      <% if session[:user] and User.find_by_id(session[:user]) %>
+      <%= link_to "Logout " + User.sessionUserId(session[:user]), signout_path, id: "sign_out" %>
+      </p>
+      <p>
+      <%= link_to  "Familles",    :controller => '/familles' %><br/>
+      <%= link_to  "Nouvelle",    new_famille_path, :class => 'subLink' %>
+      </p>
+      <p>
+      <%= link_to "Activités sportives", :controller => '/activites' %>
+      </p>
+      <p>
+      <%= link_to "Participation", :controller => '/participations' %>
+      </p>
+      <p>
+      <%= link_to  "Rapports",    :controller => '/rapports' %>
+      </p>
+      <p>
+      <%= link_to  "Opérations",    :controller => '/operations' %>
+      </p>
+      <p>
+      <%= link_to  "Usagers",    :controller => '/users' %>
+      </p>
+      <p>
+      <%= link_to  "Constantes",    :controller => '/constantes', :action => 'show', :id => Constantes.instance.id %>
+      </p>
+      <p>
+      <%= link_to  "Instructions",  url_for("/instructions") %>
+      </p>
+      <div id="recherche">
+        <p class="rech_hd">Recherche par:</p>
+        <%= form_tag recherche_familles_path do %>
+          <p>
+            <%= select_tag(:champ, options_for_select(["Nom", "Tél", "CP", "Courriel"])) %>
+            <%= text_field_tag :key, '', :size => 8 %>
+          </p>
+        <% end %>
+      </div>
+      <% else %>
+       <p>
+        <a href="" id="facebook_signin">Login avec Facebook</a>
+        </p>
+        <p>
+        <a href="" id="google_signin">Login avec Google</a>
+        </p>
+      <% end %>
+    </div>
+    
+    <div id="main">
+      <% if flash[:notice] -%>
+        <div id="notice"><%= flash[:notice] %></div>
+      <% end -%>
+
+      <%= yield  %>
+    </div>
+    
+  </div>
+</body>
+</html>

@@ -1,0 +1,15 @@
+<%= form_for([@famille, @note]) do |f| %>
+
+  <%  @note.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+      
+  <p>
+    <b>Info</b><br />
+    <%= f.text_area :info %>
+  </p>
+
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>

@@ -1,0 +1,73 @@
+<!-- Fonction pour afficher le detail des cours de natation si choisi -->
+
+<%= form_for([@famille, @membre]) do |f| %>
+
+  <%  @membre .errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>  <p>
+      
+  <p>
+    <b>Prénom</b><br />
+    <%= f.text_field :prenom %>
+  </p>
+
+  <p>
+    <b>Nom</b><br />
+    <%= f.text_field :nom %>
+  </p>
+
+  <p>
+    <b>Naissance</b><br />
+    <%= f.date_select :naissance, :start_year => 1910 %>
+  </p>
+
+  <p>
+    <b>Ecusson</b><br />
+    <select id="membre_ecussion" name="membre[ecusson]">
+    <%= options_for_select(Membre::Ecussons, @membre.ecusson)  %>
+    </select>
+  </p>
+
+  <p>
+    <b>Activités</b><br />
+    <% Activite.order(:code).each do | act | %>
+      <%= act.description_fr %>
+      <%= check_box_tag(act.code, act.code, !@membre.activites.find_by_code(act.code).nil?) %> <br/>
+    <% end%>
+  
+  <div id="LN_details" <%= @membre.abonneCoursDeNatation? ? "style=\"visibility:visible\"" : "style=\"visibility:hidden\""%>>
+  <p>
+    <b>Cours de natation</b><br />
+    <select id="membre_cours_de_natation" name="membre[cours_de_natation]">
+    <%= options_for_select(Activite::CoursDeNatation, @membre.cours_de_natation)  %>
+    </select>
+  </p>
+
+  <p>
+    <b>Session de cours de natation</b><br />
+    <select id="membre_session_de_natation" name="membre[session_de_natation]">
+    <%= options_for_select(Activite::SessionCoursDeNatation, @membre.session_de_natation)  %>
+    </select>
+  </p>
+  </div>
+
+  <p>
+    <%= f.submit button_name %>
+  </p>
+<% end %>
+
+<script text="text/javascript">
+  var lnChk = document.getElementById("<%= Activite::CodeCoursDeNatation%>");
+  lnChk.onclick = function() {
+   if (lnChk.checked)
+   {
+     document.getElementById("LN_details").style.visibility="visible"
+   }
+   else
+   {
+     document.getElementById("LN_details").style.visibility="hidden"
+   }
+   return true 
+  }
+</script>
+

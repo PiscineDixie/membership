@@ -1,0 +1,43 @@
+<p>
+  <b>Prenom:</b>
+  <%=h @membre.prenom %>
+</p>
+
+<p>
+  <b>Nom:</b>
+  <%=h @membre.nom %>
+</p>
+
+<p>
+  <b>Naissance:</b>
+  <%=h @membre.naissance %>
+</p>
+
+<p>
+  <b>Ecusson:</b>
+  <%=h @membre.ecusson %>
+</p>
+
+<% unless @membre.activites.empty? %>
+<p>
+  <b>Activités</b><br/ >
+  <% @membre.activites.each do | act | %>
+    <%= act.description_fr %><br />
+  <% end %>
+</p>
+<% end %>
+
+<% if @membre.abonneCoursDeNatation? %>
+<p>
+  <b>Cours de natation:</b>
+  <%=h @membre.cours_de_natation %>
+</p>
+
+<p>
+  <b>Session de cours de natation:</b>
+  <%=h @membre.session_de_natation %>
+</p>
+<% end %>
+
+<%= link_to 'Modifier', [:edit, @famille, @membre] %> |
+<%= link_to 'Retour', famille_path(@famille) %>

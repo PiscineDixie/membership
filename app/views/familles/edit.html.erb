@@ -1,0 +1,7 @@
+<% content_for :javascript_includes do %>
+  <%= javascript_include_tag "famille_tout.js" %>
+<% end %>
+<h1>Modifier famille</h1>
+
+<%= render :partial => "shared/famille/edit." + (@famille.english? ? 'en' : 'fr'), :locals => { :url => '/familles/' + @famille.id.to_s, :method => 'put', :button_name => "Enregistrer"} %>
+

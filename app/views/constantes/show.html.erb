@@ -1,0 +1,66 @@
+<p>
+  <b>Base Sénior:</b>
+  <%= number_with_precision @constantes.baseSenior, :precision => 2 %>
+</p>
+
+<p>
+  <b>Base Individu:</b>
+  <%= number_with_precision @constantes.baseIndividu, :precision => 2 %>
+</p>
+
+<p>
+  <b>Base Famille:</b>
+  <%= number_with_precision @constantes.baseFamille, :precision => 2 %>
+</p>
+
+<p>
+  <b>Activité Sénior:</b>
+  <%= number_with_precision @constantes.activiteSenior, :precision => 2 %>
+</p>
+
+<p>
+  <b>Activité Individu:</b>
+  <%= number_with_precision @constantes.activiteIndividu, :precision => 2 %>
+</p>
+
+<p>
+  <b>Activité Famille:</b>
+  <%= number_with_precision @constantes.activiteFamille, :precision => 2 %>
+</p>
+
+<p>
+  <b>Rabais Pré-inscription Senior:</b>
+  <%= number_with_precision @constantes.rabaisPreInscriptionSenior, :precision => 2 %>
+</p>
+
+<p>
+  <b>Rabais Pré-inscription Individu:</b>
+  <%= number_with_precision @constantes.rabaisPreInscriptionIndividu, :precision => 2 %>
+</p>
+
+<p>
+  <b>Rabais Pré-inscription Famille:</b>
+  <%= number_with_precision @constantes.rabaisPreInscriptionFamille, :precision => 2 %>
+</p>
+
+<p>
+  <b>Fin Pré-inscription:</b>
+  <%= @constantes.finPreInscription %>
+</p>
+
+<p>
+  <b>Code Lecon Natation:</b>
+  <%= @constantes.codeLeconNatation %>
+</p>
+
+<p>
+  <b>Coût d'un billet d'invité:</b>
+  <%= number_with_precision @constantes.cout_billet, :precision => 2 %>
+</p>
+
+<p>
+  <b>Age mininum pour cotisation individuel:</b>
+  <%= @constantes.age_min_individu %> ans le 1 août
+</p>
+
+<%= link_to 'Modifier', edit_constante_path(@constantes) %>

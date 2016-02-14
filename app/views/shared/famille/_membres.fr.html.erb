@@ -1,0 +1,64 @@
+<div id="membres">
+<p>
+  Inscrivez les noms de tous les membres de la famille qui habitent au même endroit (enfants, parents,
+  grand-parents). Les dates d'anniversaires sont importantes pour les reçus d'impôt
+  et le calcul de la cotisation des séniors (65 ans ou plus le 1 août).
+</p>
+<h2 id="infoecusson">Les écussons</h2>
+<p id="infoecusson">
+  <ul id="infoecusson">
+    <li>Adulte: 13 ans et  plus</li>
+    <li>Nageur: A réussi l'épreuve de nage. (Voir <%= link_to 'explication', 'http://www.piscinedixiepool.com/ecussons', :target => '_blank' %>.)</li>
+    <li>Débutant: Jeune n'ayant pas encore réussi l'épreuve.</li>
+  </ul>
+</p>
+
+<p id="head">
+  <label id="prenom">Prénom</label>
+  <label id="nom">Nom</label>
+  <label id="naissance">Date de naissance</label>
+  <label id="ecusson">Ecusson <%= link_to '(Aide)', 'http://www.piscinedixiepool.com/ecussons', :target => '_blank' %></label>
+</p>
+<div id="liste_membres">
+<% idx = 0 %>
+<% @famille.membres.each do | membre | %>
+  <div id="membres_<%= idx.to_s %>" class="membre">
+    <div class="info">
+      <%= hidden_field_tag "famille[membres][" + idx.to_s + "][id]", membre.id, :size => 0 %>
+      <span id="membres_<%= idx.to_s %>_rangee" class="head"><%= (idx+1).to_s + "." %></span>
+      <%= text_field_tag "famille[membres][" + idx.to_s + "][prenom]", membre.prenom, :size => 10, :class => "prenom" %>
+      <%= text_field_tag "famille[membres][" + idx.to_s + "][nom]", membre.nom, :size => 10, :class => "nom" %>
+      <span class="naissance">
+        <%= select_date membre.naissance, :prefix => "famille[membres][" + idx.to_s + "][naissance]", :start_year => 1910, :end_year => Date.today.year, :use_month_names => %w(Jan Fév Mar Avr Mai Juin Juil Août Sept Oct Nov Déc)%>
+      </span><%= select_tag "famille[membres][" + idx.to_s + "][ecusson]", options_for_select(Membre::Ecussons, membre.ecusson), :class => 'ecusson' %>
+    </div>
+    <div class="acts">
+      <!-- Ecrire les activites dans une tables de 3 colonnes -->
+      <table class="actstbl"><colgroup><col id="act1box"/><col id="act1"/><col id="act2box"/><col id="act2"/><col id="act3box"/><col id="act3"/></colgroup><tbody><tr>
+      <% colIdx = 0 %>
+      <% Activite.order(:code).each do | act | %>
+        <% if colIdx == 3 then %>
+          </tr><tr>
+          <% colIdx = 1 %>
+        <% else %>
+          <% colIdx = colIdx + 1 %>
+        <% end %>
+        <td><%= check_box_tag "famille[membres][" + idx.to_s + "][activites]["+act.code+"]", act.id, membre.activite?(act.id), :class => "box" %></td>
+        <td><%= link_to act.description_fr, act.url_fr, :class => 'label', :popup => [act.description_fr.delete(' -'), 'width=600,height=600'] %></td>
+      <% end%>
+      </tr></tbody></table>
+    </div>
+    <div class="member-footer">
+      <span class="enlBouton"><button id="enlBouton_<%= idx.to_s %>" type="submit" >Enlever ce membre</button></span>
+      <span id="LN_details_membres_<%= idx.to_s %>" class="LN_details">
+        <%= select_tag "famille[membres][" + idx.to_s + "][cours_de_natation]", options_for_select(['Niveau natation'].concat(Activite::CoursDeNatation), membre.cours_de_natation) %>
+        <%= select_tag "famille[membres][" + idx.to_s + "][session_de_natation]", options_for_select(['Horaire'].concat(Activite::SessionCoursDeNatation), membre.session_de_natation) %>
+      </span>
+    </div>
+  </div>
+  <% idx = idx + 1 %>
+<% end %>
+</div> <!-- liste_membres -->
+<button id="boutonAjouterMembre" type="button">Ajouter un membre</button>
+<button id="lnk_participations" type="button">Section suivante</button>
+</div>

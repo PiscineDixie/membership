@@ -1,0 +1,23 @@
+          
+<% if Date.today() < Constantes.instance.finPreInscription && famille.cotisation.rabais_preinscription > 0 %>
+<p>Your payment must be received prior to <%= Constantes.instance.finPreInscription %>
+   to ensure your early registration rebate.
+</p>
+<% end %>
+
+<p>Please write your check to "Association Piscine Dixie Inc." and send it to the following address:</p>
+
+<p>
+<blockquote>
+  Association Piscine Dixie Inc.<br/>
+  C.P. 34045, Galeries Lachine<br/>
+  Lachine, Qc<br/>
+  H8S 4H4<br/>
+</blockquote>
+</p>
+
+<p>
+  Add a copy of this email in your envelope ou write on your cheque the following
+  reference number: <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>.
+</p>
+        

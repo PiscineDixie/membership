@@ -1,0 +1,25 @@
+<div id="autres">
+  <div id="billets">
+    <h3>Guest Tickets</h3>
+    <p>
+      Tickets are required for guests that would come to the pool with a member of your family during week-end because
+      day passes are not sold on week-ends.  During the week, a guest can use these tickets or purchase a day pass (5$ each).
+    </p>
+    
+    <label>Quantity of tickets (booklets of 10 @ $<%= number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2) %>):</label>
+    <%= select_tag 'famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets) %>
+  </div>
+  
+  <!-- on affiche seulement l'espace pour une note si interface public -->
+  <% if url.include?('public') %>
+    <div id="notes">
+      <h3>Note</h3>
+      <p>Please use this area to enter any additional information.</p>
+      <%= text_area_tag 'note', @note, :rows => '3', :cols => '70' %>
+    </div>
+  <% end %>
+
+<br/>
+<%= f.submit "Save" %><br/><br/>
+
+</div> <!-- autres -->

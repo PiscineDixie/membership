@@ -1,0 +1,20 @@
+    <% if famille %>
+      <tr>
+        <td height="50px">
+          <p>
+            To access your membership profile: 
+            <a href="<%= url_for(:only_path => false, :controller => 'public', :action => 'aide', :fam_id => famille.code_acces) %>"> 
+            My profile</a> 
+         </p>
+        </td>
+      </tr>
+    <% end %>
+    <tr>
+      <td align="center" height="40px" width="600px" background="http://www.piscinedixiepool.com/home/courriel_footer.jpg">
+        <span style="font-weight:bold; font-size:18px;">Stay cool at Dixie!</span>
+      </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

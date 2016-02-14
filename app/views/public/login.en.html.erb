@@ -1,0 +1,36 @@
+<h1>Profile login</h1>
+<%= link_to "français", {:action => "login_fr", :controller => 'public'} %><br/>
+
+<p>
+  This program is used by Dixie Pool members to update their membership information. New members can create their profile.
+</p>
+
+<h3>Existing members</h3>
+<p>The emails that you receive from Dixie Pool include a link that gets you directly into
+your profile. If your profile includes an email address, you can enter it below to obtain
+immediately a new email with your personal link.
+</p>
+
+<%= form_tag :action => 'login' do %>
+<p>
+<b>Email address:</b>
+<%= text_field_tag :courriel, params[:courriel], :size => 15 %>
+</p>
+<p>
+  <%= submit_tag "Send email" %>
+<% end %>
+
+<p>
+If we do not recognize your email address, you may create a new profile using the link below.
+</p>
+<br/>
+
+<h3>New membership</h3>
+<p>
+  If you were not a member last year, you have to create a family profile. This
+  profile includes your address, the family members and their activities, etc.
+  From this your membership fee is computed and emailed to you.
+</p>
+<%= link_to "Start my registration", {:action => "new", :controller => 'public'} %>
+
+

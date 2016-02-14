@@ -1,0 +1,15 @@
+
+<h1>Liste des membres</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Nom</th><th>Adresse</th><th>Status</th>>
+    </tr>
+  </thead>
+  <tbody>
+    <% @membres.each do | membre | %>
+      <tr><td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adresse1 %></td><td>Status</td></tr>
+    <% end%>
+  </tbody>
+</table>

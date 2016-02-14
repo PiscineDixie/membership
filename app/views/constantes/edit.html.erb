@@ -1,0 +1,78 @@
+<h1>Editing constantes</h1>
+
+<%= form_for(@constantes, :url => constante_path) do |f| %>
+
+    <%  @constantes .errors.full_messages.each do |msg| %>
+      <p><%= msg %></p>
+    <% end %>  <p>
+      
+    <b>Base Sénior</b><br />
+    <%= f.text_field :baseSenior %>
+  </p>
+
+  <p>
+    <b>Base Individu</b><br />
+    <%= f.text_field :baseIndividu %>
+  </p>
+
+  <p>
+    <b>Base Famille</b><br />
+    <%= f.text_field :baseFamille %>
+  </p>
+
+  <p>
+    <b>Activité Sénior</b><br />
+    <%= f.text_field :activiteSenior %>
+  </p>
+
+  <p>
+    <b>Activité Individu</b><br />
+    <%= f.text_field :activiteIndividu %>
+  </p>
+
+  <p>
+    <b>Activité Famille</b><br />
+    <%= f.text_field :activiteFamille %>
+  </p>
+
+  <p>
+    <b>Rabais Pré-inscription Sénior</b><br />
+    <%= f.text_field :rabaisPreInscriptionSenior %>
+  </p>
+
+  <p>
+    <b>Rabais Pré-inscription Individu</b><br />
+    <%= f.text_field :rabaisPreInscriptionIndividu %>
+  </p>
+
+  <p>
+    <b>Rabais Pré-inscription Famille</b><br />
+    <%= f.text_field :rabaisPreInscriptionFamille %>
+  </p>
+
+  <p>
+    <b>Fin Pré-inscription</b><br />
+    <%= f.date_select :finPreInscription %>
+  </p>
+
+  <p>
+    <b>Code Leçon Natation</b><br />
+    <%= f.text_field :codeLeconNatation %>
+  </p>
+
+  <p>
+    <b>Coût d'un billet d'invité</b><br />
+    <%= f.text_field :cout_billet %>
+  </p>
+	
+	<p>
+    <b>Age mininum pour cotisation individuel</b><br />
+    <%= f.text_field :age_min_individu %>
+  </p>
+
+  <p>
+    <%= f.submit "Enregistrer" %>
+  </p>
+<% end %>
+
+<%= link_to 'Afficher', constante_path %>
