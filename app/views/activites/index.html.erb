@@ -1,6 +1,6 @@
 <h1>Listes des activités</h1>
 
-<table id="listeActivites">
+<table class="table table-hover">
   <thead><tr>
     <th>Code</th>
     <th>Description</th>
@@ -13,4 +13,4 @@
 
 <br />
 
-<%= link_to 'Créer une activité', new_activite_path %>
+<%= button_to 'Créer une activité', new_activite_path, {method: :get, class: 'btn btn-primary'} %>

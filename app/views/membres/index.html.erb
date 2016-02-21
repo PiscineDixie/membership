@@ -1,15 +1,17 @@
 
 <h1>Liste des membres</h1>
 
-<table>
+<table class="table table-condensed table-hover">
   <thead>
     <tr>
-      <th>Nom</th><th>Adresse</th><th>Status</th>>
+      <th>Nom</th>
+      <th>Adresse</th>
+      <th>En règle</th>
     </tr>
   </thead>
   <tbody>
     <% @membres.each do | membre | %>
-      <tr><td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adresse1 %></td><td>Status</td></tr>
+      <tr><td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adresse1 %></td><td><%= membre.famille.enRegle? ? 'oui' : 'non' %></td></tr>
     <% end%>
   </tbody>
 </table>

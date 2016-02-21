@@ -1,7 +1,7 @@
-<tr class="<%= cycle('odd', 'even') %>">
+<tr>
   <td><%=h activite_show.code %></td>
   <td><%=h activite_show.description_fr %></td>
   <td><%= link_to 'Afficher', activite_show %></td>
   <td><%= link_to 'Modifier', edit_activite_path(activite_show) %></td>
-  <td><%= link_to 'Enlever', activite_show, :confirm => 'Etes-vous certain?', :method => :delete %></td>
+  <td><%= link_to 'Enlever', activite_show, data: {confirm: 'Etes vous certain?'}, :method => :delete %></td>
 </tr>

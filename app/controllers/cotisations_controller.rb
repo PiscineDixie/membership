@@ -33,6 +33,11 @@ class CotisationsController < ApplicationController
   def update
     @cotisation = @famille.cotisation
 
+    if (params[:cancel])
+      redirect_to(famille_path(@famille))
+      return;
+    end
+    
     if @cotisation.update(cotisation_params(params))
       flash[:notice] = 'Cotisation mise à jour.'
       redirect_to(famille_path(@famille))

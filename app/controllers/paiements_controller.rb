@@ -41,6 +41,11 @@ class PaiementsController < ApplicationController
   # POST /paiements
   # POST /paiements.xml
   def create
+    if (params[:cancel])
+      redirect_to(@famille)
+      return;
+    end
+    
     @paiement = @famille.paiements.new(paiement_params(params))
 
     if @paiement.montant == 0
@@ -89,6 +94,12 @@ class PaiementsController < ApplicationController
   
   def update
     @paiement = @famille.paiements.find(params[:id])
+
+    if (params[:cancel])
+      redirect_to(@famille)
+      return;
+    end
+    
     datePrecedente = @paiement.date
     if @paiement.update_attributes(paiement_params(params))
       FamilleMailer.edit_paiement(@famille, @paiement, datePrecedente).deliver
@@ -103,16 +114,16 @@ class PaiementsController < ApplicationController
   # params[:debut] - date du début du rapport
   # params[:fin] - date de la find du rapport
   def revenus
-    @debut = Date.new(params['debut']['year'].to_i, params['debut']['month'].to_i, params['debut']['day'].to_i)
-    @fin   = Date.new(params['fin']['year'].to_i, params['fin']['month'].to_i, params['fin']['day'].to_i)
+    @debut = Date.parse(params['debut'])
+    @fin   = Date.parse(params['fin'])
   end
 
   # Les dépots bancaire à préparer pour l'interval donné
   # params[:debut] - date du début du rapport
   # params[:fin] - date de la find du rapport
   def depots
-    @debut = Date.new(params['debut']['year'].to_i, params['debut']['month'].to_i, params['debut']['day'].to_i)
-    @fin   = Date.new(params['fin']['year'].to_i, params['fin']['month'].to_i, params['fin']['day'].to_i)
+    @debut = Date.parse(params['debut'])
+    @fin   = Date.parse(params['fin'])
   end
   
   private

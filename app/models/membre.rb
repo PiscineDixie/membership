@@ -55,7 +55,7 @@ class Membre < ActiveRecord::Base
       nd = parms.delete(:naissance)
       self.naissance = Date.civil(nd[:year].to_i, nd[:month].to_i, nd[:day].to_i)
     else
-      self.naissance = Date.civil(Date.today.year - 18, 7, 15)
+      self.naissance = Date.civil(Date.today.year - 5, 7, 15)
     end
     
     saveActivites(tmpActivites)
@@ -175,6 +175,11 @@ class Membre < ActiveRecord::Base
   def abonneCoursDeNatation?
     ln =  Activite.natation
     return activite?(ln.id);
+  end
+  
+  # Retourne true si le membre est "eligible" pour aider aux activites
+  def peutAider?
+    return Date.today().years_ago(13) > self.naissance
   end
   
   # Retourne la liste des membres actifs

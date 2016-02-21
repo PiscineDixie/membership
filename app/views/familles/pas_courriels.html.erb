@@ -1,6 +1,6 @@
 <h1>Rapport des familles sans courriel</h1>
 
-<table>
+<table class="table table-condensed">
   <thead>
     <tr>
       <th>Famille</th><th>Etat</th><th>Tel</th><th colspan="4">Adresse</th>
@@ -9,7 +9,7 @@
   <tbody>
     <% @familles.each do | famille | %>
       <% if famille.courriels.empty? %>
-        <tr class="<%= cycle('odd', 'even') %>">
+        <tr>
           <td><%= link_to famille.nom, famille %></td>
           <td><%= famille.etat %></td>
           <td><%= number_to_phone(famille.tel_soir) %></td>

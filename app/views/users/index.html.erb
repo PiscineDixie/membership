@@ -1,6 +1,6 @@
 <h1>Liste des usagers</h1>
 
-<table id="listeUsagers">
+<table class="table table-hover">
   <thead>
   <tr>
     <th>Nom</th>
@@ -14,13 +14,13 @@
   <tbody>
 
 <% for user in @users %>
-  <tr class="<%= cycle('odd', 'even') %>">
+  <tr>
     <td><%=h user.nom %></td>
     <td><%=h user.courriel %></td>
     <td><%=h user.roles %></td>
     <td><%= link_to 'Afficher', user %></td>
     <td><%= link_to 'Modifier', edit_user_path(user) %></td>
-    <td><%= link_to 'Enlever', user, :confirm => 'Etes-vous certain?', :method => :delete %></td>
+    <td><%= link_to 'Enlever', user, data: {confirm: 'Etes-vous certain?'}, :method => :delete %></td>
   </tr>
 <% end %>
 </tbody>
@@ -28,4 +28,5 @@
 
 <br />
 
-<%= link_to 'Ajouter un usager', new_user_path %>
+<%= button_to 'Ajouter un usager', new_user_path, {method: :get, class: "btn btn-primary"} %>
+

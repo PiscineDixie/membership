@@ -1,17 +1,16 @@
-<p>
-  <b>Date:</b>
-  <%=h @note.date %>
+<div class="form-group">
+    <label>Date</label>
+<p class="form-control-static"><%=h @note.date %></p>
 </p>
 
-<p>
-  <b>Auteur:</b>
-  <%=h @note.auteur %>
+<div class="form-group">
+    <label>Auteur</label>
+<p class="form-control-static"><%=h @note.auteur %></p>
 </p>
 
-<p>
-  <b>Info:</b>
-  <%=h @note.info %>
+<div class="form-group">
+    <label>Info</label>
+<p class="form-control-static"><%=h @note.info %></p>
 </p>
-
 
 <%= link_to 'Retour', famille_path(@famille) %>

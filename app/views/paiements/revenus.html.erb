@@ -7,7 +7,7 @@
 <p>
 Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
 </p>
-<table style="width: 800px">
+<table class="table table-hover table-condensed">
   <thead><th>Inscr.</th><th>Date</th><th class="number">Id</td><th>Famille</th><th class="number">Chèque</th><th class="number">Comptant</th><th>Note</th></thead>
 	<tfoot><th/><th/><th/><th/>
 	  <td align="right"> <%= number_with_precision(Paiement.sumMontantCheque(@debut, @fin), :precision => 2) %> </td>

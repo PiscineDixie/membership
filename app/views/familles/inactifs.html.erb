@@ -1,6 +1,6 @@
 <h1>Rapport des familles inactives (n'ayant pas renouvelées)</h1>
 
-<table>
+<table class="table table-hover">
   <thead>
     <tr>
       <th>Famille</th><th>Tel</th><th colspan="4">Adresse</th>
@@ -9,7 +9,7 @@
   <tbody>
     <% @familles.each do | famille | %>
       <% if !famille.active? %>
-        <tr class="<%= cycle('odd', 'even') %>">
+        <tr>
           <td><%= link_to famille.nom, famille %></td>
           <td><%= number_to_phone(famille.tel_soir) %></td>
           <td><%= famille.adresse1 %></td>

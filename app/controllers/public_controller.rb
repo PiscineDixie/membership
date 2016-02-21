@@ -88,6 +88,11 @@ class PublicController < ApplicationController
   
   # Enregistrer les donnees d'une nouvelle famille.
   def create
+    if (params[:cancel])
+      redirect_to :action => 'login'
+      return
+    end
+    
     # Recuperer l'information de la famille, des membres et leurs activites
     @famille = Famille.new(famille_params(params))
     @famille.etat = Famille::Etats[0]  # On commence actif
@@ -135,6 +140,12 @@ class PublicController < ApplicationController
   end
 
   def update
+
+    if params[:cancel]
+      show()
+      return
+    end
+    
     @note = params.has_key?(:note) ? params[:note].strip : ''
     cotisationAvant = @famille.cotisationTotal
     if @famille.update(famille_params(params))
@@ -160,9 +171,9 @@ class PublicController < ApplicationController
         FamilleMailer.cotisation_notif(@famille, @famille.courriels).deliver
       end
       
-    flash[:notice] = @famille.english? ? 
-      "Your profile is updated." :
-      "Votre profil est modifié."
+      flash[:notice] = @famille.english? ? 
+        "Your profile is updated." :
+        "Votre profil est modifié."
 
       if (!@famille.membres.empty? and @famille.cotisationDue() > 0)
         render :content_type => 'text/html', :template => "shared/abonnement_" + @famille.langue.downcase + ".text.html.erb", :locals => {:famille => @famille};

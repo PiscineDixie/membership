@@ -25,6 +25,11 @@ class UsersController < ApplicationController
 
   # POST /users
   def create
+    if (params[:cancel])
+      redirect_to(users_url)
+      return;
+    end
+    
     @user = User.new(user_params(params))
   
     if !User.empty? && !validateRole(@user.roles)
@@ -46,6 +51,11 @@ class UsersController < ApplicationController
   def update
     @user = User.find(params[:id])
 
+    if (params[:cancel])
+      redirect_to(famille_path(@user))
+      return;
+    end
+    
     if !validateRole(params[:user][:roles])
       render :action => "edit"
       return

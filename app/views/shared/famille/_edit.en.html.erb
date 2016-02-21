@@ -17,18 +17,13 @@
   </div>
 <% end %>
 
-<div id="header">
-  <a id="sel_coordonnees" href="coordonnees">1. Family Information</a>
-  <a id="sel_membres" href="membres">2. Members</a>
-  <a id="sel_participations" href="participations">3. Volunteering</a>
-  <a id="sel_autres" href="autres">4. Others</a>
-</div>
-
 <%= render :partial => 'shared/famille/coordonnees.'    + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
 <%= render :partial => 'shared/famille/membres.'        + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
-<%= render :partial => 'shared/famille/participations.' + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f } %>
 <%= render :partial => 'shared/famille/autres.'         + (@famille.english? ? 'en' : 'fr'), :locals => { :famille => @famille, :f => f, :url => url } %>
 
 </div> <!-- famille_tout -->
+
+<%= f.submit 'Save', :class => "btn btn-primary" %>
+<%= f.submit( 'Cancel', {name: 'cancel', class: "btn btn-default"}) %>
 
 <% end %>

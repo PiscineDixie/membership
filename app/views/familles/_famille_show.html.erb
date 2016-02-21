@@ -1,8 +1,7 @@
-<tr class="<%= cycle('odd', 'even') %>">
+<tr>
   <td><%= link_to famille_show.nom, famille_show %></td>
   <td><%= code_postal_fmt(famille_show.code_postal) %></td>
   <td><%= number_to_phone(famille_show.tel_soir) %></td>
   <td><%= famille_show.etat %></td>
-  <td><%= link_to 'Enlever', famille_show, :confirm => 'Etes-vous certain?', :method => :delete %></td>
 </tr>
 

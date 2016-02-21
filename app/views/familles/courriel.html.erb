@@ -1,31 +1,52 @@
 <h1>Expédier un courriel aux membres</h1>
 
 <%= form_tag :controller => 'familles', :action => 'courriel' do %>
-<p>
-Langue: <br/>
-<%= select_tag :langue, options_for_select([ 'Toutes' ] + Famille::Langue, @langue)%>
+  <div class="form-group">
+    <label>Langue: <br/>
+    <%= select_tag(:langue, options_for_select([ 'Toutes' ] + Famille::Langue, @langue), class: 'form-control') %>
+  </div>
+     
+  <div class="form-group">
+      <label>Sujet</label>
+      <%= text_field_tag :sujet, @sujet, class: 'form-control' %>
+  </div>
+
+  <div class="form-group">
+   <label>Destinataires</label>
+   <div class="form-inline">
+    <div class="form-group">
+     <div class="col-lg-4 col-sm-4">
+      <%= select_tag(:activite, options_for_select(
+      [["Familles Actives", 102]] + 
+      [["Toutes", 100]] + 
+      [["Familles Inactives", 101]] + 
+      [["Cotisation dûe", 103]] + 
+      Activite.descriptions.sort), class: "form-control") %>
+    </div>
+   </div>
+   <div class="form-group">
+     <label class="control-label col-lg-4 col-sm-4"><em>OU</em> Adresse(s):</label>
+     <div class="col-lg-4 col-sm-4">
+       <%= text_field_tag :testAddr, @testAddr, class: 'form-control' %>
+     </div>
+   </div>
+  </div>
+ </div>
+
+
+  <div class="form-group">
+     <label>Message: (HTML ou non)</label>
+     <%= text_area_tag :msg, @msg, class: 'form-control', rows: 20 %>
+  </div>
+
+  <div class="form-group">
+       <label>Inclure l'information de cotisation</label>
+       <%= check_box_tag :cotisation, class: 'form-control' %>
+  </div>
+       
 </p>
-<p>
-Sujet: <br/>
-<%= text_field_tag :sujet, @sujet, :size => 40 %>
-</p>
-<p>
-Destinataires: <br/>
-<%= select_tag :activite, options_for_select(
-  [["Familles Actives", 102]] + 
-  [["Toutes", 100]] + 
-  [["Familles Inactives", 101]] + 
-  [["Cotisation dûe", 103]] + 
-  Activite.descriptions.sort) %>
-<em>OU</em> Adresse(s): <%= text_field_tag :testAddr, @testAddr, :size => 20 %>
-<p>
-Message: (HTML ou non)<br/>
-<%= text_area_tag :msg, @msg, :size => "80x30" %>
-</p>
-<p>
-	Inclure l'information de cotisation: <%= check_box_tag :cotisation %>
-</p>
-</table>
-  <%= submit_tag "Expédier" %>
+  <%= submit_tag "Expédier", :class => "btn btn-primary" %>
+  <%= submit_tag( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+  
 <% end %>
 

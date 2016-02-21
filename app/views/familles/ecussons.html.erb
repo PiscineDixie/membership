@@ -1,6 +1,6 @@
 <h1>Ecussons et billets par famille</h1>
 
-<table>
+<table class="table table-condensed table-hover">
   <thead>
     <tr>
       <th>Inscription</th>
@@ -15,7 +15,7 @@
   <tbody>
     <% @familles.each do | famille | %>
       <% if famille.enRegle? %>
-        <tr class="<%= cycle('odd', 'even') %>">
+        <tr>
           <td><%= (famille.paiements.first.nil? ? famille.cotisation.created_at : famille.paiements.first.created_at).strftime('%Y-%m-%d') %></td>
           <td><%= link_to famille.nom, famille %></td>
           <td><%= famille.adresse1 %></td>

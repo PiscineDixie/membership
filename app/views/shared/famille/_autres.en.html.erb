@@ -1,25 +1,33 @@
-<div id="autres">
-  <div id="billets">
-    <h3>Guest Tickets</h3>
+
+<div class="panel panel-default">
+<div class="panel-heading"><div class="panel-title">Others</div></div>
+<div class="panel-body">
+
+    <h4>Guest Tickets</h4>
     <p>
       Tickets are required for guests that would come to the pool with a member of your family during week-end because
       day passes are not sold on week-ends.  During the week, a guest can use these tickets or purchase a day pass (5$ each).
     </p>
-    
-    <label>Quantity of tickets (booklets of 10 @ $<%= number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2) %>):</label>
-    <%= select_tag 'famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets) %>
-  </div>
+    <div class="form-group">
+      <label>Quantity of tickets (booklets of 10 @ $<%= number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2) %>):</label>
+      <div class="row">
+        <div class="col-xs-1">
+          <%= select_tag('famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets), class: 'form-control') %>
+        </div>
+      </div>
+    </div>
   
   <!-- on affiche seulement l'espace pour une note si interface public -->
   <% if url.include?('public') %>
     <div id="notes">
-      <h3>Note</h3>
-      <p>Please use this area to enter any additional information.</p>
-      <%= text_area_tag 'note', @note, :rows => '3', :cols => '70' %>
+      <h4>Note</h4>
+      <div class="form-group">
+        <label>Please use this area to enter any additional information.</label>
+        <%= text_area_tag 'note', @note, :rows => '3', :cols => '70', class: 'form-control' %>
+      </div>
     </div>
   <% end %>
 
-<br/>
-<%= f.submit "Save" %><br/><br/>
 
+</div>
 </div> <!-- autres -->

@@ -7,20 +7,23 @@
 
 <h2>Crédit d'impôt pour la condition physique des enfants</h2>
 <p>
-<%= button_to "Générer reçus", {:action => "recus", :controller => 'familles'} %>
+<%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn"}) %>
 </p>
+
 <p>
-<%= button_to "Expédier reçus", {:action => "exp_recus", :controller => 'familles'}, :confirm => "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?" %>
+<%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'}, 
+   {data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn"}) %>
 </p>
 
 <h2>Eliminer rabais de pré-inscription</h2>
 <p>Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
 de la période de pré-inscription mais qui n'ont pas envoyé au moins un paiement. Un courriel est expédié.
-<%= button_to "Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'} %>
+<%= button_to("Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'}, {class: "btn"}) %>
 </p>
 
 <h2>Remise à zéro des données annuelles</h2>
 <p>
-<%= button_to "Remise à zéro", {:action => "debutAnnee", :controller => 'familles'}, :confirm => "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?" %>
+<%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'}, 
+  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn"}) %>
 </p>
 

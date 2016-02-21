@@ -1,30 +1,37 @@
+<div class="row">
+<div class="col-sm-8 col-lg-5">
+
 <%= form_for([:famille, @cotisation], :url => famille_cotisation_path(@famille)) do |f| %>
 
   <%  @cotisation.errors.full_messages.each do |msg| %>
     <p><%= msg %></p>
   <% end %>  <p>
       
-  <p>
-    <b>Montant</b><br />
-    <%= number_with_precision(@cotisation.cotisation_calculee, :precision => 2) %>
-  </p>
+  <div class="form-group">
+    <label>Montant</label>
+    <div "form-control-static"><%= number_with_precision(@cotisation.cotisation_calculee, :precision => 2) %></div>
+  </div>
 
-  <p>
-    <b>Exemption</b><br />
-    <%= f.text_field :cotisation_exemption, :size => 7 %>
-  </p>
+
+  <div class="form-group">
+    <label>Exemption</label>
+    <%= f.text_field :cotisation_exemption, class: 'form-control' %>
+  </div>
+
   
-  <p>
-    <b>Rabais pre-inscription</b><br />
-    <%= f.text_field :rabais_preinscription, :size => 7 %>
-  </p>
+  <div class="form-group">
+    <label>Rabais pre-inscription</label>
+    <%= f.text_field :rabais_preinscription, class: 'form-control' %>
+  </div>
+
   
-  <p>
-    <b>Frais additionels</b><br />
-    <%= f.text_field :frais_supplementaires, :size => 7 %>
-  </p>
+  <div class="form-group">
+    <label>Frais additionels</label>
+    <%= f.text_field :frais_supplementaires, class: 'form-control' %>
+  </div>
+
   
-  <p>
-    <%= f.submit button_name %>
-  </p>
+  <%= f.submit button_name, :class => "btn btn-primary" %>
+  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+  
 <% end %>

@@ -1,26 +1,35 @@
 <h1>Rapports</h1>
 
-<h2>Cours de Natation</h2>
+<h4>Cours de Natation</h4>
 <%= link_to "Groupes de cours de natations", :id => Activite::natation.id, :controller => 'activites', :action => 'listeMembreNatation' %>
+<hr/>
 
-<h2>Activités</h2>
-<%= form_tag :controller => 'activites', :action => 'listeMembre' do %>
-<table>
-<tr><td>Activité: </td><td><%= select_tag :activite, options_for_select(Activite.descriptions)%></td/></tr>
-</table>
-  <%= submit_tag "Générer" %>
+<h4>Activités</h4>
+<%= form_tag( {:controller => 'activites', :action => 'listeMembre'},  {class: "form-horizontal"}) do %>
+  <div class="form-group">
+      <label class="control-label col-xs-1">Activité:</label>
+      <div class="col-xs-2">
+        <%= select_tag(:activite, options_for_select(Activite.descriptions), {class: 'form-control'}) %>
+      </div>
+  </div>
+  <%= submit_tag "Générer", :class => "btn btn-default" %>
 <% end %>
+<hr/>
 
-<h2>Participation communautaire</h2>
-<%= form_tag :controller => 'participations', :action => 'listeMembre' do %>
-<table>
-<tr><td>Activité: </td><td><%= select_tag :participation, options_for_select(Participation.descriptions)%></td/></tr>
-</table>
-  <%= submit_tag "Générer" %>
+<h4>Participation communautaire</h4>
+<%= form_tag( {:controller => 'participations', :action => 'listeMembre'},  {class: "form-horizontal"}) do %>
+  <div class="form-group">
+        <label class="control-label col-xs-1">Activité:</label>
+        <div class="col-xs-2">
+         <%= select_tag(:participation, options_for_select(Participation.descriptions), {class: 'form-control'}) %>
+        </div>
+  </div>
+  <%= submit_tag "Générer", :class => "btn btn-default" %>
 <% end %>
+<hr/>
 
 
-<h2>Membres</h2>
+<h4>Membres</h4>
 <%= link_to "Statistiques", stats_familles_path  %><br/>
 <%= link_to "Cotisations",  cotisations_familles_path %><br/>
 <%= link_to "Ecussons et billets",  ecussons_familles_path %><br/>
@@ -28,38 +37,66 @@
 <%= link_to "Liste des familles sans courriels", :controller => 'familles', :action => 'pas_courriels' %><br/>
 <%= link_to "Liste des familles inactives", :controller => 'familles', :action => 'inactifs' %><br/>
 <%= link_to "Liste des membres", :controller => 'membres', :action => 'index' %><br/>
+<hr/>
 
-<h2>Revenus</h2>
-<%= form_tag :controller => 'paiements', :action => 'revenus' do %>
-<table>
-<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
-<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
-</table>
-  <%= submit_tag "Générer" %>
+<h4>Revenus</h4>
+<%= form_tag({:controller => 'paiements', :action => 'revenus'}, {class: "form-horizontal"}) do %>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Début</label>
+    <div class="col-sm-2">
+     <%= text_field_tag('debut', Date.today, {type: 'date', class: "form-control"}) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Fin</label>
+    <div class="col-sm-2">
+      <%= text_field_tag('fin', Date.today, {type: 'date', class: "form-control"})  %>
+     </div>
+  </div>
+  <%= submit_tag "Générer", :class => "btn btn-default"  %>
 <% end %>
 <p/>
+<hr/>
 
-<h2>Dépôts bancaires</h2>
-<%= form_tag :controller => 'paiements', :action => 'depots' do %>
-<table>
-<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
-<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
-</table>
-  <%= submit_tag "Générer" %>
+<h4>Dépôts bancaires</h4>
+<%= form_tag({:controller => 'paiements', :action => 'depots'}, {class: "form-horizontal"}) do %>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Début</label>
+    <div class="col-sm-2">
+     <%= text_field_tag('debut', Date.today, {type: 'date', class: "form-control"}) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Fin</label>
+    <div class="col-sm-2">
+      <%= text_field_tag('fin', Date.today, {type: 'date', class: "form-control"})  %>
+     </div>
+  </div>
+  <%= submit_tag "Générer", :class => "btn btn-default"  %>
 <% end %>
 <p/>
+<hr/>
 
-<h2>Notes des familles</h2>
-<%= form_tag :controller => 'notes', :action => 'rapport' do %>
-<table>
-<tr><td>Début: </td><td><%= select_date Date.today, :prefix => "debut" %></td></tr>
-<tr><td>Fin: </td><td><%= select_date Date.today, :prefix => "fin" %></td></tr>
-</table>
-  <%= submit_tag "Générer" %>
+<h4>Notes des familles</h4>
+<%= form_tag({:controller => 'notes', :action => 'rapport'}, {class: "form-horizontal"}) do %>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Début</label>
+    <div class="col-sm-2">
+     <%= text_field_tag('debut', Date.today, {type: 'date', class: "form-control"}) %>
+    </div>
+  </div>
+  <div class="form-group">
+    <label class="control-label col-sm-1">Fin</label>
+    <div class="col-sm-2">
+      <%= text_field_tag('fin', Date.today, {type: 'date', class: "form-control"})  %>
+     </div>
+  </div>
+  <%= submit_tag "Générer", :class => "btn btn-default"  %>
 <% end %>
 <p/>
+<hr/>
 
-<h2>Cotisations dûes</h2>
+<h4>Cotisations dûes</h4>
 <p>
 <%= link_to "Générer rapport", {:action => "dues", :controller => 'familles'} %>
 </p>

@@ -44,6 +44,11 @@ class ParticipationsController < ApplicationController
   # POST /participations
   # POST /participations.xml
   def create
+    if (params[:cancel])
+      redirect_to(participations_url)
+      return;
+    end
+    
     @participation = Participation.new(participation_params(params))
 
     respond_to do |format|
@@ -63,6 +68,11 @@ class ParticipationsController < ApplicationController
   def update
     @participation = Participation.find(params[:id])
 
+    if (params[:cancel])
+      redirect_to(@participation)
+      return;
+    end
+    
     respond_to do |format|
       if @participation.update_attributes(participation_params(params))
         flash[:notice] = 'Activite was successfully updated.'

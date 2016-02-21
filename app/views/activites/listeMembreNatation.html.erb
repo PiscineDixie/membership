@@ -5,8 +5,7 @@
     <% membres = @activite.membreNatation(session, niveau) %>
     <% if !membres.empty? %>
       <h2>Session: <%= session %>, Niveau: <%= niveau %></h2>
-      <table id="listeMembre">
-        <colgroup> <col id="nom"/><col id="soir"/><col id="jour"/><col id="email"/></colgroup>
+      <table class="table table-condensed">
         <thead>
           <tr><th>Membre</th><th>Tel Soir</th><th>Tel Jour</th><th>Courriel</th></tr>
         </thead>

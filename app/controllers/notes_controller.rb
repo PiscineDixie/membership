@@ -35,6 +35,11 @@ class NotesController < ApplicationController
   # POST /notes
   # POST /notes.xml
   def create
+    if (params[:cancel])
+      redirect_to(famille_path(@famille))
+      return;
+    end
+    
     @note = @famille.notes.new
     @note.info = params[:note][:info]
     @note.auteur = User.sessionUserId(session[:user])
@@ -56,8 +61,8 @@ class NotesController < ApplicationController
   # params[:debut] - date du début du rapport
   # params[:fin] - date de la find du rapport
   def rapport
-    @debut = Date.new(params['debut']['year'].to_i, params['debut']['month'].to_i, params['debut']['day'].to_i)
-    @fin   = Date.new(params['fin']['year'].to_i, params['fin']['month'].to_i, params['fin']['day'].to_i)
+    @debut = Date.parse(params['debut'])
+    @fin   = Date.parse(params['fin'])
     @notes = Note.order("famille_id, date").
               where("date >= :minDate and date <= :endDate", 
               {:minDate => @debut.to_s(:db), :endDate => @fin.to_s(:db)})

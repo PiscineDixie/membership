@@ -38,6 +38,11 @@ class FamillesController < ApplicationController
   # Et le post pour creer toute la famille d'une seule operation
   # Si une erreur de traitement, on re-affiche la form du "new"
   def create
+    if (params[:cancel])
+      redirect_to(familles_url)
+      return;
+    end
+    
     # Recuperer l'information de la famille, des membres et leurs activites
     @famille = Famille.new(famille_params(params))
     @famille.etat = Famille::Etats[0]  # On commence actif
@@ -55,8 +60,14 @@ class FamillesController < ApplicationController
   # PUT /familles/1.xml
   def update
     @famille = Famille.find(params[:id])
+      
+    if (params[:cancel])
+      redirect_to(@famille)
+      return;
+    end
+    
     if @famille.update(famille_params(params))
-      flash[:notice] = 'Famille was successfully updated.'
+      flash[:notice] = 'Modifications registrées.'
       @famille.calculeCotisation
       redirect_to(@famille)
     else
@@ -75,6 +86,7 @@ class FamillesController < ApplicationController
       @famille.etat = 'Inactif'
       @famille.courriel1 = @famille.courriel2 = ''
       @famille.save!
+      flash[:notice] = 'Famille désactivée mais non enlevée puisque des paiements ont été enregistrés.'
     end
 
     respond_to do |format|
@@ -144,6 +156,12 @@ class FamillesController < ApplicationController
     @testAddr = params[:testAddr].strip if params[:testAddr]
     
     if request.post?
+      
+      if (params[:cancel])
+        redirect_to(familles_url)
+        return;
+      end
+
       valide = true
       if @msg.empty? || @sujet.empty?
         flash[:notice] = "Le message et le sujet doivent être fournis."

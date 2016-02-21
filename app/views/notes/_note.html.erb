@@ -4,12 +4,12 @@
     <p><%= msg %></p>
   <% end %>  <p>
       
-  <p>
-    <b>Info</b><br />
-    <%= f.text_area :info %>
-  </p>
+  <div class="form-group">
+      <label>Info</label>
+    <%= f.text_area :info, class: 'form-control' %>
+  </div>
 
-  <p>
-    <%= f.submit button_name %>
-  </p>
+  <%= f.submit button_name, :class => "btn btn-primary" %>
+  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+  
 <% end %>

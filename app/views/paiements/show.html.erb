@@ -1,52 +1,53 @@
-<p>
-  <b>Date:</b>
-  <%= @paiement.date %>
-</p>
+<div class="form-horizontal">
+<div class="form-group">
+    <label class="control-label col-sm-2">Date</label>
+<p class="form-control-static"><%= @paiement.date %></p>
+</div>
 
-<p>
-  <b>Montant reçu:</b>
-  <%= number_with_precision(@paiement.montant, :precision => 2) %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">Montant reçu</label>
+<p class="form-control-static"><%= number_with_precision(@paiement.montant, :precision => 2) %></p>
+</div>
 
-<p>
-  <b>Numéro chèque:</b>
+<div class="form-group">
+    <label class="control-label col-sm-2">Numéro chèque</label>
   <% if @paiement.comptant %>
-	  comptant
+<p class="form-control-static">comptant</p>
 	<% else %>
-	  <%= @paiement.no_cheque %>
+<p class="form-control-static"><%= @paiement.no_cheque %></p>
 	<% end%>
-</p>
+</div>
 
-<p>
-  <b>Non-taxable:</b>
-  <%= number_with_precision(@paiement.non_taxable, :precision => 2) %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">Non-taxable</label>
+<p class="form-control-static"><%= number_with_precision(@paiement.non_taxable, :precision => 2) %></p>
+</div>
 
-<p>
-  <b>Taxable:</b>
-  <%= number_with_precision(@paiement.taxable, :precision => 2) %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">Taxable</label>
+<p class="form-control-static"><%= number_with_precision(@paiement.taxable, :precision => 2) %></p>
+</div>
 
-<p>
-  <b>TPS:</b>
-  <%= number_with_precision(@paiement.tps, :precision => 2) %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">TPS</label>
+<p class="form-control-static"><%= number_with_precision(@paiement.tps, :precision => 2) %></p>
+</div>
 
-<p>
-  <b>TVQ:</b>
-  <%= number_with_precision(@paiement.tvq, :precision => 2) %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">TVQ</label>
+<p class="form-control-static"><%= number_with_precision(@paiement.tvq, :precision => 2) %></p>
+</div>
 
-<p>
-  <b>Entré par:</b>
-  <%= @paiement.par %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">Entré par</label>
+<p class="form-control-static"><%= @paiement.par %></p>
+</div>
 
-<p>
-  <b>Note:</b>
-  <%= @paiement.note %>
-</p>
+<div class="form-group">
+    <label class="control-label col-sm-2">Note</label>
+<p class="form-control-static"><%= @paiement.note %></p>
+</div>
 
-
+</div>
 
 <%= link_to 'Retour', famille_path(@famille) %>

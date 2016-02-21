@@ -45,6 +45,11 @@ class ActivitesController < ApplicationController
   # POST /activites
   # POST /activites.xml
   def create
+    if (params[:cancel])
+      redirect_to(activites_url)
+      return;
+    end
+    
     @activite = Activite.new(activite_params(params))
 
     respond_to do |format|
@@ -64,6 +69,11 @@ class ActivitesController < ApplicationController
   def update
     @activite = Activite.find(params[:id])
 
+    if (params[:cancel])
+      redirect_to(@activite)
+      return;
+    end
+    
     respond_to do |format|
       if @activite.update_attributes(activite_params(params))
         flash[:notice] = 'Activite was successfully updated.'

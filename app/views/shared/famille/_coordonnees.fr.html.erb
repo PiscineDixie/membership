@@ -1,29 +1,86 @@
-<div id="coordonnees">
+<div class="panel panel-default">
+<div class="panel-heading"><div class="panel-title">Coordonnées</div></div>
+<div class="panel-body">
+
   <p>Entrez les coordonnées de votre famille. Une adresse courriel est nécessaire
      afin de recevoir un reçu d'impôt. Elle permet aussi à nos bénévoles de vous contacter
      facilement (e.g., campagne de ré-abonnement).</p>
-  <table id="coor">
-    <colgroup><col id="cle"/><col id="data"/></colgroup>
-    <tbody>
-      <tr><td class="heading">Adresse1</td><td><%= f.text_field :adresse1 %></td></tr>
-      <tr><td class="heading">Adresse2</td><td><%= f.text_field :adresse2 %></td></tr>
-      <tr><td class="heading">Ville</td>   <td><%= f.text_field :ville %></td></tr>
-      <tr><td class="heading">Province</td><td><%= f.text_field :province, :size => 2 %></td></tr>
-      <tr><td class="heading">Code postal</td><td><%= f.text_field :code_postal, :size => 6 %></td></tr>
-      <tr><td class="heading">Tél soir</td><td><%= f.text_field :tel_soir, :size => 10 %></td></tr>
-      <tr><td class="heading">Tél jour</td><td><%= f.text_field :tel_jour, :size => 10 %></td></tr>
-      <tr><td class="heading">Courriel1</td><td><%= f.text_field :courriel1 %></td></tr>
-      <tr><td class="heading">Courriel2</td><td><%= f.text_field :courriel2 %></td></tr>
-      <tr><td class="heading">Langue</td>
-        <td>
-          <select id="famille_langue" name="famille[langue]">
-          <%= options_for_select(Famille::Langue, famille.langue) %>
-          </select>
-        </td></tr>
-      <tr><td><%= f.hidden_field :etat, :size => 2 %></td></tr>
-    </tbody>
-  </table>
-  
-  <br/>
-  <button id="lnk_membres" type="button">Section suivante</button>
+    
+<div class="form-group">
+ <label>Adresse1</label>
+ <div class="row"><div class="col-xs-6 col-sm-4 col-lg-2">
+ <%= f.text_field :adresse1, class: 'form-control' %>
+ </div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Adresse2</label>
+ <div class="row"><div class="col-xs-6 col-sm-4 col-lg-2">
+ <%= f.text_field :adresse2, class: 'form-control' %>
+</div></div>
+
+</div>
+ 
+<div class="form-group">
+ <label>Ville</label>
+<div class="row"><div class="col-xs-6 col-sm-4 col-lg-2">
+ <%= f.text_field :ville, class: 'form-control' %>
+</div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Province</label>
+ <div class="row"><div class="col-xs-3 col-sm-2 col-lg-1">
+ <%= f.text_field :province, class: 'form-control' %>
+ </div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Code postal</label>
+ <div class="row"><div class="col-xs-4 col-sm-2 col-lg-2">
+ <%= f.text_field :code_postal, class: 'form-control' %>
+ </div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Tél soir</label>
+<div class="row"><div class="col-xs-6 col-sm-4 col-lg-2">
+ <%= f.text_field :tel_soir, class: 'form-control' %>
+</div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Tél jour</label>
+<div class="row"><div class="col-xs-6 col-sm-4 col-lg-2">
+ <%= f.text_field :tel_jour, class: 'form-control' %>
+</div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Courriel1</label>
+<div class="row"><div class="col-xs-9 col-sm-4 col-lg-3">
+ <%= f.text_field :courriel1, class: 'form-control' %>
+</div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Courriel2</label>
+<div class="row"><div class="col-xs-9 col-sm-4 col-lg-3">
+ <%= f.text_field :courriel2, class: 'form-control' %>
+</div></div>
+</div>
+ 
+<div class="form-group">
+ <label>Langue</label>
+ <div class="row">
+  <div class="col-xs-3 col-sm-2 col-lg-1">
+    <select id="famille_langue" name="famille[langue]" class="form-control">
+     <%= options_for_select(Famille::Langue, famille.langue) %>
+    </select>
+   </div>
+  </div>
+</div>
+ 
+ <%= f.hidden_field :etat, :size => 2 %></td></tr>
+</div>
 </div>

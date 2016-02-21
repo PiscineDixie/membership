@@ -1,79 +1,88 @@
 <div id="showProfil">
 <h1>Profile</h1>
 
-<div id="coordonneeFamille">
-<h2>Basic Data</h2>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title">Coordonnées</h2></div>
+<div class="panel-body">
 
-<table>
-  <colgroup><col id="hdr"/> <col id="data"/></colgroup>
-  <tbody>
-  <td class="heading">Address1:</th><td><%=h @famille.adresse1 %></td></tr>
-  <td class="heading">Address2:</th><td><%=h @famille.adresse2 %></td></tr>
-  <td class="heading">City:</th><td><%=h @famille.ville %></td></tr>
-  <td class="heading">Province:</th><td><%=h @famille.province %></td></tr>
-  <td class="heading">Postal code:</th><td><%= code_postal_fmt(@famille.code_postal) %></td></tr>
-  <td class="heading">Evening phone:</th><td><%= number_to_phone(@famille.tel_soir) %></td></tr>
-  <td class="heading">Day phone:</th><td><%= number_to_phone(@famille.tel_jour) %></td></tr>
-  <td class="heading">Email1:</th><td><%=h @famille.courriel1 %></td></tr>
-  <td class="heading">Email2:</th><td><%=h @famille.courriel2 %></td></tr>
-  <td class="heading">Language:</th><td><%= @famille.langue %></td></tr>
-  <td class="heading">State:</th><td><%= @famille.etat %></td></tr>
-  </tbody>
-</table>
-</p>
+<dl class="dl-horizontal">
+  <dt>Address1</dt><dd><%= @famille.adresse1 %></dd>
+<dt>Address2</dt><dd><%= @famille.adresse2 %></dd>
+<dt>City</dt><dd><%= @famille.ville %></dd>
+<dt>Province</dt><dd><%= @famille.province %></dd>
+<dt>Postal code</dt><dd><%= code_postal_fmt(@famille.code_postal) %></dd>
+<dt>Evening phone</dt><dd><%= number_to_phone(@famille.tel_soir) %></dd>
+<dt>Day phone</dt><dd><%= number_to_phone(@famille.tel_jour) %></dd>
+<dt>Email1</td><dd><%= @famille.courriel1 %></dd>
+<dt>Email2</td><dd><%= @famille.courriel2 %></dd>
+<dt>Language</dt><dd><%= @famille.langue %></td></tr>
+</dl>
+</div>
 </div>
 
-<h2>Members</h2>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title">Family Members</h2></div>
+<div class="panel-body">
+
 <% unless @famille.membres.empty? %>
-  <table id="listeMembres">
-    <colgroup><col id="nom"/> <col id="naissance"/><col id="act"/></colgroup>
+  <table class="table table-condensed">
     <thead><tr>
       <th>Name</th><th>Birthday</th><th>Activities</th>
     </tr></thead>
     <tbody>
       <% @famille.membres.each do | membre | %>
-        <tr class="<%= cycle('odd', 'even') %>">
-          <td><%= membre.nomPrenom %></td>
-          <td><%= membre.naissance %></td>
-          <td><%= membre.listeActivites %></td>
-        <tr>
+      <tr>
+        <td><%= membre.nomPrenom %></td>
+        <td><%= membre.naissance %></td>
+        <td><%= membre.listeActivites %></td>
+      <tr>
       <% end %>
-    </tbody>
+   </tbody>
   </table>
 <% end %>
 
+</div>
+</div>
 
-<h2>Fees</h2>
 <% if @famille.cotisation %>
-<%= render :partial => "cotisation.en", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+  <div class="panel panel-default" id="coordonneeFamille">
+  <div class="panel-heading"><h2 class="panel-title">Membership Fee</h2></div>
+  <div class="panel-body">
+  <%= render :partial => "cotisation.en", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+  </div>
+  </div>
 <% end %>
 
 <% unless @famille.paiements.empty? %>
-<h3>Payments Received</h3>
-  <table id="listePaiements">
-    <colgroup><col id="date"/><col id="mon"/><col id="op1"/><col id="op2"/></colgroup>
-    <thead><tr><th>Date</th><th class="number">Amount</th><th></th><th></th></tr></thead>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title">Paiements</h2></div>
+<div class="panel-body">
+  <table class="table table-condensed">
+     <thead><tr><th>Date</th><th class="number">Amount</th><th></th><th></th></tr></thead>
     <tbody>
   <% @famille.paiements.each do | paiement | %>
-    <tr class="<%= cycle('odd', 'even') %>">
+    <tr>
       <td><%= paiement.date %> </td>
       <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
     <tr>
   <% end %>
   </tbody></table>
+</div>
+</div>
 <% end %>
 
 <% famNotes = @famille.notes.where(auteur: 'famille') %>
 <% unless famNotes.empty? %>
-<h2>Notes</h2>
-  <table id="listeNote">
-    <colgroup><col id="date"/><col id="sum"/></colgroup>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title">Notes</h2></div>
+<div class="panel-body">
+  <table lass="table table-condensed">
     <thead>
-      <tr><th>Date</th><th>Text</th></tr>
+      <tr><th>Date</th><th>Note</th></tr>
     </thead>
     <tbody>
   <% famNotes.each do | note | %>
-    <tr class="<%= cycle('odd', 'even') %>">
+    <tr>
       <td><%= note.date %> </td>
       <td><%= note.sommaire %> </td>
     <tr>

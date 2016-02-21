@@ -1,6 +1,6 @@
-<tr class="<%= cycle('odd', 'even') %>">
+<tr>
   <td><%= link_to membre.nomPrenom, [@famille, membre] %></td>
   <td><%= membre.listeActivites %></td>
   <td><%= link_to 'Modifier', edit_famille_membre_path(@famille, membre) %></td>
-  <td><%= link_to 'Enlever', [@famille, membre], :confirm => 'Etes-vous certain?', :method => :delete %></td>
+  <td><%= link_to 'Enlever', [@famille, membre], data: {confirm: 'Etes vous certain?'}, :method => :delete %></td>
 <tr>

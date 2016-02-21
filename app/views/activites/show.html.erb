@@ -1,39 +1,44 @@
 <h1>Données de: <%=@activite.description_fr -%></h1>
+<div class="row">
+<div class="col-sm-8 col-lg-5">
+ 
+  <div class="form-group">
+    <label>Code</label>
+     <p class="form-control-static"><%= @activite.code %></p>
+  </div>
 
-<p>
-  <b>Code:</b>
-  <%=h @activite.code %>
-</p>
+  <div class="form-group">
+  <label>Description (FR)</label>
+    <p class="form-control-static"><%= @activite.description_fr %></p>
+  </div>
 
-<p>
-  <b>Description (FR):</b>
-  <%=h @activite.description_fr %>
-</p>
+  <div class="form-group">
+  <label>URL Description (FR)</label>
+<p class="form-control-static"><%=  @activite.url_fr %></p>
+  </div>
 
-<p>
-  <b>URL (FR):</b>
-  <%=h @activite.url_fr %>
-</p>
+  <div class="form-group">
+  <label>Description (EN)</label>
+<p class="form-control-static"><%=  @activite.description_en %></p>
+  </div>
 
-<p>
-  <b>Description (EN):</b>
-  <%=h @activite.description_en %>
-</p>
+  <div class="form-group">
+  <label>URL Description (EN)</label>
+<p class="form-control-static"><%=  @activite.url_en %></p>
+  </div>
 
-<p>
-  <b>URL (EN):</b>
-  <%=h @activite.url_en %>
-</p>
+  <div class="form-group">
+  <label>Gratuit</label>
+<p class="form-control-static"><%=  @activite.gratuite ? 'oui' : 'non' %></p>
+  </div>
 
-<p>
-  <b>Gratuite:</b>
-  <%=h @activite.gratuite == true ? 'oui' : 'non'%>
-</p>
-
-<p>
-  <b>Coût:</b>
-  <%= number_with_precision(@activite.cout, :precision => 2) %>
-</p>
+  <div class="form-group">
+  <label>Coût</label>
+<p class="form-control-static"><%=  @activite.cout %></p>
+  </div>
+  
+</div>
+</div>
 
 <%= link_to 'Modifier', edit_activite_path(@activite) %> |
-<%= link_to 'Retour', activites_path %>
+<%= link_to 'Retour', activites_path %></div>

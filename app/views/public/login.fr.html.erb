@@ -1,25 +1,31 @@
-<h1>Accès à votre profil</h1><%= link_to "English", {:action => "login_en", :controller => 'public'} %>
+<h1>Accès à votre profil</h1>
+<%= link_to "English", {:action => "login_en", :controller => 'public'} %>
 <br/><br/>
 <p>
   Ce logiciel est utilisé pour gérer les abonnements de la Piscine Dixie. Si vous êtes déjà
   membre vous pouvez accéder à votre profil. Les nouveaux membres peuvent créer leur profil.
 </p>
 
-<h3>Famille déjà inscrite</h3>
+<h3>Renouvellement</h3>
 <p>Les courriels que vous recevez de Piscine Dixie incluent un lien pour accéder directement à votre
 profil. Si vous avez inscrit une adresse courriel inscrite à votre profil, vous pouvez entrer cette
 adresse pour obtenir immédiatement un nouveau courriel avec votre lien personnel:</p>
 </p>
 
 <%= form_tag :action => 'login' do %>
-<p>
-<b>Adresse Courriel:</b>
-<%= text_field_tag :courriel, params[:courriel], :size => 15 %>
-</p>
-<p>
-  <%= submit_tag "Expédier courriel" %>
+<div class="form-group">
+ <label>Adresse Courriel</label>
+ <div class="row">
+ <div class="col-xs-4 col-lg-2">
+  <%= text_field_tag :courriel, params[:courriel], class: 'form-control' %>
+ </div>
+ </div>
+</div>
+
+<%= submit_tag "Expédier courriel",  class: 'btn btn-default' %>
 <% end %>
 
+<div style="padding-bottom: 20px;"></div>
 <p>
 Si nous ne retrouvons pas votre adresse courriel, vous pouvez créer un nouveau profil comme un nouvel abonné.
 </p>
@@ -30,6 +36,6 @@ Si nous ne retrouvons pas votre adresse courriel, vous pouvez créer un nouveau 
 les membres de la famille, leurs activités, etc. Le logiciel calcule ensuite votre cotisation et vous l'expédie par
 courriel.
 </p>
-<%= link_to "Je désire m'inscrire", {:action => "new", :controller => 'public'} %>
+<%= button_to "Je désire m'inscrire", {action: "new", controller: 'public'}, {method: :get, class: 'btn btn-primary'} %>
 
 
