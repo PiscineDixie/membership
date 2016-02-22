@@ -1,22 +1,26 @@
-
-
 <%= form_for(@participation) do |f| %>
 
+<% unless @participation.errors.full_messages.empty? %>
+<div class="alert alert-danger">
   <%  @participation.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>  <p>
-      
-  <div class="form-group">
-      <label>Description (FR)</label>
-    <%= f.text_field :description_fr, class: 'form-control' %>
-  </div>
+  <p>
+    <%= msg %>
+  </p>
+  <% end %>
+</div>
+<% end %>
 
-  <div class="form-group">
-      <label>Description (EN)</label>
-    <%= f.text_field :description_en, class: 'form-control' %>
-  </div>
+<div class="form-group">
+  <label>Description (FR)</label>
+  <%= f.text_field :description_fr, class: 'form-control' %>
+</div>
 
-  <%= f.submit button_name, :class => "btn btn-primary" %>
-  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
-  
+<div class="form-group">
+  <label>Description (EN)</label>
+  <%= f.text_field :description_en, class: 'form-control' %>
+</div>
+
+<%= f.submit button_name, :class => "btn btn-primary" %>
+<%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+
 <% end %>

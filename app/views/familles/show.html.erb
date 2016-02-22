@@ -1,145 +1,228 @@
 <div id="showFamille">
-<h1>Famille <%= @famille.nom %></h1>
+  <h1>Famille <%= @famille.nom %></h1>
 
-<nav class="navbar navbar-default">
-<ul class="nav navbar-nav">
-<li><%= link_to 'Modifier', edit_famille_path(@famille) %></li>
-<li><%= link_to 'Ajouter paiement', new_famille_paiement_path(@famille) %></li>
-<% unless @famille.courriels.empty? %>
-<li><%= link_to 'Expédier courriel', :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriels.join(' ') %></li>
-<% end %>
-<li><%= link_to 'Expédier reçu', recu_famille_path(@famille) %></li>
-<% if @famille.active? %>
-<li><%= link_to 'Rendre inactive', desactive_famille_path(@famille), method: :post %></li>
-<% end %>
-<li><%= link_to 'Enlever famille', @famille, data: {confirm: 'Etes vous certain?'}, :method => :delete %></li>
-</ul>
-</nav>
+  <nav class="navbar navbar-default">
+    <ul class="nav navbar-nav">
+      <li>
+        <%= link_to 'Modifier', edit_famille_path(@famille) %>
+      </li>
+      <li>
+        <%= link_to 'Ajouter paiement', new_famille_paiement_path(@famille) %>
+      </li>
+      <% unless @famille.courriels.empty? %>
+      <li>
+        <%= link_to 'Expédier courriel', :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriels.join(' ') %>
+      </li>
+      <% end %>
+      <li>
+        <%= link_to 'Expédier reçu', recu_famille_path(@famille) %>
+      </li>
+      <% if @famille.active? %>
+      <li>
+        <%= link_to 'Rendre inactive', desactive_famille_path(@famille), method: :post %>
+      </li>
+      <% end %>
+      <li>
+        <%= link_to 'Enlever famille', @famille, data: {confirm: 'Etes vous certain?'}, :method => :delete %>
+      </li>
+    </ul>
+  </nav>
 
-<div class="panel panel-default" id="coordonneeFamille">
-<div class="panel-heading"><h2 class="panel-title">Coordonnées</h2></div>
-<div class="panel-body">
+  <div class="panel panel-default" id="coordonneeFamille">
+    <div class="panel-heading">
+      <h2 class="panel-title">Coordonnées</h2>
+    </div>
+    <div class="panel-body">
 
-<dl class="dl-horizontal">
-  <dt>Adresse</dt><dd><%= @famille.adresse1 %></dd>
-<dt>Adresse</dt><dd><%= @famille.adresse2 %></dd>
-<dt>Ville</dt><dd><%= @famille.ville %></dd>
-<dt>Province</dt><dd><%= @famille.province %></dd>
-<dt>Code postal</dt><dd><%= code_postal_fmt(@famille.code_postal) %></dd>
-<dt>Tél soir</dt><dd><%= number_to_phone(@famille.tel_soir) %></dd>
-<dt>Tél jour</dt><dd><%= number_to_phone(@famille.tel_jour) %></dd>
-<dt>Courriel1</td>
-    <% if @famille.courriel1.empty? %>
-      <dd />
-    <% else %>
-      <dd><%= link_to @famille.courriel1, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel1 %></dd>
-    <% end %>
-<dt>Courriel2</td>
-    <% if @famille.courriel2.empty? %>
-      <dd />
-    <% else %>
-      <dd><%= link_to @famille.courriel2, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel2 %></dd>
-    <% end %>
-<dt>Langue</dt><dd><%= @famille.langue %></td></tr>
-<dt>Etat</dt><dd><%= @famille.etat %></td></tr>
-</dl>
-</div>
-</div>
-
-
-<div class="panel panel-default" id="coordonneeFamille">
-<div class="panel-heading"><h2 class="panel-title">Membres</h2></div>
-<div class="panel-body">
-
-<% unless @famille.membres.empty? %>
-  <table class="table table-condensed">
-    <thead><tr>
-      <th>Nom</th><th>Naissance</th><th>Activités</th><th></th><th></th>
-    </tr></thead>
-    <tbody>
-      <%= render :partial => 'membre', :collection => @famille.membres %>
-    </tbody>
-  </table>
-<% end %>
-
-</div>
-</div>
-
-<div class="panel panel-default" id="coordonneeFamille">
-<div class="panel-heading"><h2 class="panel-title">Cotisation & Paiements</h2></div>
-<div class="panel-body">
-
-<% if @famille.cotisation %>
-<h5>Cotisation</h5>
-<div class="form-horizontal">
-  <% if @famille.cotisation.cout_billets > 0 %>
-  <div class="form-group" style="margin-bottom:0">
-    <label class="control-label col-xs-2">Billets</label>
-    <div class="col-xs-1">
-    <p class="form-control-static pull-right"><%= number_with_precision(@famille.cotisation.cout_billets, :precision => 2) %></p>
+      <dl class="dl-horizontal">
+        <dt>
+          Adresse
+        </dt>
+        <dd>
+          <%= @famille.adresse1 %>
+        </dd>
+        <dt>
+          Adresse
+        </dt>
+        <dd>
+          <%= @famille.adresse2 %>
+        </dd>
+        <dt>
+          Ville
+        </dt>
+        <dd>
+          <%= @famille.ville %>
+        </dd>
+        <dt>
+          Province
+        </dt>
+        <dd>
+          <%= @famille.province %>
+        </dd>
+        <dt>
+          Code postal
+        </dt>
+        <dd>
+          <%= code_postal_fmt(@famille.code_postal) %>
+        </dd>
+        <dt>
+          Tél soir
+        </dt>
+        <dd>
+          <%= number_to_phone(@famille.tel_soir) %>
+        </dd>
+        <dt>
+          Tél jour
+        </dt>
+        <dd>
+          <%= number_to_phone(@famille.tel_jour) %>
+        </dd>
+        <dt>
+          Courriel1</td>
+          <% if @famille.courriel1.empty? %>
+          <dd />
+          <% else %>
+          <dd>
+            <%= link_to @famille.courriel1, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel1 %>
+          </dd>
+          <% end %>
+        <dt>
+          Courriel2</td>
+          <% if @famille.courriel2.empty? %>
+          <dd />
+          <% else %>
+          <dd>
+            <%= link_to @famille.courriel2, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel2 %>
+          </dd>
+          <% end %>
+        <dt>
+          Langue
+        </dt>
+        <dd>
+          <%= @famille.langue %></td></tr>
+          <dt>
+            Etat
+          </dt>
+        <dd>
+          <%= @famille.etat %></td></tr>
+      </dl>
     </div>
   </div>
-  <% end %>
-<div class="form-group" style="margin-bottom:0">
-  <label class="control-label col-xs-2">Total</label>
-  <div class="col-xs-1">
-  <p class="form-control-static pull-right"><%= number_with_precision(@famille.cotisation.total, :precision => 2) %></p>
-</div>
-</div>
-<div class="form-group" style="margin-bottom:0">
-  <label class="control-label col-xs-2">Montant dû</label>
-  <div class="col-xs-1">
-  <p class="form-control-static pull-right"><%= number_with_precision(@famille.cotisationDue, :precision => 2) %></p>
-</div>
-</div>
-</div>
-<%= link_to 'Calculer cotisation', new_famille_cotisation_path(@famille) %>
-<% if @famille.cotisation %>
-| <%= link_to 'Afficher cotisation', famille_cotisation_path(@famille) %>
-| <%= link_to 'Modifier cotisation', edit_famille_cotisation_path(@famille) %>
-<% end %>
 
-<% unless @famille.paiements.empty? %>
-<h5>Paiements</h5>
-  <table class="table" id="listePaiements">
-    <thead><tr><th>Date</th><th class="number">Montant</th><th></th><th></th><th></th></tr></thead>
-    <tbody>
-  <% @famille.paiements.each do | paiement | %>
-    <tr>
-      <td><%= paiement.date %> </td>
-      <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
-      <td><%= link_to 'Annuler', famille_paiement_path(@famille, paiement), data: {confirm: 'Etes vous certain?'}, :method => :delete %></td>
-      <td><%= link_to 'Afficher', famille_paiement_path(@famille, paiement) %></td>
-      <td><%= link_to 'Modifier', edit_famille_paiement_path(@famille, paiement) %></td>
-    </tr>
-  <% end %>
-  </tbody></table>
-<% end %>
-<% end %>
+  <div class="panel panel-default" id="coordonneeFamille">
+    <div class="panel-heading">
+      <h2 class="panel-title">Membres</h2>
+    </div>
+    <div class="panel-body">
 
-</div>
-</div>
+      <% unless @famille.membres.empty? %>
+      <table class="table table-condensed">
+        <thead>
+          <tr>
+            <th>Nom</th><th>Naissance</th><th>Activités</th><th></th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render :partial => 'membre', :collection => @famille.membres %>
+        </tbody>
+      </table>
+      <% end %>
 
-<div class="panel panel-default" id="coordonneeFamille">
-<div class="panel-heading"><h2 class="panel-title">Dossier</h2></div>
-<div class="panel-body">
+    </div>
+  </div>
 
-<% unless @famille.notes.empty? %>
-  <table class="table table-condensed" id="listeNote">
-    <thead>
-      <tr><th>Date</th><th>Auteur</th><th>Sommaire</th></tr>
-    </thead>
-    <tbody>
-  <% @famille.notes.each do | note | %>
-    <tr>
-      <td><%= note.date %> </td>
-      <td><%= note.auteur %> </td>
-      <td><%= note.sommaire %> </td>
-      <td><%= link_to 'Afficher', [@famille, note] %></td>
-    <tr>
-  <% end %>
-  </tbody>
-  </table>
-<% end %>
-<%= link_to 'Ajouter note', new_famille_note_path(@famille) %>
-</div>
+  <div class="panel panel-default" id="coordonneeFamille">
+    <div class="panel-heading">
+      <h2 class="panel-title">Cotisation & Paiements</h2>
+    </div>
+    <div class="panel-body">
+
+      <% if @famille.cotisation %>
+      <h5>Cotisation</h5>
+      <div class="form-horizontal">
+        <% if @famille.cotisation.cout_billets > 0 %>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="control-label col-xs-2">Billets</label>
+          <div class="col-xs-1">
+            <p class="form-control-static pull-right">
+              <%= number_with_precision(@famille.cotisation.cout_billets, :precision => 2) %>
+            </p>
+          </div>
+        </div>
+        <% end %>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="control-label col-xs-2">Total</label>
+          <div class="col-xs-1">
+            <p class="form-control-static pull-right">
+              <%= number_with_precision(@famille.cotisation.total, :precision => 2) %>
+            </p>
+          </div>
+        </div>
+        <div class="form-group" style="margin-bottom:0">
+          <label class="control-label col-xs-2">Montant dû</label>
+          <div class="col-xs-1">
+            <p class="form-control-static pull-right">
+              <%= number_with_precision(@famille.cotisationDue, :precision => 2) %>
+            </p>
+          </div>
+        </div>
+      </div>
+      <%= link_to 'Calculer cotisation', new_famille_cotisation_path(@famille) %>
+      <% if @famille.cotisation %>
+      | <%= link_to 'Afficher cotisation', famille_cotisation_path(@famille) %>
+      | <%= link_to 'Modifier cotisation', edit_famille_cotisation_path(@famille) %>
+      <% end %>
+
+      <% unless @famille.paiements.empty? %>
+      <h5>Paiements</h5>
+      <table class="table" id="listePaiements">
+        <thead>
+          <tr>
+            <th>Date</th><th class="number">Montant</th><th></th><th></th><th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @famille.paiements.each do | paiement | %>
+          <tr>
+            <td><%= paiement.date %> </td>
+            <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
+            <td><%= link_to 'Annuler', famille_paiement_path(@famille, paiement), data: {confirm: 'Etes vous certain?'}, :method => :delete %></td>
+            <td><%= link_to 'Afficher', famille_paiement_path(@famille, paiement) %></td>
+            <td><%= link_to 'Modifier', edit_famille_paiement_path(@famille, paiement) %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+      <% end %>
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default" id="coordonneeFamille">
+    <div class="panel-heading">
+      <h2 class="panel-title">Dossier</h2>
+    </div>
+    <div class="panel-body">
+
+      <% unless @famille.notes.empty? %>
+      <table class="table table-condensed" id="listeNote">
+        <thead>
+          <tr>
+            <th>Date</th><th>Auteur</th><th>Sommaire</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @famille.notes.each do | note | %>
+          <tr>
+            <td><%= note.date %> </td>
+            <td><%= note.auteur %> </td>
+            <td><%= note.sommaire %> </td>
+            <td><%= link_to 'Afficher', [@famille, note] %></td>
+          <tr>
+            <% end %>
+        </tbody>
+      </table>
+      <% end %>
+      <%= link_to 'Ajouter note', new_famille_note_path(@famille) %>
+    </div>

@@ -1,79 +1,94 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abonnements</title>
-  <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true%>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Abonnements</title>
+    <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true%>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
-  <script src="//apis.google.com/js/client:plus.js"></script>
-  <%= csrf_meta_tags %>
-</head>
+    <script src="//apis.google.com/js/client:plus.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body>
-  
-<div class="page-header">
-  <%= image_tag("logo112x87.png") %>
-  <div class="pull-right"><h1><%= @page_title || "Abonnements"%></h1></div>
-</div>
-  
-<% if @famille %>
+  <body>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <div class="page-header">
+      <%= image_tag("logo112x87.png") %>
+      <div class="pull-right">
+        <h1><%= @page_title || "Abonnements"%></h1>
+      </div>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <% if @famille.id %>
-      <ul class="nav navbar-nav">
-        <% if @famille.active? %>
-           <li><%= link_to  @famille.english? ? 'Display profile' : "Afficher profil",    :controller => '/public',  :action => 'show', :id => 1 %></li>
-           <li><%= link_to  @famille.english? ? 'Modify profile' : "Modifier profil",    :controller => '/public', :action => 'edit', :id => 1  %></li>
-        <% else %>
-          <li><%= link_to  @famille.english? ? 'Renewing your membership' : "Ré-inscription",    :controller => '/public', :action => 'edit', :id => 1   %></li>
-         <% end %>
-         
-         <% if @famille.paiementTotal > 0 %>
-          <li><%= link_to(@famille.english? ? 'Get receipt for membership' : "Obtenir un reçu pour paiement",    :controller => '/public', :action => 'recupaiement', :id => 1) %></li>
-         <% end %>
-   
-         <li><%= link_to(@famille.english? ? 'Mail income tax receipts' : "Expédier mes reçus d'impôt",    :controller => '/public', :action => 'recu', :id => 1) %></li>
-      </ul>
-      <% end %>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to  @famille.english? ? 'Help' : "Aide",    :controller => '/public', :action => 'aide', :id => 1 %></li>
-        <li><%= link_to  "Logout ",    :controller => '/public', :action => 'logout' %></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+    <% if @famille %>
 
-<% end %>
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
 
-<div id="columns" class="container-fluid">
-  <% if flash[:notice] -%>
-    <div class="alert alert-info">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <%= flash[:notice] %>
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <% if @famille.id %>
+          <ul class="nav navbar-nav">
+            <% if @famille.active? %>
+            <li>
+              <%= link_to  @famille.english? ? 'Display profile' : "Afficher profil",    :controller => '/public',  :action => 'show', :id => 1 %>
+            </li>
+            <li>
+              <%= link_to  @famille.english? ? 'Modify profile' : "Modifier profil",    :controller => '/public', :action => 'edit', :id => 1  %>
+            </li>
+            <% else %>
+            <li>
+              <%= link_to  @famille.english? ? 'Renewing your membership' : "Ré-inscription",    :controller => '/public', :action => 'edit', :id => 1   %>
+            </li>
+            <% end %>
+
+            <% if @famille.paiementTotal > 0 %>
+            <li>
+              <%= link_to(@famille.english? ? 'Get receipt for membership' : "Obtenir un reçu pour paiement",    :controller => '/public', :action => 'recupaiement', :id => 1) %>
+            </li>
+            <% end %>
+
+            <li>
+              <%= link_to(@famille.english? ? 'Mail income tax receipts' : "Expédier mes reçus d'impôt",    :controller => '/public', :action => 'recu', :id => 1) %>
+            </li>
+          </ul>
+          <% end %>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to  @famille.english? ? 'Help' : "Aide",    :controller => '/public', :action => 'aide', :id => 1 %>
+            </li>
+            <li>
+              <%= link_to  "Logout ",    :controller => '/public', :action => 'logout' %>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <% end %>
+
+    <div id="columns" class="container-fluid">
+      <% if flash[:notice] -%>
+      <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= flash[:notice] %>
+      </div>
+      <% end -%>
+
+      <%= yield  %>
     </div>
-  <% end -%>
 
-  <%= yield  %>
-</div>
-  
-<div class="footer">
-</div
-</body>
+    <div class="footer"></div
+  </body>
 </html>

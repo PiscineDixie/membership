@@ -1,51 +1,55 @@
-
 <div class="row">
-<div class="col-sm-8 col-lg-5">
-<%= form_for(@activite) do |f| %>
+  <div class="col-sm-8 col-lg-5">
+    <%= form_for(@activite) do |f| %>
 
-    <%  @activite.errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>  <p>
-      
+    <% unless @activite.errors.full_messages.empty? %>
+    <div class="alert alert-danger">
+      <%  @activite.errors.full_messages.each do |msg| %>
+      <p>
+        <%= msg %>
+      </p>
+      <% end %>
+    </div>
+    <% end %>
 
-  <div class="form-group">
-    <label>Code</label>
+    <div class="form-group">
+      <label>Code</label>
       <%= f.text_field :code, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>Description (FR)</label>
+      <%= f.text_field :description_fr, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>URL Description (FR)</label>
+      <%= f.text_field :url_fr, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>Description (EN)</label>
+      <%= f.text_field :description_en, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>URL Description (EN)</label>
+      <%= f.text_field :url_en, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>Gratuit</label>
+      <%= f.select(:gratuite, {'oui' => 1, 'non' => 0}, {selected: (@activite.gratuite ? 1 : 0)}, {class: 'form-control'}) %>
+    </div>
+
+    <div class="form-group">
+      <label>Coût</label>
+      <%= f.text_field :cout, class: 'form-control' %>
+    </div>
+
+    <%= f.submit button_name, :class => "btn btn-primary" %>
+    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+    <% end %>
+
   </div>
-
-  <div class="form-group">
-  <label>Description (FR)</label>
-    <%= f.text_field :description_fr, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-  <label>URL Description (FR)</label>
-    <%= f.text_field :url_fr, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-  <label>Description (EN)</label>
-    <%= f.text_field :description_en, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-  <label>URL Description (EN)</label>
-    <%= f.text_field :url_en, class: 'form-control' %>
-  </div>
-
-  <div class="form-group">
-  <label>Gratuit</label>
-  <%= f.select(:gratuite, {'oui' => 1, 'non' => 0}, {selected: (@activite.gratuite ? 1 : 0)}, {class: 'form-control'}) %>
-  </div>
-
-  <div class="form-group">
-  <label>Coût</label>
-    <%= f.text_field :cout, class: 'form-control' %>
-  </div>
-
-  <%= f.submit button_name, :class => "btn btn-primary" %>
-  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
-<% end %>
-
-</div>
 </div>

@@ -52,7 +52,7 @@ class UsersController < ApplicationController
     @user = User.find(params[:id])
 
     if (params[:cancel])
-      redirect_to(famille_path(@user))
+      redirect_to(@user)
       return;
     end
     

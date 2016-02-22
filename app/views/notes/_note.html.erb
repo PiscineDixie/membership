@@ -1,15 +1,21 @@
 <%= form_for([@famille, @note]) do |f| %>
 
+<% unless @note.errors.full_messages.empty? %>
+<div class="alert alert-danger">
   <%  @note.errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>  <p>
-      
-  <div class="form-group">
-      <label>Info</label>
-    <%= f.text_area :info, class: 'form-control' %>
-  </div>
+  <p>
+    <%= msg %>
+  </p>
+  <% end %>
+</div>
+<% end %>
 
-  <%= f.submit button_name, :class => "btn btn-primary" %>
-  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
-  
+<div class="form-group">
+  <label>Info</label>
+  <%= f.text_area :info, class: 'form-control' %>
+</div>
+
+<%= f.submit button_name, :class => "btn btn-primary" %>
+<%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+
 <% end %>

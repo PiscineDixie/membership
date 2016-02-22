@@ -19,17 +19,6 @@ class Famille < ActiveRecord::Base
   validates_format_of :code_postal, :with => /\A[A-Z][1-9][A-Z][1-9][A-Z][1-9]\z/, :message => 'doit contenir des chiffres et des majuscules'
   validates_size_of :membres, :minimum => 1, :on => :create, :message => '-- au moins un'
   
-  validate :validations
-  def validations
-    # Read the errors from our members
-    self.membres.each do | membre |
-      membre.valid? if membre.errors.empty?
-      membre.errors.each do | attr, msg |
-        errors[:base] << msg;
-      end
-    end
-  end
-  
   has_many :membres, inverse_of: :famille, dependent: :destroy  # Destroy pour mettre a jour le lien avec les activites
   has_one  :cotisation, inverse_of: :famille, dependent: :delete
   has_many :paiements, inverse_of: :famille, dependent: :delete_all
@@ -444,7 +433,7 @@ class Famille < ActiveRecord::Base
            famille.cotisationTotal > 0 then
         famille.cotisation.rabais_preinscription = 0
         famille.cotisation.save!
-        FamilleMailer.rabais_notif(famille, famille.courriels).deliver_later unless famille.courriels.empty?
+        FamilleMailer.rabais_notif(famille, famille.courriels).deliver_now unless famille.courriels.empty?
       end
     end
   end

@@ -178,7 +178,7 @@ class FamillesController < ApplicationController
             uneAddr = to[0]
             famille = Famille.where("courriel1 = :addr or courriel2 = :addr", {:addr => uneAddr}).take
           end
-          FamilleMailer.info(famille, @sujet, to, @msg, @langue).deliver_later
+          FamilleMailer.info(famille, @sujet, to, @msg, @langue).deliver_now
           cnt = 1
         else
           # Expedier ce courriel aux familles. Filtre sur les activites
@@ -207,7 +207,7 @@ class FamillesController < ApplicationController
             
             # Expedier un courriel aux adresses de la famille
             if trouveMembre && !f.courriels.empty?
-              FamilleMailer.info(f, @sujet, f.courriels, @msg, @langue, cnt == 0).deliver_later
+              FamilleMailer.info(f, @sujet, f.courriels, @msg, @langue, cnt == 0).deliver_now
               cnt = cnt + 1
             end
           end
@@ -253,7 +253,7 @@ class FamillesController < ApplicationController
       recus = famille.recus.where("annee = :annee", {:annee => annee});
       unless recus.empty? || famille.courriels.empty?
         parent = famille.membres.order(:naissance).take.prenomNom
-        FamilleMailer.recu(famille, recus, famille.courriels, parent).deliver_later
+        FamilleMailer.recu(famille, recus, famille.courriels, parent).deliver_now
       end
     end
     flash[:notice] = "Courriels expédiés à tous les membres éligibles."
@@ -263,7 +263,7 @@ class FamillesController < ApplicationController
   # Generer les recu d'impot d'une famille
   # Reconnait les parametre "annee" et "parent"
   def recu
-    famille = Famille.find(params[:id], :include => [:membres, :cotisation, :paiements])
+    famille = Famille.includes(:membres, :cotisation, :paiements).find(params[:id])
     if (famille.courriels.empty?)
       flash[:notice] = "La famille doit avoir au moins une adresse courriel pour l'expédition des reçus."
       redirect_to(famille)
@@ -280,7 +280,7 @@ class FamillesController < ApplicationController
     recus = famille.recus.where("annee = :annee", {:annee => annee});
     if !recus.empty?
       parent = params[:parent] || famille.membres.order(:naissance).take.prenomNom
-      FamilleMailer.recu(famille, recus, famille.courriels, parent).deliver_later
+      FamilleMailer.recu(famille, recus, famille.courriels, parent).deliver_now
       flash[:notice] = "Courriels expédiés à l'adresse(s): " + famille.courriels.to_s
     else
       flash[:notice] = "Non éligible pour un reçu."

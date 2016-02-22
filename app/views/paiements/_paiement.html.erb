@@ -1,56 +1,61 @@
-
 <div class="row">
-<div class="col-sm-8 col-lg-5">
+  <div class="col-sm-8 col-lg-5">
 
-<%= form_for([@famille, @paiement]) do |f| %>
+    <%= form_for([@famille, @paiement]) do |f| %>
 
-  <%  @paiement .errors.full_messages.each do |msg| %>
-    <p><%= msg %></p>
-  <% end %>  <p>
-      
-  <div class="form-group">
-    <label>Date</label>
-    <div class="">
-      <div class="form-inline">
-       <%= f.text_field(:date, {type: 'date', class: "form-control" }) %>
+    <% unless @paiement.errors.full_messages.empty? %>
+    <div class="alert alert-danger">
+      <%  @paiement.errors.full_messages.each do |msg| %>
+      <p>
+        <%= msg %>
+      </p>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <label>Date</label>
+      <div class="">
+        <div class="form-inline">
+          <%= f.text_field(:date, {type: 'date', class: "form-control" }) %>
+        </div>
       </div>
     </div>
-  </div>
-  
-  <div class="form-group">
-      <label>Montant</label>
-    <%= f.text_field :montant, :precision => 2, class: 'form-control form-amount' %>
-  </div>
 
-  <div class="form-inline">
-   <div class="form-group">
-      <%= f.check_box :comptant, {class: "form-control"} %>
-      <label>Comptant</label>
-   </div>
-   <div class="form-group">
-    <label>ou Numéro du chèque</label>
-    <%= f.text_field :no_cheque, class: 'form-control' %>
-   </div>
-  </div>
-  
-  <div class="form-group">
-      <label>Note</label>
-    <%= f.text_field :note, class: 'form-control' %>
-  </div>
-
-  <% unless noemail %>
-   <div class="form-inline">
     <div class="form-group">
-      <%= check_box_tag('courriel', 1, true, class: 'form-control') %>
-     <label>Courriel de confirmation</label>
+      <label>Montant</label>
+      <%= f.text_field :montant, :precision => 2, class: 'form-control form-amount' %>
     </div>
-</div>
-  <% end %>
 
-  <%= f.submit button_name, :class => "btn btn-primary" %>
-  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
-  
-<% end %>
+    <div class="form-inline">
+      <div class="form-group">
+        <%= f.check_box :comptant, {class: "form-control"} %>
+        <label>Comptant</label>
+      </div>
+      <div class="form-group">
+        <label>ou Numéro du chèque</label>
+        <%= f.text_field :no_cheque, class: 'form-control' %>
+      </div>
+    </div>
 
-</div>
+    <div class="form-group">
+      <label>Note</label>
+      <%= f.text_field :note, class: 'form-control' %>
+    </div>
+
+    <% unless noemail %>
+    <div class="form-inline">
+      <div class="form-group">
+        <%= check_box_tag('courriel', 1, true, class: 'form-control') %>
+        <label>Courriel de confirmation</label>
+      </div>
+    </div>
+    <% end %>
+
+    <%= f.submit button_name, :class => "btn btn-primary" %>
+    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+
+    <% end %>
+
+  </div>
 </div>

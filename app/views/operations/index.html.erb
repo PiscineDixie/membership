@@ -1,29 +1,43 @@
 <h1>Opérations</h1>
 
+<h4>Courriels</h4>
 <p>
-<%= link_to 'Expédier un courriel aux membres', :action => "courriel", :controller => 'familles' %>
+  Permet l'envoi de courriels à un membre, à un groupe de membres, ou à tous.
 </p>
 
+<%= button_to('Expédier courriels', {:action => "courriel", :controller => 'familles'}, {method: :get, class: "btn btn-primary"})  %>
+<div style="padding-bottom: 30px"></div>
 
-<h2>Crédit d'impôt pour la condition physique des enfants</h2>
+<h4>Crédit d'impôt pour la condition physique des enfants</h4>
 <p>
-<%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn"}) %>
+  Premièrement, on génère les reçus. Fait à la fin janvier par un administrateur.
 </p>
+<%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn btn-default"}) %>
+<br />
 
 <p>
-<%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'}, 
-   {data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn"}) %>
+  Deuxièmement, le lendemain (pour laisser le backup se faire), après avoir remis les données à zéro (voir çi-bas),
+  on les expédie aux familles. (Il faut remettre les données à zéro parce que certains vont s'abonner en recevant le courriel.)
 </p>
+<%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'},
+{data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn btn-default"}) %>
+<div style="padding-bottom: 30px"></div>
 
-<h2>Eliminer rabais de pré-inscription</h2>
-<p>Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
-de la période de pré-inscription mais qui n'ont pas envoyé au moins un paiement. Un courriel est expédié.
-<%= button_to("Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'}, {class: "btn"}) %>
-</p>
-
-<h2>Remise à zéro des données annuelles</h2>
+<h4>Eliminer le rabais de pré-inscription</h4>
 <p>
-<%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'}, 
-  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn"}) %>
+  Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
+  de la période de pré-inscription mais qui n'ont pas envoyé au moins un paiement. Un courriel est expédié.
+  <%= button_to("Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'}, {class: "btn btn-default"}) %>
+</p>
+<div style="padding-bottom: 30px"></div>
+
+<h4>Remise à zéro des données annuelles</h4>
+<p>
+  <strong>Assurez-vous de générer les reçus pour le crédit d'impôt avant de faire cette opération.</strong>
+  Vous devez avoir le privilège de super user (voir la table des usagers) pour effectuer cette opération.
+</p>
+<p>
+  <%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'},
+  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn btn-danger"}) %>
 </p>
 

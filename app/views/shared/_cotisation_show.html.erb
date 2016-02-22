@@ -1,74 +1,97 @@
-
 <div class="form-group">
-    <label>Montant</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.cotisation_calculee, :precision => 2) %></p>
+  <label>Montant</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.cotisation_calculee, :precision => 2) %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Exemption:</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.cotisation_exemption, :precision => 2) %></p>
+  <label>Exemption:</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.cotisation_exemption, :precision => 2) %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Frais additionnels:</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais_supplementaires, :precision => 2) %></p>
+  <label>Frais additionnels:</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais_supplementaires, :precision => 2) %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Montant non-taxable:</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.non_taxable, :precision => 2) %></p>
+  <label>Montant non-taxable:</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.non_taxable, :precision => 2) %>
+  </p>
 </div>
 
 <% if cotisation_show.frais1 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais1_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais1, :precision => 2) %></p>
+  <label><%= cotisation_show.frais1_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais1, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.frais2 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais2_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais2, :precision => 2) %></p>
+  <label><%= cotisation_show.frais2_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais2, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.frais3 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais3_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais3, :precision => 2) %></p>
+  <label><%= cotisation_show.frais3_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais3, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.frais4 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais4_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais4, :precision => 2) %></p>
+  <label><%= cotisation_show.frais4_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais4, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.frais5 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais5_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais5, :precision => 2) %></p>
+  <label><%= cotisation_show.frais5_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais5, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.frais6 != 0 %>
 <div class="form-group">
-    <label><%= cotisation_show.frais6_explication %></label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.frais6, :precision => 2) %></p>
+  <label><%= cotisation_show.frais6_explication %></label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.frais6, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <% if cotisation_show.cout_billets != 0 %>
 <div class="form-group">
-    <label>Billets d'invités</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.cout_billets, :precision => 2) %></p>
+  <label>Billets d'invités</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.cout_billets, :precision => 2) %>
+  </p>
 </div>
 <% end %>
 
 <div class="form-group">
-    <label>Rabais pré-inscription</label>
-<p class="form-control-static"><%= number_with_precision(cotisation_show.rabais_preinscription, :precision => 2) %></p>
+  <label>Rabais pré-inscription</label>
+  <p class="form-control-static">
+    <%= number_with_precision(cotisation_show.rabais_preinscription, :precision => 2) %>
+  </p>
 </div>

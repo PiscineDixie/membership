@@ -1,111 +1,136 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Abonnements</title>
-  <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true%>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Abonnements</title>
+    <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true%>
+    <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
-  <script src="//apis.google.com/js/client:plus.js"></script>
-  <%= csrf_meta_tags %>
-</head>
+    <script src="//apis.google.com/js/client:plus.js"></script>
+    <%= csrf_meta_tags %>
+  </head>
 
-<body>
-  
-<div class="page-header">
-  <%= image_tag("logo112x87.png") %>
-  <div class="pull-right"><h1><%= @page_title || "Abonnements"%></h1></div>
-</div>
-  
-<% if session[:user] and User.find_by_id(session[:user]) %>
+  <body>
 
-<nav class="navbar navbar-default">
-  <div class="container-fluid">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <div class="page-header">
+      <%= image_tag("logo112x87.png") %>
+      <div class="pull-right">
+        <h1><%= @page_title || "Abonnements"%></h1>
+      </div>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav">
-      <%= form_tag( recherche_familles_path, {class: 'navbar-form navbar-left'} ) do %>
-          <div class="form-group">
-            <%= select_tag(:champ, options_for_select(["Nom", "Tél", "CP", "Courriel"]), class: 'form-control') %>
-          </div>
-          <div class="form-group">
-            <%= text_field_tag :key, '', size: 12, placeholder: 'Recherche', class: 'form-control' %>
-          </div>
-          <button type="submit" class="btn btn-default">Submit</button>
-        <% end %>
-        <li><%= link_to  "Familles",    :controller => '/familles' %></li>
-        <li><%= link_to  "Rapports",    :controller => '/rapports' %></li>
-        <li><%= link_to  "Opérations",    :controller => '/operations' %></li>
-        <% if User.hasAdminPriviledge(session[:user]) %>
-        <li class="dropdown">
-          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuration<span class="caret"></span></a>
-          <ul class="dropdown-menu">
-            <li><%= link_to "Activités sportives", :controller => '/activites' %></li>
-            <li><%= link_to "Participation", :controller => '/participations' %></li>
-            <li><%= link_to  "Usagers",    :controller => '/users' %></li>
-            <li><%= link_to  "Constantes",    :controller => '/constantes', :action => 'show', :id => Constantes.instance.id %></li>
+    <% if session[:user] and User.find_by_id(session[:user]) %>
+
+    <nav class="navbar navbar-default">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <%= form_tag( recherche_familles_path, {class: 'navbar-form navbar-left'} ) do %>
+            <div class="form-group">
+              <%= select_tag(:champ, options_for_select(["Nom", "Tél", "CP", "Courriel"]), class: 'form-control') %>
+            </div>
+            <div class="form-group">
+              <%= text_field_tag :key, '', size: 12, placeholder: 'Recherche', class: 'form-control' %>
+            </div>
+            <button type="submit" class="btn btn-default">
+              Submit
+            </button>
+            <% end %>
+            <li>
+              <%= link_to  "Familles",    :controller => '/familles' %>
+            </li>
+            <li>
+              <%= link_to  "Rapports",    :controller => '/rapports' %>
+            </li>
+            <li>
+              <%= link_to  "Opérations",    :controller => '/operations' %>
+            </li>
+            <% if User.hasAdminPriviledge(session[:user]) %>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Configuration<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <%= link_to "Activités sportives", :controller => '/activites' %>
+                </li>
+                <li>
+                  <%= link_to "Participation", :controller => '/participations' %>
+                </li>
+                <li>
+                  <%= link_to  "Usagers",    :controller => '/users' %>
+                </li>
+                <li>
+                  <%= link_to  "Constantes",    :controller => '/constantes', :action => 'show', :id => Constantes.instance.id %>
+                </li>
+              </ul>
+            </li>
+            <% end %>
           </ul>
-        </li>
-        <% end %>
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        <li><%= link_to  "Aide",          url_for("/instructions")  %></li>
-        <li><%= link_to "Logout " + User.sessionUserId(session[:user]), signout_path, id: "sign_out" %></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <%= link_to  "Aide",          url_for("/instructions")  %>
+            </li>
+            <li>
+              <%= link_to "Logout " + User.sessionUserId(session[:user]), signout_path, id: "sign_out" %>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
 
-<% else %>
+    <% else %>
 
-<nav class="navbar navbar-default">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-        <span class="sr-only">Toggle navigation</span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
+    <nav class="navbar navbar-default">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav navbar-right">
+            <li>
+              <a href="" id="facebook_signin">Login avec Facebook</a>
+            </li>
+            <li>
+              <a href="" id="google_signin">Login avec Google</a>
+            </li>
+          </ul>
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+
+    <% end %>
+
+    <div id="columns" class="container-fluid">
+      <% if flash[:notice] -%>
+      <div class="alert alert-info">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <%= flash[:notice] %>
+      </div>
+      <% end -%>
+
+      <%= yield  %>
     </div>
 
-    <!-- Collect the nav links, forms, and other content for toggling -->
-    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right">
-        <li><a href="" id="facebook_signin">Login avec Facebook</a></li>
-        <li><a href="" id="google_signin">Login avec Google</a></li>
-      </ul>
-    </div><!-- /.navbar-collapse -->
-  </div><!-- /.container-fluid -->
-</nav>
-
-<% end %>
-
-<div id="columns" class="container-fluid">
-  <% if flash[:notice] -%>
-    <div class="alert alert-info">
-      <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-        <span aria-hidden="true">&times;</span>
-      </button>
-      <%= flash[:notice] %>
-    </div>
-  <% end -%>
-
-  <%= yield  %>
-</div>
-  
-<div class="footer">
-</div
-</body>
+    <div class="footer"></div
+  </body>
 </html>

@@ -1,84 +1,90 @@
 <h1>Edition des constantes</h1>
 
 <div class="row">
-<div class="col-sm-8 col-lg-5">
+  <div class="col-sm-8 col-lg-5">
 
-<%= form_for(@constantes, :url => constante_path) do |f| %>
+    <%= form_for(@constantes, :url => constante_path) do |f| %>
 
-    <%  @constantes .errors.full_messages.each do |msg| %>
-      <p><%= msg %></p>
-    <% end %>  <p>
-      
-  <div class="form-group">
+    <% unless @constantes.errors.full_messages.empty? %>
+    <div class="alert alert-danger">
+      <%  @constantes.errors.full_messages.each do |msg| %>
+      <p>
+        <%= msg %>
+      </p>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="form-group">
       <label>Base Sénior</label>
-    <%= f.text_field :baseSenior, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :baseSenior, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Base Individu</label>
-    <%= f.text_field :baseIndividu, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :baseIndividu, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Base Famille</label>
-    <%= f.text_field :baseFamille, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :baseFamille, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Activité Sénior</label>
-    <%= f.text_field :activiteSenior, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :activiteSenior, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Activité Individu</label>
-    <%= f.text_field :activiteIndividu, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :activiteIndividu, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Activité Famille</label>
-    <%= f.text_field :activiteFamille, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :activiteFamille, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Rabais Pré-inscription Sénior</label>
-    <%= f.text_field :rabaisPreInscriptionSenior, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :rabaisPreInscriptionSenior, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Rabais Pré-inscription Individu</label>
-    <%= f.text_field :rabaisPreInscriptionIndividu, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :rabaisPreInscriptionIndividu, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Rabais Pré-inscription Famille</label>
-    <%= f.text_field :rabaisPreInscriptionFamille, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :rabaisPreInscriptionFamille, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
-  <label>Fin Pré-inscription</label>
-  <div class="form-inline">
-  <%= f.date_select(:finPreInscription, {}, {class: 'form-control'})  %>
-  </div>
-  </div>
+    <div class="form-group">
+      <label>Fin Pré-inscription</label>
+      <div class="form-inline">
+        <%= f.date_select(:finPreInscription, {}, {class: 'form-control'})  %>
+      </div>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Code Leçon Natation</label>
-    <%= f.text_field :codeLeconNatation, class: 'form-control'  %>
-  </div>
+      <%= f.text_field :codeLeconNatation, class: 'form-control'  %>
+    </div>
 
-  <div class="form-group">
+    <div class="form-group">
       <label>Coût d'un billet d'invité</label>
-    <%= f.text_field :cout_billet, class: 'form-control'  %>
-  </div>
-	
-  <div class="form-group">
+      <%= f.text_field :cout_billet, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
       <label>Age mininum pour cotisation individuel</label>
-    <%= f.text_field :age_min_individu, class: 'form-control'  %>
+      <%= f.text_field :age_min_individu, class: 'form-control'  %>
+    </div>
+
+    <%= f.submit "Enregistrer", class: "btn btn-primary"%>
+    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+    <% end %>
+
   </div>
-
-  <%= f.submit "Enregistrer", class: "btn btn-primary"%>
-  <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %> 
-<% end %>
-
-</div>
 </div>

@@ -5,7 +5,7 @@
 <% hasErrors = !@famille.errors.full_messages.empty? %>
 <% @famille.membres.each { | membre | hasErrors = hasErrors || !membre.errors.full_messages.empty? } %>
 <% if hasErrors %>
-  <div id="errorExplanation">
+  <div class="alert alert-danger">
     <% @famille.errors.full_messages.each do |msg| %>
     <p><%= msg %></p>
   <% end %>

@@ -8,16 +8,16 @@
   </thead>
   <tbody>
     <% @familles.each do | famille | %>
-      <% if !famille.active? %>
-        <tr>
-          <td><%= link_to famille.nom, famille %></td>
-          <td><%= number_to_phone(famille.tel_soir) %></td>
-          <td><%= famille.adresse1 %></td>
-          <td><%= famille.adresse2 %></td>
-          <td><%= famille.ville %></td>
-          <td><%= famille.code_postal %></td>
-        </tr>
-      <% end %>
+    <% if !famille.active? %>
+    <tr>
+      <td><%= link_to famille.nom, famille %></td>
+      <td><%= number_to_phone(famille.tel_soir) %></td>
+      <td><%= famille.adresse1 %></td>
+      <td><%= famille.adresse2 %></td>
+      <td><%= famille.ville %></td>
+      <td><%= famille.code_postal %></td>
+    </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

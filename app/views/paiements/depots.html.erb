@@ -1,44 +1,47 @@
 <!-- Code pour generer le rapport des depots bancaires: groupes de 10 cheques -->
 <!-- Les variables sont:
-     @debut, @fin: Date du debut et de la fin du rapport
+@debut, @fin: Date du debut et de la fin du rapport
 -->
 
 <h1>Dépôts bancaires pour chèques encaissés</h1>
 <p>
-Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
+  Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
 </p>
 <table class="table">
-  <thead><th>Date d'entrée</th><th>Date de paiement</th><th class="number">Id</td><th>Famille</th><th class="number">Nº</th><th class="number">Montant</th></thead>
-	<tfoot>
-	  <th/><th/><th/><th/><td/>
-	  <td align="right"> <%= number_with_precision(Paiement.sumMontantCheque(@debut, @fin), :precision => 2) %> </td>
+  <thead>
+    <th>Date d'entrée</th><th>Date de paiement</th><th class="number">Id</td><th>Famille</th><th class="number">Nº</th><th class="number">Montant</th>
+  </thead>
+  <tfoot>
+    <th/><th/><th/><th/><td/>
+    <td align="right"> <%= number_with_precision(Paiement.sumMontantCheque(@debut, @fin), :precision => 2) %> </td>
   </tfoot>
   <tbody>
     <% depIdx = 1 %>
     <% depTot = 0 %>
     <% Paiement.paiements(@debut, @fin).each do | p | %>
-      <tr>
-        <% if !p.comptant %>
-          <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
-          <td><%= p.date.strftime("%m-%d") %></td>
-          <td class="number"><%= p.famille_id %></td>
-          <td><%= link_to Famille.find(p.famille_id).nom, Famille.find(p.famille_id) %></td>
-          <td><%= depIdx %></td>
-          <td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td>
-          <% depIdx = depIdx + 1 %>
-          <% depTot = depTot + p.montant %>
-        <% end %>
-      <% if (depIdx == 11) %>
-        <tr><td/><td/><td/><td/><td/><td style="padding-bottom:1em;" align="right"><%= number_with_precision(depTot, :precision => 2) %></td></tr>
-        <tr/>
-        <% depIdx = 1 %>
-        <% depTot = 0 %>
+    <tr>
+      <% if !p.comptant %>
+      <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
+      <td><%= p.date.strftime("%m-%d") %></td>
+      <td class="number"><%= p.famille_id %></td>
+      <td><%= link_to Famille.find(p.famille_id).nom, Famille.find(p.famille_id) %></td>
+      <td><%= depIdx %></td>
+      <td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td>
+      <% depIdx = depIdx + 1 %>
+      <% depTot = depTot + p.montant %>
       <% end %>
+      <% if (depIdx == 11) %>
+    <tr><td/><td/><td/><td/><td/><td style="padding-bottom:1em;" align="right"><%= number_with_precision(depTot, :precision => 2) %></td>
+    </tr>
+    <tr/>
+    <% depIdx = 1 %>
+    <% depTot = 0 %>
+    <% end %>
     <% end %>
     <% if (depTot != 0) %>
-      <tr><td/><td/><td/><td/><td/><td style="padding-bottom:1em;" align="right"><%= number_with_precision(depTot, :precision => 2) %></td></tr>
+    <tr><td/><td/><td/><td/><td/><td style="padding-bottom:1em;" align="right"><%= number_with_precision(depTot, :precision => 2) %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
-
 

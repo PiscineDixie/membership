@@ -1,6 +1,10 @@
 <div class="panel panel-default">
-<div class="panel-heading"><div class="panel-title">Autres</div></div>
-<div class="panel-body">
+  <div class="panel-heading">
+    <div class="panel-title">
+      Autres
+    </div>
+  </div>
+  <div class="panel-body">
 
     <h4>Billets d'invités</h4>
     <p>
@@ -16,9 +20,9 @@
         </div>
       </div>
     </div>
-  
-  <!-- on affiche seulement l'espace pour une note si interface public -->
-  <% if url.include?('public') %>
+
+    <!-- on affiche seulement l'espace pour une note si interface public -->
+    <% if url.include?('public') %>
     <div id="notes">
       <h4>Note</h4>
       <div class="form-group">
@@ -26,8 +30,8 @@
         <%= text_area_tag 'note', @note, :rows => '3', :cols => '70', class: 'form-control' %>
       </div>
     </div>
-  <% end %>
+    <% end %>
 
-
+  </div>
 </div>
-</div> <!-- autres -->
+<!-- autres -->

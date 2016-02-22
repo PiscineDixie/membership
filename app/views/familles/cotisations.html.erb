@@ -3,28 +3,28 @@
 <table class="table table-hover">
   <thead>
     <tr>
-      <th>Inscription</th><th>Famille</th><th>Cotisation</th><th>Paiements</th><th>Montant dû</th>
+      <th>Inscription</th><th>Famille</th><th class="text-right">Cotisation</th><th class="text-right">Paiements</th><th class="text-right">Montant dû</th>
     </tr>
   </thead>
   <tbody>
     <% @familles.each do | famille | %>
-      <% if famille.cotisation %>
-        <tr>
-          <td><%= famille.cotisation.created_at.strftime('%Y-%m-%d') %></td>
-          <td><%= link_to famille.nom, famille %></td>
-          <td align="right"><%= number_with_precision(famille.cotisation.total, :precision => 2) %></td>
-          <td align="right"><%= number_with_precision(famille.paiementTotal, :precision => 2) %></td>
-          <td align="right"><%= number_with_precision(famille.cotisationDue, :precision => 2) %></td>
-        </tr>
-      <% end %>
+    <% if famille.cotisation %>
+    <tr>
+      <td><%= famille.cotisation.created_at.strftime('%Y-%m-%d') %></td>
+      <td><%= link_to famille.nom, famille %></td>
+      <td class="text-right"><%= number_with_precision(famille.cotisation.total, :precision => 2) %></td>
+      <td class="text-right"><%= number_with_precision(famille.paiementTotal, :precision => 2) %></td>
+      <td class="text-right"><%= number_with_precision(famille.cotisationDue, :precision => 2) %></td>
+    </tr>
     <% end %>
-  <tr>
-    <td>Totaux:</td>
-    <td/>
-    <td align="right"><%= number_with_precision(Cotisation.totalAnnuel, :precision => 2)%></td>
-    <td align="right"><%= number_with_precision(Paiement.totalAnnuel, :precision => 2)%></td>
-    <td align="right"><%= number_with_precision(Cotisation.totalAnnuel - Paiement.totalAnnuel, :precision => 2)%></td>
-    <td></td>
-  </tr>
+    <% end %>
+    <tr>
+      <td>Totaux:</td>
+      <td/>
+      <td class="text-right"><%= number_with_precision(Cotisation.totalAnnuel, :precision => 2)%></td>
+      <td class="text-right"><%= number_with_precision(Paiement.totalAnnuel, :precision => 2)%></td>
+      <td class="text-right"><%= number_with_precision(Cotisation.totalAnnuel - Paiement.totalAnnuel, :precision => 2)%></td>
+      <td></td>
+    </tr>
   </tbody>
 </table>

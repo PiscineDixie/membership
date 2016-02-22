@@ -1,13 +1,20 @@
 <h1>Membres pour <%= @participation.description_fr %></h1>
 
 <div>
-<table class="table table-condensed">
-  <thead>
-    <colgroup> <col id="nom"/><col id="soir"/><col id="jour"/><col id="email"/></colgroup>
-    <tr><th>Membre</th><th>Tel Soir</th><th>Tel Jour</th><th>Courriel</th></tr>
-  </thead>
-  <tbody>
-    <%= render :partial => 'membre_show', :collection => @membres %>
-  </tbody>
-</table>
+  <table class="table table-condensed">
+    <thead>
+      <colgroup>
+        <col id="nom"/>
+        <col id="soir"/>
+        <col id="jour"/>
+        <col id="email"/>
+      </colgroup>
+      <tr>
+        <th>Membre</th><th>Tel Soir</th><th>Tel Jour</th><th>Courriel</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%= render :partial => 'membre_show', :collection => @membres %>
+    </tbody>
+  </table>
 </div>

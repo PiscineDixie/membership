@@ -1,106 +1,123 @@
-  <div class="panel panel-default">
-  <div class="panel-heading"><div class="panel-title">Family Members</div></div>
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      Family Members
+    </div>
+  </div>
   <div class="panel-body">
-  
-  <p>
-  Include an entry for each member of the family (child, parent, grand-parent) living at the same address.
-  The birthdates are important for the income tax receipts and discounts for senior (65 year-old on August 1st).
-  </p>
-  
-  <h5>Swimming badges</h5>
-  <p >
-   <ul>
-      <li>Adult: 13 and over</li>
-      <li>Swimming/Nageur: Passed the Dixie test. (See <%= link_to 'badges', 'http://www.piscinedixiepool.com/badges', :target => '_blank' %>.)</li>
-      <li>Beginner/Débutant: Child that has not passed the Dixie test.</li>
-    </ul>
-  </p>
-  <hr/>
-  
-  <div id="liste_membres">
-  <% idx = 0 %>
-  <% @famille.membres.each do | membre | %>
-    <div class="membre">
-      <%= hidden_field_tag "famille[membres][" + idx.to_s + "][id]", membre.id, :size => 0, class: 'id' %>
-      <div class="row">
-        <label class="col-xs-3 col-sm-3 col-lg-2">Firsname</label>
-        <label class="col-xs-4 col-sm-3">Surname</label>
-        <label class="col-xs-3 col-sm-3">Birthday</label>
-        <label class="col-xs-2 col-lg-1">Badge</label>
-      </div>
-      
-      <div class="info form-inline">
-       <div class="row">
-        <div class="col-xs-3 col-sm-3 col-lg-2">
-         <div class="form-group">
-          <%= text_field_tag "famille[membres][" + idx.to_s + "][prenom]", membre.prenom, :class => "form-control prenom" %>
-         </div>
-        </div>
-        <div class="col-xs-4 col-sm-3">
-         <%= text_field_tag "famille[membres][" + idx.to_s + "][nom]", membre.nom, :class => "form-control nom" %>
-        </div>
-        <div class="col-xs-3 col-sm-3">
-         <%= select_date(membre.naissance, {prefix: "famille[membres][" + idx.to_s + "][naissance]", start_year: 1910, end_year: Date.today.year, use_month_names: %w(Jan Fév Mar Avr Mai Juin Juil Août Sept Oct Nov Déc)}, {class: 'naissance form-control'})%>
-        </div>
-        <div class="col-xs-3 col-lg-1">
-         <%= select_tag "famille[membres][" + idx.to_s + "][ecusson]", options_for_select(Membre::Ecussons, membre.ecusson), :class => 'ecusson-sel form-control' %>
-        </div>
-       </div>
-     </div>
-        
-      <div class="acts">
-        <h5>Activities</h5>
+
+    <p>
+      Include an entry for each member of the family (child, parent, grand-parent) living at the same address.
+      The birthdates are important for the income tax receipts and discounts for senior (65 year-old on August 1st).
+    </p>
+
+    <h5>Swimming badges</h5>
+    <p >
+      <ul>
+        <li>
+          Adult: 13 and over
+        </li>
+        <li>
+          Swimming/Nageur: Passed the Dixie test. (See <%= link_to 'badges', 'http://www.piscinedixiepool.com/badges', :target => '_blank' %>.)
+        </li>
+        <li>
+          Beginner/Débutant: Child that has not passed the Dixie test.
+        </li>
+      </ul>
+    </p>
+    <hr/>
+
+    <div id="liste_membres">
+      <% idx = 0 %>
+      <% @famille.membres.each do | membre | %>
+      <div class="membre">
+        <%= hidden_field_tag "famille[membres][" + idx.to_s + "][id]", membre.id, :size => 0, class: 'id' %>
         <div class="row">
-        <% Activite.order(:code).each do | act | %>
-          <div class="col-xs-6 col-sm-4 col-lg-2">
-             <%= check_box_tag("famille[membres][" + idx.to_s + "][activites]["+act.code+"]", act.id, membre.activite?(act.id), :class => 'activite-' + act.code) %>
-             <%= link_to act.description_en, act.url_en, target: '_blank' %>
-          </div>
-        <% end%>
+          <label class="col-xs-3 col-sm-3 col-lg-2">Firsname</label>
+          <label class="col-xs-4 col-sm-3">Surname</label>
+          <label class="col-xs-3 col-sm-3">Birthday</label>
+          <label class="col-xs-2 col-lg-1">Badge</label>
         </div>
-        
-        <div class="row">
-         <div class="form-inline col-lg-offset-1 LN_details" <%= membre.abonneCoursDeNatation? ? '' : 'style=display:none;' %> >
-            <%= select_tag("famille[membres][" + idx.to_s + "][cours_de_natation]", options_for_select(['Niveau natation'].concat(Activite::CoursDeNatation), membre.cours_de_natation), class: 'form-control') %>
-            <%= select_tag("famille[membres][" + idx.to_s + "][session_de_natation]", options_for_select(['Horaire'].concat(Activite::SessionCoursDeNatation), membre.session_de_natation), class: 'form-control') %>
+
+        <div class="info form-inline">
+          <div class="row">
+            <div class="col-xs-3 col-sm-3 col-lg-2">
+              <div class="form-group">
+                <%= text_field_tag "famille[membres][" + idx.to_s + "][prenom]", membre.prenom, :class => "form-control prenom" %>
+              </div>
+            </div>
+            <div class="col-xs-4 col-sm-3">
+              <%= text_field_tag "famille[membres][" + idx.to_s + "][nom]", membre.nom, :class => "form-control nom" %>
+            </div>
+            <div class="col-xs-3 col-sm-3">
+              <%= select_date(membre.naissance, {prefix: "famille[membres][" + idx.to_s + "][naissance]", start_year: 1910, end_year: Date.today.year, use_month_names: %w(Jan Fév Mar Avr Mai Juin Juil Août Sept Oct Nov Déc)}, {class: 'naissance form-control'})%>
+            </div>
+            <div class="col-xs-3 col-lg-1">
+              <%= select_tag "famille[membres][" + idx.to_s + "][ecusson]", options_for_select(Membre::Ecussons, membre.ecusson), :class => 'ecusson-sel form-control' %>
+            </div>
           </div>
         </div>
-      </div>
-      
-      <% if membre.peutAider? %>
+
+        <div class="acts">
+          <h5>Activities</h5>
+          <div class="row">
+            <% Activite.order(:code).each do | act | %>
+            <div class="col-xs-6 col-sm-4 col-lg-2">
+              <%= check_box_tag("famille[membres][" + idx.to_s + "][activites]["+act.code+"]", act.id, membre.activite?(act.id), :class => 'activite-' + act.code) %>
+              <%= link_to act.description_en, act.url_en, target: '_blank' %>
+            </div>
+            <% end%>
+          </div>
+
+          <div class="row">
+            <div class="form-inline col-lg-offset-1 LN_details" <%= membre.abonneCoursDeNatation? ? '' : 'style=display:none;' %> >
+              <%= select_tag("famille[membres][" + idx.to_s + "][cours_de_natation]", options_for_select(['Niveau natation'].concat(Activite::CoursDeNatation), membre.cours_de_natation), class: 'form-control') %>
+              <%= select_tag("famille[membres][" + idx.to_s + "][session_de_natation]", options_for_select(['Horaire'].concat(Activite::SessionCoursDeNatation), membre.session_de_natation), class: 'form-control') %>
+            </div>
+          </div>
+        </div>
+
+        <% if membre.peutAider? %>
         <div class="acts-aide" >
-      <% else %>
-        <div class="acts-aide" style="display:none;" >
+          <% else %>
+          <div class="acts-aide" style="display:none;" >
+            <% end %>
+            <h5>Activities Volunteering</h5>
+            <!-- Ecrire les activites dans une tables de 3 colonnes -->
+            <div class="row">
+              <% Participation.all.each do | act | %>
+              <div class="col-xs-6 col-sm-4 col-lg-2">
+                <%= check_box_tag "famille[membres][" + idx.to_s + "][participations]["+act.id.to_s+"]", act.id, membre.participation?(act.id), :class => "box" %>
+                <%= act.description_en %>
+              </div>
+              <% end%>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-inline member-footer">
+          <div class="row">
+            <div class="col-xs-5 col-sm-4 col-lg-3">
+              <button class="btn btn-default membre-rem-btn" <%= idx > 0 ? '' : 'style=display:none;' %>
+                >Remove this member
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <hr/>
+      </div>
+      <!-- .membre -->
+
+      <% idx = idx + 1 %>
       <% end %>
-        <h5>Activities Volunteering</h5>
-        <!-- Ecrire les activites dans une tables de 3 colonnes -->
-        <div class="row">
-          <% Participation.all.each do | act | %>
-           <div class="col-xs-6 col-sm-4 col-lg-2">
-             <%= check_box_tag "famille[membres][" + idx.to_s + "][participations]["+act.id.to_s+"]", act.id, membre.participation?(act.id), :class => "box" %>
-             <%= act.description_en %>
-           </div>
-          <% end%>
-        </div>
-      </div>
-      
-      <div class="form-inline member-footer">
-        <div class="row">
-         <div class="col-xs-5 col-sm-4 col-lg-3">
-          <button class="btn btn-default membre-rem-btn" <%= idx > 0 ? '' : 'style=display:none;' %> >Remove this member</button>
-         </div>
-        </div>
-      </div>
-      
-     <hr/>
-     </div> <!-- .membre -->
-  
-    <% idx = idx + 1 %>
-  <% end %>
-  
-  </div> <!-- liste_membres -->
-  
-  <button id="boutonAjouterMembre" type="button" class="btn btn-default">Add a new member</button>
-  
+
+    </div>
+    <!-- liste_membres -->
+
+    <button id="boutonAjouterMembre" type="button" class="btn btn-default">
+      Add a new member
+    </button>
+
   </div>
-  </div>
+</div>

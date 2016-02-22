@@ -1,45 +1,60 @@
 <!-- Code pour generer le rapport des revenus de cotisation -->
 <!-- Les variables sont:
-     @debut, @fin: Date du debut et de la fin du rapport
+@debut, @fin: Date du debut et de la fin du rapport
 -->
 
 <h1>Rapports des Revenus</h1>
 <p>
-Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
+  Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
 </p>
 <table class="table table-hover table-condensed">
-  <thead><th>Inscr.</th><th>Date</th><th class="number">Id</td><th>Famille</th><th class="number">Chèque</th><th class="number">Comptant</th><th>Note</th></thead>
-	<tfoot><th/><th/><th/><th/>
-	  <td align="right"> <%= number_with_precision(Paiement.sumMontantCheque(@debut, @fin), :precision => 2) %> </td>
-		<td align="right"> <%= number_with_precision(Paiement.sumMontantComptant(@debut, @fin), :precision => 2) %> </td>
-		<td/>
-</tfoot>
+  <thead>
+    <th>Inscr.</th><th>Date</th><th class="number">Id</td><th>Famille</th><th class="number">Chèque</th><th class="number">Comptant</th><th>Note</th>
+  </thead>
+  <tfoot><th/><th/><th/><th/>
+    <td align="right"> <%= number_with_precision(Paiement.sumMontantCheque(@debut, @fin), :precision => 2) %> </td>
+    <td align="right"> <%= number_with_precision(Paiement.sumMontantComptant(@debut, @fin), :precision => 2) %> </td>
+    <td/>
+  </tfoot>
   <tbody>
     <% Paiement.paiements(@debut, @fin).each do | p | %>
-      <tr>
-        <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
-        <td><%= p.date.strftime("%m-%d") %></td>
-        <td class="number"><%= p.famille_id %></td>
-        <td><%= link_to Famille.find(p.famille_id).nom, Famille.find(p.famille_id) %></td>
-				<% if p.comptant %>
-          <td/><td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td>
-			  <% else %>
-          <td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td><td/>
-			  <% end %>
-				<td><%= p.note.slice(0,20) %></td>
-      </tr>
+    <tr>
+      <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
+      <td><%= p.date.strftime("%m-%d") %></td>
+      <td class="number"><%= p.famille_id %></td>
+      <td><%= link_to Famille.find(p.famille_id).nom, Famille.find(p.famille_id) %></td>
+      <% if p.comptant %>
+      <td/><td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td>
+      <% else %>
+      <td align="right"><%= link_to number_with_precision(p.montant, :precision => 2), famille_paiement_path(Famille.find(p.famille_id), p) %></td><td/>
+      <% end %>
+      <td><%= p.note.slice(0,20) %></td>
+    </tr>
     <% end %>
   </tbody>
 </table>
 
-<br/><br/>
+<br/>
+<br/>
 <table style="width: 300px">
   <tbody>
-    <tr><td>Total perçu:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :montant), :precision => 2) %></td></tr>
-    <tr><td>Revenu total:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable) + Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td></tr>
-    <tr><td>Revenu non taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td></tr>
-    <tr><td>Revenu taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable), :precision => 2) %></td></tr>
-    <tr><td>TPS perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tps), :precision => 2) %></td></tr>
-    <tr><td>TVQ perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tvq), :precision => 2) %></td></tr>
+    <tr>
+      <td>Total perçu:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :montant), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>Revenu total:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable) + Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>Revenu non taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>Revenu taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>TPS perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tps), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>TVQ perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tvq), :precision => 2) %></td>
+    </tr>
   </tbody>
 </table>

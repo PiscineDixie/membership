@@ -6,25 +6,25 @@
       <th>Inscription</th>
       <th>Famille</th>
       <th>Adresse</th>
-      <th><%=Membre::Ecussons[0]-%></th>
-      <th><%=Membre::Ecussons[1]-%></th>
-      <th><%=Membre::Ecussons[2]-%></th>
+      <th><%= Membre::Ecussons[0]-%></th>
+      <th><%= Membre::Ecussons[1]-%></th>
+      <th><%= Membre::Ecussons[2]-%></th>
       <th>Billets</th>
     </tr>
   </thead>
   <tbody>
     <% @familles.each do | famille | %>
-      <% if famille.enRegle? %>
-        <tr>
-          <td><%= (famille.paiements.first.nil? ? famille.cotisation.created_at : famille.paiements.first.created_at).strftime('%Y-%m-%d') %></td>
-          <td><%= link_to famille.nom, famille %></td>
-          <td><%= famille.adresse1 %></td>
-          <td><%= famille.ecussons(Membre::Ecussons[0]) %></td>
-          <td><%= famille.ecussons(Membre::Ecussons[1]) %></td>
-          <td><%= famille.ecussons(Membre::Ecussons[2]) %></td>
-          <td><%= famille.nombreBillets %></td>
-        </tr>
-      <% end %>
+    <% if famille.enRegle? %>
+    <tr>
+      <td><%= (famille.paiements.first.nil? ? famille.cotisation.created_at : famille.paiements.first.created_at).strftime('%Y-%m-%d') %></td>
+      <td><%= link_to famille.nom, famille %></td>
+      <td><%= famille.adresse1 %></td>
+      <td><%= famille.ecussons(Membre::Ecussons[0]) %></td>
+      <td><%= famille.ecussons(Membre::Ecussons[1]) %></td>
+      <td><%= famille.ecussons(Membre::Ecussons[2]) %></td>
+      <td><%= famille.nombreBillets %></td>
+    </tr>
+    <% end %>
     <% end %>
   </tbody>
 </table>

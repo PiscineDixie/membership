@@ -1,18 +1,23 @@
 <div class="form-group">
-    <label>Userid</label>
-<p class="form-control-static"><%=h @user.nom %></p>
+  <label>Userid</label>
+  <p class="form-control-static">
+    <%= h @user.nom %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Courriel</label>
-<p class="form-control-static"><%=h @user.courriel %></p>
+  <label>Courriel</label>
+  <p class="form-control-static">
+    <%= h @user.courriel %>
+  </p>
 </div>
 
 <div class="form-group">
-    <label>Rôle</label>
-<p class="form-control-static"><%=h @user.roles %></p>
+  <label>Rôle</label>
+  <p class="form-control-static">
+    <%= h @user.roles %>
+  </p>
 </div>
-
 
 <%= link_to 'Modifier', edit_user_path(@user) %> |
 <%= link_to 'Retour', users_path %>
