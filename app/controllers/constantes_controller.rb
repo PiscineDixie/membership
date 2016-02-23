@@ -17,7 +17,7 @@ class ConstantesController < ApplicationController
 
   # PUT /constantes/1
   def update
-    if (!params[:cancel])
+    if (params[:cancel])
       redirect_to(constante_path)
       return;
     end

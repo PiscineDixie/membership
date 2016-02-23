@@ -4,10 +4,10 @@
   <nav class="navbar navbar-default">
     <ul class="nav navbar-nav">
       <li>
-        <%= link_to 'Modifier', edit_famille_path(@famille) %>
+        <%= link_to 'Ajouter paiement', new_famille_paiement_path(@famille) %>
       </li>
       <li>
-        <%= link_to 'Ajouter paiement', new_famille_paiement_path(@famille) %>
+        <%= link_to 'Modifier', edit_famille_path(@famille) %>
       </li>
       <% unless @famille.courriels.empty? %>
       <li>
@@ -170,7 +170,6 @@
       <%= link_to 'Calculer cotisation', new_famille_cotisation_path(@famille) %>
       <% if @famille.cotisation %>
       | <%= link_to 'Afficher cotisation', famille_cotisation_path(@famille) %>
-      | <%= link_to 'Modifier cotisation', edit_famille_cotisation_path(@famille) %>
       <% end %>
 
       <% unless @famille.paiements.empty? %>
@@ -184,11 +183,11 @@
         <tbody>
           <% @famille.paiements.each do | paiement | %>
           <tr>
-            <td><%= paiement.date %> </td>
+            <td><%= link_to paiement.date, famille_paiement_path(@famille, paiement) %></td>
             <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
             <td><%= link_to 'Annuler', famille_paiement_path(@famille, paiement), data: {confirm: 'Etes vous certain?'}, :method => :delete %></td>
-            <td><%= link_to 'Afficher', famille_paiement_path(@famille, paiement) %></td>
             <td><%= link_to 'Modifier', edit_famille_paiement_path(@famille, paiement) %></td>
+            <td></td>
           </tr>
           <% end %>
         </tbody>
@@ -215,12 +214,11 @@
         <tbody>
           <% @famille.notes.each do | note | %>
           <tr>
-            <td><%= note.date %> </td>
+            <td><%= link_to note.date, [@famille, note] %></td>
             <td><%= note.auteur %> </td>
             <td><%= note.sommaire %> </td>
-            <td><%= link_to 'Afficher', [@famille, note] %></td>
           <tr>
-            <% end %>
+          <% end %>
         </tbody>
       </table>
       <% end %>

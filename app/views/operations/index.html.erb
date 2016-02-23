@@ -8,21 +8,6 @@
 <%= button_to('Expédier courriels', {:action => "courriel", :controller => 'familles'}, {method: :get, class: "btn btn-primary"})  %>
 <div style="padding-bottom: 30px"></div>
 
-<h4>Crédit d'impôt pour la condition physique des enfants</h4>
-<p>
-  Premièrement, on génère les reçus. Fait à la fin janvier par un administrateur.
-</p>
-<%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn btn-default"}) %>
-<br />
-
-<p>
-  Deuxièmement, le lendemain (pour laisser le backup se faire), après avoir remis les données à zéro (voir çi-bas),
-  on les expédie aux familles. (Il faut remettre les données à zéro parce que certains vont s'abonner en recevant le courriel.)
-</p>
-<%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'},
-{data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn btn-default"}) %>
-<div style="padding-bottom: 30px"></div>
-
 <h4>Eliminer le rabais de pré-inscription</h4>
 <p>
   Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
@@ -31,13 +16,23 @@
 </p>
 <div style="padding-bottom: 30px"></div>
 
-<h4>Remise à zéro des données annuelles</h4>
-<p>
-  <strong>Assurez-vous de générer les reçus pour le crédit d'impôt avant de faire cette opération.</strong>
-  Vous devez avoir le privilège de super user (voir la table des usagers) pour effectuer cette opération.
-</p>
-<p>
-  <%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'},
-  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn btn-danger"}) %>
-</p>
+<h4>Fin d'année</h4>
+<p>A la fin de l'année, il faut faire deux opérations importantes:</p>
+<ol>
+  <li>Expédier les reçus d'impôt pour la condition physique des enfants;</li>
+  <li>Remettre les données d'abonnement à zéro.</li>
+</ol>
 
+<p>Avant de commencer, on devrait avoir les nouveaux tarifs puisque lorsque certains reçoivent leurs reçus d'imôt, ils en
+profitent pour se ré-abonner.</p>
+
+<p>Je suggère la procédure suivante:</p>
+<ol>
+  <li>Générer les reçus: <%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn btn-default"}) %></li>
+  <li>Attendre une journée. Ceci permet au backup de compléter avec toutes les données de l'année précédente.</li>
+  <li>Modifier les constantes pour inscrire les nouveaux tarifs et la nouvelle date pour la fin du rabais de pré-inscription: <%= link_to 'Modifier constantes', edit_constante_path(Constantes.instance) %></li>
+  <li>Remettre les données d'abonnement à zéro. Vous devez avoir le privilège de super user (voir la table des usagers) pour effectuer cette opération. <%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'},
+  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn btn-danger"}) %></li>
+  <li>Expédier les reçus d'impôts: <%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'},
+{data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn btn-default"}) %></li>
+</ol>
