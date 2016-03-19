@@ -71,6 +71,15 @@ Membership::Application.configure do
       :protocol => 'https',
       :host => "apps.piscinedixiepool.com:8484"
   }
-  config.action_mailer.delivery_method = :sendmail
+  config.action_mailer.delivery_method = :smtp
+  config.action_mailer.smtp_settings = {
+        :address              => Rails.application.secrets[:smtp]["address"],
+        :port                 => 587,
+        :domain               => Rails.application.secrets[:smtp]["domain"],
+        :user_name            => Rails.application.secrets[:smtp]["user"],
+        :password             => Rails.application.secrets[:smtp]["password"],
+        :authentication       => :plain,
+        :enable_starttls_auto => true
+  }
 
 end

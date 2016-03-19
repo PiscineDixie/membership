@@ -36,27 +36,33 @@
       <div class="membre well">
         <%= hidden_field_tag "famille[membres][" + idx.to_s + "][id]", membre.id, :size => 0, class: 'id' %>
         <div class="row">
-          <label class="col-xs-3 col-sm-3 col-lg-2">Prénom</label>
-          <label class="col-xs-4 col-sm-3">Nom</label>
-          <label class="col-xs-3 col-sm-3">Date de naissance</label>
-          <label class="col-xs-2 col-lg-1">Ecusson</label>
+          <label class="col-xs-6 col-sm-2 col-lg-2">Prénom</label>
+          <label class="col-xs-6 col-sm-3 col-lg-2">Nom</label>
+          <label class="col-xs-12 col-sm-5 col-lg-3">Date de naissance</label>
+          <label class="col-xs-6 col-sm-2 col-lg-2">Ecusson</label>
         </div>
 
         <div class="info form-inline">
           <div class="row">
-            <div class="col-xs-3 col-sm-3 col-lg-2">
-              <div class="form-group">
-                <%= text_field_tag "famille[membres][" + idx.to_s + "][prenom]", membre.prenom, :class => "form-control prenom" %>
+            <div class="col-xs-6 col-sm-2 col-lg-2">
+              <div class="membre-info">
+                <%= text_field_tag "famille[membres][" + idx.to_s + "][prenom]", membre.prenom, :class => "prenom form-control" %>
               </div>
             </div>
-            <div class="col-xs-4 col-sm-3">
-              <%= text_field_tag "famille[membres][" + idx.to_s + "][nom]", membre.nom, :class => "form-control nom" %>
+            <div class="col-xs-6 col-sm-3 col-lg-2">
+              <div class="membre-info">
+                <%= text_field_tag "famille[membres][" + idx.to_s + "][nom]", membre.nom, :class => "nom form-control" %>
+              </div>
             </div>
-            <div class="col-xs-3 col-sm-3">
-              <%= select_date(membre.naissance, {prefix: "famille[membres][" + idx.to_s + "][naissance]", start_year: 1910, end_year: Date.today.year, use_month_names: %w(Jan Fév Mar Avr Mai Juin Juil Août Sept Oct Nov Déc)}, {class: 'naissance form-control'})%>
+            <div class="col-xs-12 col-sm-5 col-lg-3">
+              <div class="membre-info">
+                <%= select_date(membre.naissance, {prefix: "famille[membres][" + idx.to_s + "][naissance]", start_year: 1910, end_year: Date.today.year, use_month_names: %w(Jan Fév Mar Avr Mai Juin Juil Août Sept Oct Nov Déc)}, {class: 'date-sel3 naissance form-control'})%>
+              </div>
             </div>
-            <div class="col-xs-3 col-lg-1">
-              <%= select_tag "famille[membres][" + idx.to_s + "][ecusson]", options_for_select(Membre::Ecussons, membre.ecusson), :class => 'ecusson-sel form-control' %>
+            <div class="col-xs-4 col-sm-2 col-lg-2">
+              <div class="membre-info">
+                <%= select_tag "famille[membres][" + idx.to_s + "][ecusson]", options_for_select(Membre::Ecussons, membre.ecusson), :class => 'ecusson-sel form-control' %>
+              </div>
             </div>
           </div>
         </div>

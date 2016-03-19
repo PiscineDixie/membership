@@ -67,7 +67,7 @@ class FamillesController < ApplicationController
     end
     
     if @famille.update(famille_params(params))
-      flash[:notice] = 'Modifications registrées.'
+      flash[:notice] = 'Modifications enregistrées.'
       @famille.calculeCotisation
       redirect_to(@famille)
     else

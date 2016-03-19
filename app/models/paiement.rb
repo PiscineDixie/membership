@@ -1,6 +1,8 @@
 # coding: utf-8
 class Paiement < ActiveRecord::Base
 
+  enum methode: [ :cheque, :comptant, :interac ]
+
   validates_presence_of :montant, :date
   validates_numericality_of :montant
 
@@ -62,20 +64,25 @@ class Paiement < ActiveRecord::Base
       sum(colonne)
   end
 
-  def self.sumMontantCheque(debut, fin)
+  def self.sumMontantMethode(debut, fin, methode)
     Paiement.
-      where("date >= :minDate and date <= :endDate and comptant = false", 
-        {:minDate => debut.to_s(:db), :endDate => fin.to_s(:db)}).
+      where("date >= :minDate and date <= :endDate and methode = :methode", 
+        {minDate: debut.to_s(:db), endDate: fin.to_s(:db), methode: Paiement.methodes[methode]}).
       sum(:montant)
+  end
+  
+  def self.sumMontantCheque(debut, fin)
+    sumMontantMethode(debut, fin, :cheque)
   end
 
   def self.sumMontantComptant(debut, fin)
-    Paiement.
-      where("date >= :minDate and date <= :endDate and comptant = true", 
-        {:minDate => debut.to_s(:db), :endDate => fin.to_s(:db)}).
-      sum(:montant)
+    sumMontantMethode(debut, fin, :comptant)
   end
 
+  def self.sumMontantInterac(debut, fin)
+    sumMontantMethode(debut, fin, :interac)
+  end
+  
   def self.totalAnnuel
     Paiement.sum(:montant)
   end

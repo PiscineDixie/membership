@@ -115,7 +115,7 @@ CREATE TABLE `cotisations` (
   `frais_supplementaires` decimal(8,2) DEFAULT '0.00',
   PRIMARY KEY (`id`),
   UNIQUE KEY `par_famille` (`famille_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=711 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=714 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -143,7 +143,7 @@ CREATE TABLE `familles` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `par_code_acces` (`code_acces`)
-) ENGINE=InnoDB AUTO_INCREMENT=617 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=620 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -166,7 +166,7 @@ CREATE TABLE `membres` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `par_famille` (`famille_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2189 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2199 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -186,7 +186,7 @@ CREATE TABLE `notes` (
   `updated_at` datetime DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `par_famille` (`famille_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=72 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=80 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -210,10 +210,10 @@ CREATE TABLE `paiements` (
   `updated_at` datetime DEFAULT NULL,
   `par` varchar(255) DEFAULT '',
   `no_cheque` int(11) DEFAULT '0',
-  `comptant` tinyint(1) DEFAULT '0',
+  `methode` int(11) DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY `par_famille` (`famille_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -267,7 +267,7 @@ CREATE TABLE `recus` (
   `montant_recu` date DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `par_famille_annee` (`famille_id`,`annee`)
-) ENGINE=InnoDB AUTO_INCREMENT=3009 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3011 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -298,7 +298,7 @@ CREATE TABLE `users` (
   `courriel` varchar(255) DEFAULT NULL,
   `nom` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -310,7 +310,7 @@ CREATE TABLE `users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-06-01 22:53:32
+-- Dump completed on 2016-03-08 22:28:48
 INSERT INTO schema_migrations (version) VALUES ('1');
 
 INSERT INTO schema_migrations (version) VALUES ('10');
@@ -342,6 +342,8 @@ INSERT INTO schema_migrations (version) VALUES ('20110707024451');
 INSERT INTO schema_migrations (version) VALUES ('20120529013417');
 
 INSERT INTO schema_migrations (version) VALUES ('20150602024858');
+
+INSERT INTO schema_migrations (version) VALUES ('20160309022850');
 
 INSERT INTO schema_migrations (version) VALUES ('21');
 

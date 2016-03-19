@@ -30,6 +30,7 @@ class PaiementsController < ApplicationController
     @paiement = @famille.paiements.build
     @paiement.par = User.sessionUserId(session[:user])
     @paiement.montant = @famille.cotisationDue
+    @paiement.date = Date.today
 
     respond_to do |format|
       format.html # new.html.erb
@@ -60,7 +61,7 @@ class PaiementsController < ApplicationController
       
       # Expedier le courriel de confirmation si desire
       if params[:courriel] && !@famille.courriels.empty?
-        FamilleMailer.paiement_notif(@famille, @paiement, @famille.courriels).deliver
+        FamilleMailer.paiement_notif(@famille, @paiement, @famille.courriels).deliver_now
       end
       redirect_to(famille_path(@famille))
     else
@@ -81,7 +82,7 @@ class PaiementsController < ApplicationController
       :taxable     => @paiement.taxable * -1,
       :tps         => @paiement.tps * -1,
       :tvq         => @paiement.tvq * -1,
-      :comptant    => @paiement.comptant,
+      :methode     => @paiement.methode,
       :no_cheque   => @paiement.no_cheque,
       :par         => User.sessionUserId(session[:user]),
       :note        => "Annulation du paiement du " + @paiement.date.to_s})
@@ -102,7 +103,7 @@ class PaiementsController < ApplicationController
     
     datePrecedente = @paiement.date
     if @paiement.update_attributes(paiement_params(params))
-      FamilleMailer.edit_paiement(@famille, @paiement, datePrecedente).deliver
+      FamilleMailer.edit_paiement(@famille, @paiement, datePrecedente).deliver_now
       flash[:notice] = "Paiement modifié"
       redirect_to(@famille)
     else
@@ -129,6 +130,6 @@ class PaiementsController < ApplicationController
   private
   
   def paiement_params(params)
-    params.require(:paiement).permit([:date, :montant, :non_taxable, :taxable, :tps, :tvq, :comptant, :no_cheque, :par, :note])
+    params.require(:paiement).permit([:date, :montant, :non_taxable, :taxable, :tps, :tvq, :methode, :no_cheque, :par, :note])
   end
 end

@@ -14,7 +14,7 @@
     <div class="form-group">
       <label>Quantity of tickets (booklets of 10 @ $<%= number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2) %>):</label>
       <div class="row">
-        <div class="col-xs-1">
+        <div class="col-xs-3 col-sm-2 col-lg-1">
           <%= select_tag('famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets), class: 'form-control') %>
         </div>
       </div>

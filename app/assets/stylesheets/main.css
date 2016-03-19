@@ -133,3 +133,14 @@ input[type="text"], textarea {
   margin-top: 10px;
 }
 
+.date-sel3 {
+  display:inline-block;
+  width:auto;
+}
+
+.membre-info {
+ 
+}
+.membre-info .prenom, .membre-info .nom, .membre-info .ecusson-sel {
+  width: 100%;
+}

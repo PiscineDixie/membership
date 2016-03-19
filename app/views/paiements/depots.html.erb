@@ -20,7 +20,7 @@
     <% depTot = 0 %>
     <% Paiement.paiements(@debut, @fin).each do | p | %>
     <tr>
-      <% if !p.comptant %>
+      <% if p.cheque? %>
       <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
       <td><%= p.date.strftime("%m-%d") %></td>
       <td class="number"><%= p.famille_id %></td>
