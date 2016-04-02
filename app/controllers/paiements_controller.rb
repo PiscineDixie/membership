@@ -29,7 +29,7 @@ class PaiementsController < ApplicationController
   def new
     @paiement = @famille.paiements.build
     @paiement.par = User.sessionUserId(session[:user])
-    @paiement.montant = @famille.cotisationDue
+    @paiement.montant = @famille.totalDu
     @paiement.date = Date.today
 
     respond_to do |format|
@@ -56,6 +56,7 @@ class PaiementsController < ApplicationController
     end
     
     @paiement.par = User.sessionUserId(session[:user])
+      
     if @paiement.save
       flash[:notice] = 'Paiement enregistré.'
       
@@ -63,6 +64,10 @@ class PaiementsController < ApplicationController
       if params[:courriel] && !@famille.courriels.empty?
         FamilleMailer.paiement_notif(@famille, @paiement, @famille.courriels).deliver_now
       end
+      
+      # Modifier le status des commandes
+      @famille.paiementDeCommandes(@paiement)
+      
       redirect_to(famille_path(@famille))
     else
       render :action => "new"
@@ -88,6 +93,8 @@ class PaiementsController < ApplicationController
       :note        => "Annulation du paiement du " + @paiement.date.to_s})
 
     @paiement2.save!
+    
+    @famille.annulationPaiement(@paiement)
   
     flash[:notice] = 'Paiement annulé.'
     redirect_to(famille_path(@famille))

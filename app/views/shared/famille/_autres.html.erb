@@ -1,0 +1,33 @@
+<div class="panel panel-default">
+  <div class="panel-heading">
+    <div class="panel-title">
+      <%= t('shared.famille.autres.titre')%>
+    </div>
+  </div>
+  <div class="panel-body">
+
+    <h4><%= t('shared.famille.autres.billets.titre')%></h4>
+    <p><%= t('shared.famille.autres.billets.msg')%></p>
+    <div class="form-group">
+      <label><%= t('shared.famille.autres.billets.label', cout: number_with_precision(Constantes.instance.cout_billet * 10, :precision => 2)) %></label>
+      <div class="row">
+        <div class="col-xs-3 col-sm-2 col-lg-1">
+          <%= select_tag('famille[cotisation][nombre_billets]', options_for_select([0, 10, 20], @famille.nombreBillets), class: 'form-control') %>
+        </div>
+      </div>
+    </div>
+
+    <!-- on affiche seulement l'espace pour une note si interface public -->
+    <% if url.include?('public') %>
+    <div id="notes">
+      <h4><%= t('shared.famille.autres.note.titre')%></h4>
+      <div class="form-group">
+        <label><%= t('shared.famille.autres.note.label')%></label>
+        <%= text_area_tag 'note', @note, :rows => '3', :cols => '70', class: 'form-control' %>
+      </div>
+    </div>
+    <% end %>
+
+  </div>
+</div>
+<!-- autres -->

@@ -1,0 +1,74 @@
+<h1 style="margin-bottom:40px"><%= t('.titre') %></h1>
+
+<% @produits.each do | p | %>
+
+  <%= form_tag("/paniers/1/plus") do %>
+    <div class="row produit">
+      <div class="col-sm-6 col-md-5 col-lg-4">
+        <div class="titre">
+          <%= @famille.english? ? p.titre_en : p.titre_fr %>
+        </div>
+    
+        <div class="prix">
+          <%= t('.label_prix') %><%= p.prix %><%= t('.label_prix_suff') %>
+        </div>
+    
+        <div class="desc">
+          <%= raw @famille.english? ? p.description_en : p.description_fr %>
+        </div>
+    
+        <% unless p.tailles_fr.nil? %>
+        <div class="form-group">
+          <label><%= t('.label_taille') %></label>
+          <div class="row">
+            <div class="col-xs-3 col-lg-4">
+              <%= select_tag(:desc, options_for_select(p.tailles_fr.split(',')), :class => 'form-control') %>
+            </div>
+          </div>
+        </div>
+        <% end %>
+    
+        <div class="form-group">
+          <label><%= t('.label_qte') %></label>
+          <div class="row">
+            <div class="col-xs-3 col-lg-4">
+              <%= number_field_tag :quantite, 1, min: 1, class: 'form-control' %>
+            </div>
+          </div>
+        </div>
+    
+      </div>
+    
+      <div class="col-sm-6 col-md-7 col-lg-8">
+        <% p.images.split(',').each do | img | %>
+        <div class="thumbnail">
+          <%= image_tag(img, class: 'img-responsive') %>
+        </div>
+        <% end %>
+      </div>
+    
+    </div>
+    <%= hidden_field_tag :produit_id, p.id %>
+    <%= submit_tag t('.ajouter'), :class => "btn btn-default" %>
+    
+    <hr />
+  <% end %>
+
+<% end %>
+
+<h2><%= t('.panier') %></h2>
+
+<%= form_tag("/paniers/1/commande") do %>
+
+  <% if @panier.empty? %>
+    <div>
+      <%= t('.vide') %>
+    </div>
+  <% else %>
+    <%= render partial: "paniers/panier", locals: {panier: @panier, readonly: false} %>
+    <%= submit_tag t('.acheter'), :class => "btn btn-primary" %>
+  <% end %>
+  
+  <%= submit_tag( t('.annuler'), {name: 'cancel', class: "btn btn-default"}) %>
+
+<% end %>

@@ -1,0 +1,46 @@
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th><Produit><%= t('.label_produit')%></th>
+        <th><%= t('.label_taille')%></th>
+        <th><%= t('.label_taille')%></th>
+        <th><%= t('.label_prix')%></th>
+        <th><%= t('.label_total')%></th><th/>
+        <% unless readonly %><th/><% end %>
+      </tr>
+    </thead>
+    <tbody>
+      <% idx = 0 %>
+      <% @panier.items.each do | item | %>
+      <% produit = Produit.find(item.produit) %>
+      <tr>
+        <td><%=idx + 1 %></td>
+        <td><%= produit.titre_fr %></td>
+        <td><%= item.code %></td>
+        <td><%= item.quantite %></td>
+        <td><%= produit.prix %></td>
+        <td><%= number_with_precision(produit.prix * item.quantite, precision: 2) %></td>
+        <% unless readonly %>
+          <td><%= submit_tag( t('.enlever'), {name: 'rem['+idx.to_s+']', class: "btn btn-default btn-xs"}) %></td>
+        <% end %>
+      </tr>
+      <% idx = idx + 1 %>
+      <% end %>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td/>
+        <td/>
+        <td/>
+        <td/>
+        <th>Total</th>
+        <th><%= number_with_precision(@panier.total, precision: 2) %></th>
+        <% unless readonly %><td/><% end %>
+      </tr>
+    </tfoot>
+  </table>
+
+<p>
+  <strong><%= t('.conditions_title')%></strong><%= t('.conditions')%>
+</p>

@@ -42,8 +42,6 @@ class Membre < ActiveRecord::Base
   # Initializer.
   def initialize(parms = nil, options = {})
     
-    logger.error "Creating new member: #{parms.to_yaml}"
-    
     # Enlever les activites
     tmpActivites = parms && parms.delete(:activites) || nil
     tmpParticipations = parms && parms.delete(:participations) || nil
@@ -207,6 +205,13 @@ class Membre < ActiveRecord::Base
     cnt = 0
     membresActif.each { |m| cnt = cnt + m.activites.size }
     return cnt
+  end
+  
+  # @return array of [label, value]
+  def self.ecussonsForSelect
+    Ecussons.map do | e, _ |
+      [I18n.t("activerecord.attributes.membre.ecussons.#{e}"), e]
+    end
   end
   
 end

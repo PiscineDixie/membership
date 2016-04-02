@@ -5,7 +5,7 @@ require 'recu'
 class Famille < ActiveRecord::Base
   # Etats d'une famille:
   #  - inactif: famille connue mais non-re-inscrite
-  #  - actif:   ayant payee sa cotisation
+  #  - actif:   ayant complété son inscription
   Etats = %w(Actif Inactif)
   Langue = %w(FR EN)
   
@@ -24,7 +24,14 @@ class Famille < ActiveRecord::Base
   has_many :paiements, inverse_of: :famille, dependent: :delete_all
   has_many :notes, inverse_of: :famille, dependent: :delete_all
   has_many :recus, inverse_of: :famille, dependent: :delete_all
+  has_many :commandes, inverse_of: :famille, dependent: :delete_all
   
+  scope :english, -> { where(langue: 'EN') }
+  scope :french, -> { where(langue: 'FR') }
+  scope :langue, -> (ln) { where("langue = ?", ln) }
+  scope :actives, -> { where(etat: 'Actif') }
+  scope :inactives, -> { where(etat: 'Inactif') }
+    
   # Generer un code d'access pour la famille
   before_create :assign_code
   def assign_code
@@ -222,9 +229,10 @@ class Famille < ActiveRecord::Base
     return self.paiements.empty? ? 0 : self.paiements.sum(:montant)
   end
   
+  # Nous n'avons pas de facon de savoir si les paiements etaient pour une cotisation ou
+  # pour un produit.
   def cotisationDue
-    return 0 if self.cotisation.nil?
-    return self.cotisation.total - paiementTotal
+    return totalDu
   end
   
   def nombreBillets
@@ -237,6 +245,52 @@ class Famille < ActiveRecord::Base
     return self.cotisation.total
   end
   
+  def commandesDues
+    return self.commandes.reduce(0.0) { |s, c| s + c.due }
+  end
+  
+  def commandesTotal
+    return self.commandes.reduce(0.0) { |s, c| s + c.total }
+  end
+  
+  def totalDu
+    return cotisationTotal + commandesTotal - paiementTotal
+  end
+  
+  # On essaie d'appliquer le paiement a une commande
+  # Le cas que nous devons considerer survient lorsqu'un enfant est inscrit
+  # ou cours de sauvetage, qu'il n'est pas encore paye et qu'il ne le sera pas
+  # avant le debut du cours. Il faut quand meme qu'un paiement soit applique aux
+  # commandes meme si la cotisation n'est alors pas consideree comme toute reglee.
+  def paiementDeCommandes(paiement)
+    # Premierement appliquer a une commande du meme montant
+    self.commandes.each do |c|
+      if c.due == paiement.montant
+        c.withPaiement(paiement)
+        return
+      end
+    end
+    
+    # Deuxiemement, consider le montant en sus de la cotisation
+    extraPaie = paiementTotal - cotisationTotal
+    self.commandes.each do | c | 
+      if c.due <= extraPaie
+        extraPaie = extraPaie - c.due
+        c.withPaiement(paiement)
+      end
+    end
+  end
+  
+  # Un paiement est annule.
+  # Pour la cotisation, rien a faire
+  # Pour les commandes, il faut changer leur etat 
+  def annulationPaiement(paiement)
+    self.commandes.each do | c |
+      if !c.paiement.nil? && c.paiement.id == paiement.id
+        c.annulationPaiement
+      end
+    end
+  end
   
   # Calcul de la cotisation pour l'annee. Delegue a l'objet Cotisation.
   # Cotisation est cree si pas deja present.
@@ -405,7 +459,7 @@ class Famille < ActiveRecord::Base
     
     # Creer les nouveau recus
     annee = Date.today.month > 6 ? Date.today.year : Date.today.year - 1
-    Famille.includes([:membres, :cotisation, :paiements]).each do |famille|
+    Famille.includes([:membres, :cotisation, :paiements, :commandes]).each do |famille|
       famille.genereRecus(annee)
     end
     
@@ -413,6 +467,7 @@ class Famille < ActiveRecord::Base
     Paiement.destroy_all
     Note.destroy_all
     Cotisation.destroy_all
+    Commande.destroy_all
     
     # Effacer les activites de la famille
     Famille.all.each do |f|

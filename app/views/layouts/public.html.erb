@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Abonnements</title>
+    <title><%= t('.app_titre') %></title>
     <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => true%>
     <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 
@@ -17,7 +17,7 @@
     <div class="page-header">
       <%= image_tag("logo112x87.png") %>
       <div class="pull-right">
-        <h1><%= @page_title || "Abonnements"%></h1>
+        <h1><%= @page_title || t('.titre') %></h1>
       </div>
     </div>
 
@@ -38,36 +38,39 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <% if @famille.id %>
           <ul class="nav navbar-nav">
+            <li>
+              <%= link_to  t(".menu_home"), :controller => '/public',  :action => 'home', :id => 1 %>
+            </li>
             <% if @famille.active? %>
             <li>
-              <%= link_to  @famille.english? ? 'Display profile' : "Afficher profil",    :controller => '/public',  :action => 'show', :id => 1 %>
+              <%= link_to  t('.menu_profile_display'), :controller => '/public',  :action => 'show', :id => 1 %>
             </li>
             <li>
-              <%= link_to  @famille.english? ? 'Modify profile' : "Modifier profil",    :controller => '/public', :action => 'edit', :id => 1  %>
+              <%= link_to  t('.menu_profile_edit'), :controller => '/public', :action => 'edit', :id => 1  %>
             </li>
             <% else %>
             <li>
-              <%= link_to  @famille.english? ? 'Renewing your membership' : "Ré-inscription",    :controller => '/public', :action => 'edit', :id => 1   %>
+              <%= link_to  t(".menu_renouv"), :controller => '/public', :action => 'edit', :id => 1   %>
             </li>
             <% end %>
-
-            <% if @famille.paiementTotal > 0 %>
             <li>
-              <%= link_to(@famille.english? ? 'Get receipt for membership' : "Obtenir un reçu pour paiement",    :controller => '/public', :action => 'recupaiement', :id => 1) %>
+              <%= link_to( t('.menu_recu'), :controller => '/public', :action => 'recu', :id => 1) %>
             </li>
+            <% if Date.today <= Constantes.instance.finCommandes %>
+              <li>
+                <%= link_to paniers_show_path(1) do %>
+                  <span class="glyphicon glyphicon-star"></span><%= t('.menu_panier') %>
+                <% end %>
+              </li>
             <% end %>
-
-            <li>
-              <%= link_to(@famille.english? ? 'Mail income tax receipts' : "Expédier mes reçus d'impôt",    :controller => '/public', :action => 'recu', :id => 1) %>
-            </li>
           </ul>
           <% end %>
           <ul class="nav navbar-nav navbar-right">
             <li>
-              <%= link_to  @famille.english? ? 'Help' : "Aide",    :controller => '/public', :action => 'aide', :id => 1 %>
+              <%= link_to  t('.menu_aide'), :controller => '/public', :action => 'aide', :id => 1 %>
             </li>
             <li>
-              <%= link_to  "Logout ",    :controller => '/public', :action => 'logout' %>
+              <%= link_to  t('.menu_logout'), :controller => '/public', :action => 'logout' %>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->

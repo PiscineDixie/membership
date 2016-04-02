@@ -1,0 +1,36 @@
+<!-- partial pour imprimer une table de commandes selon la variable orders -->
+<table class="table table-hover table-condensed">
+  <thead>
+    <th>Numéro</th>
+    <th>Date</th>
+    <th>Famille</th>
+    <th class="number">Montant</th>
+    <th>Etat</th>
+    <th/>
+  </thead>
+  
+  <tbody>
+    <% tot = 0 %>
+    <% orders.each do | c | %>
+      <tr>
+        <td><%= link_to c.id, c %></td>
+        <td><%= c.created_at.strftime("%F %T") %></td>
+        <td><%= link_to c.famille.nom, c.famille %></td>
+        <td class="number"><%= c.total %></td>
+        <td><%= c.etat %></td>
+        <td><%= button_to('Enlever', c, {data: {confirm: 'Etes-vous certain?'}, :method => :delete, class: "btn btn-danger btn-xs"}) %></td>
+        <% tot = tot + c.total * 100 %>
+      </tr>
+      
+    <% end %>
+  </tbody>
+  
+  <tfoot>
+    <td/>
+    <td/>
+    <td/>
+    <th class="number"> <%= number_with_precision(tot / 100, :precision => 2) %> </th>
+    <th/>
+  </tfoot>
+  
+</table>

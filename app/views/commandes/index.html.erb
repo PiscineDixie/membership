@@ -1,0 +1,21 @@
+<h2>Rapports des Commandes</h2>
+<p>
+  Période: Du <%= @debut.to_s %> au <%= @fin.to_s %> (inclusivement)
+</p>
+
+<!-- les commandes du systeme -->
+<h3>Commandes en attente de paiement</h3>
+<%= render(partial: "commandes", locals: {orders: Commande.commandes(@debut, @fin, [ Commande.etats[:entree] ]) || [] } ) %>
+
+<h3>Commandes payées</h3>
+<%= render(partial: "commandes", locals: {orders: Commande.commandes(@debut, @fin, [ Commande.etats[:payee] ]) || [] } ) %>
+
+<h3>Commandes avec produits commandés</h3>
+<%= render(partial: "commandes", locals: {orders: Commande.commandes(@debut, @fin, [ Commande.etats[:commandee] ]) || [] } ) %>
+
+<h2>Rapport des produits</h2>
+<h3>Produits en attente de paiement</h3>
+<%= render(partial: "produits", locals: {achats: Achat.achats(@debut, @fin, [ Commande.etats[:entree] ]) } ) %>
+
+<h3>Produits payés</h3>
+<%= render(partial: "produits", locals: {achats: Achat.achats(@debut, @fin, [ Commande.etats[:payee] ]) } ) %>

@@ -1,0 +1,17 @@
+<%= render(:partial => 'public/header', :locals => {:famille => @famille } ) %>
+    <tr>
+      <td style="padding:20px;" width="90%"><br/>
+        <p>Hi,</p>
+        
+        <p>Please find below your membership information at Dixie Pool for this year:</p>
+        
+        <%= render :partial => "public/cotisation", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+          
+        <% if @famille.totalDu > 0 %>
+          <%= render :partial => "shared/cheque", :locals => {:famille => @famille } %>
+        <% end %>
+        
+        <p>Thanks.</p>
+      </td>
+    </tr>
+<%= render(:partial => 'public/footer', :locals => {:famille => @famille } ) %>

@@ -6,11 +6,6 @@ class Paiement < ActiveRecord::Base
   validates_presence_of :montant, :date
   validates_numericality_of :montant
 
-  # Les taux de taxes en vigueur
-  @@tauxDeTPS = 0.05   # La TPS est de 5.00%
-  @@tauxDeTVQ = 0.09975 # La TVQ est de 9.975%
-  @@tauxAvantTaxes = 1 + (@@tauxDeTPS + @@tauxDeTVQ)
-  
   belongs_to :famille, inverse_of: :paiements
 
   before_save :calculDesTaxes
@@ -46,9 +41,9 @@ class Paiement < ActiveRecord::Base
     
     brut = self.montant - self.non_taxable;
     if brut > 0
-      net = (brut / @@tauxAvantTaxes * 100).round / 100.0
-      self.tps = (net * @@tauxDeTPS *100).round / 100.0
-      self.tvq = (net * @@tauxDeTVQ * 100).round / 100.0
+      cts = Constantes.instance
+      self.tps = (brut * 100.0 * cts.tps / (1.0 + cts.tps + cts.tvq)).round / 100.0
+      self.tvq = (brut * 100.0 * cts.tvq / (1.0 + cts.tps + cts.tvq)).round / 100.0
       self.taxable = brut - self.tps - self.tvq
     else
       self.tps = 0

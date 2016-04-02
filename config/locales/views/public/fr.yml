@@ -1,0 +1,40 @@
+fr:
+  public:
+    
+    edit:
+      titre: "Mise à jour de votre profil"
+      
+    home:
+      titre: "Votre dossier à la piscine Dixie"
+      msg: "Utilisez le menu en haut de la page pour effectuer les opérations désirées."
+      capt1: "Procurez vous des produits avec le logo Dixie"
+      capt2: "Participez aux activités. C'est gratuit!"
+      
+    new:
+      titre: "Nouveau profil"
+      
+    recu:
+      cotisation_titre: "Reçu de cotisation"
+      cotisation_bouton: "Obtenir un reçu pour paiement"
+      cotisation_na: "Suite à vos paiements, vous pourrez obtenir un reçu officiel ici."
+      impot_titre: "Reçu d'impôt"
+      impot_msg: "Entrez le nom de la personne au nom de laquelle le reçu sera émis. Ce reçu s'applique
+            aux frais payés par tous les membres éligibles. Il est expédié par courriel."
+      impot_label_nom: "Nom"
+      impot_label_courriel: "Courrier"
+      impot_bouton: "Envoi"
+      
+    show:
+      titre: "Profil"
+      coordonnees: "Coordonnées"
+      membres_titre: "Membres"
+      membres_nom: "Nom"
+      membres_naissance: "Naissance"
+      membres_activites: "Activités"
+      cotisation_titre: "Frais"
+      paiements_titre: "Paiements"
+      paiements_date: "Date"
+      paiements_montant: "Montant"
+      notes_titre: "Notes"
+      notes_date: "Date"
+      notes_sommaire: "Sommaire"

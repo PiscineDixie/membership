@@ -1,0 +1,30 @@
+<!-- partial pour imprimer une liste de produits donnees par @achats -->
+<table class="table">
+  <thead>
+    <th>Produit</th>
+    <th>Code</th>
+    <th class="number">Quantité</th>
+  </thead>
+  
+  <tbody>
+    
+    <% tot = 0 %>
+    <% achats.each do | a | %>
+      <% tot = tot + a.quantite %>
+      <tr>
+        <td><%= a.produit.titre_fr %></td>
+        <td><%= a.code %></td>
+        <td class="number"><%= a.quantite %></td>
+      </tr>
+    <% end %>
+    
+  </tbody>
+  
+    <tfoot>
+    <td/>
+    <td/>
+    <td class="number"> <%= tot %> </td>
+    <th/>
+  </tfoot>
+</table>
+

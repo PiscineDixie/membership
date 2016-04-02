@@ -17,6 +17,7 @@ gem 'turbolinks'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
+gem 'rails-i18n'
 
 
 group :development do

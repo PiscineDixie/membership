@@ -1,0 +1,39 @@
+en:
+  shared:
+    famille:
+      save: "Save"
+      cancel: 'Cancel'
+      coordonnees:
+        titre: "Family Information"
+        msg1: "Enter the following information for your family. An email address is required
+          to receive income tax receipts. It also simplifies the work of the volunteers
+          that manage the pool because we can contact you easily when required."
+
+      membres:
+        titre: "Family Members"
+        msg: "Include an entry for each member of the family (child, parent, grand-parent) living at the same address.
+              The birthdates are important for the income tax receipts and discounts for senior (65 year-old on August 1st)."
+        ecusson:
+          titre: "Swimming Badges"
+          adulte: "Adult: 13 and over"
+          nageur: "Swimmer: Passed the Dixie test. (See <a href=\"http://www.piscinedixiepool.com/badges\" target=\"_blank\">badges</a>.)"
+          debutant: "Beginner: Child that has not passed the Dixie test."
+        label_prenom: "Firsname"
+        label_nom: "Surname"
+        label_naissance: "Birthday"
+        label_ecusson: "Badge"
+        activites_titre: "Activities"
+        aide_titre: "Volunteering"
+        enlever: "Remove this member"
+        ajouter: "Add a new member"
+        
+      autres:
+        titre: "Others"
+        billets:
+          titre: "Guest Tickets"
+          msg: "Tickets are required for guests that would come to the pool with a member of your family during week-end because
+      day passes are not sold on week-ends.  During the week, a guest can use these tickets or purchase a day pass (5$ each)."
+          label: "Number of tickets (booklets of 10 @ $%{cout} each):"
+        note:
+          titre: "Note"
+          label: "Please use this area to enter any additional information."

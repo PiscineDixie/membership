@@ -1,4 +1,5 @@
 .metadata
+.DS_Store
 /log
 /config/database.yml
 /config/secrets.yml
@@ -6,3 +7,4 @@
 /vendor/
 /tmp/
 /deploy.pyc
+.byebug_history

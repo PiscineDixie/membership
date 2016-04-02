@@ -1,0 +1,42 @@
+
+fr:
+  public_login_link: "SVP Utilisez le lien ci-dessous pour accéder à votre dossier."
+  public_login_sujet: "Lien pour accès au dossier"
+  public_login_sent: "Un courriel a été expédié."
+  public_login_unk: "Aucun profil ne correspond à cette adresse courriel."
+  public_login_inv: "Veuillez-SVP entrer une adresse courriel."
+  public_create_saved: "Votre profil est enregistré."
+  public_upd_saved: "Votre profil est modifié."
+  public_recu_sent: "Courriel expédié à l'adresse: %{to}"
+  public_recu_na: "Non éligible pour un reçu."
+  public_recu_email_needed: "Vous devez d'abord ajouter une adresse courriel valide à votre profil."
+  public_valid_membre: "SVP ajouter au moins un membre à votre profil familial."
+  public_valid_ticket: "L'achat de billets n'est permis que si un membre de la famille a plus de 10 ans le premier août."
+  public_valid_age: "Au moins un membre de la famille doit être né avant le %{naissance} pour souscrire à un abonnement individuel. SVP ajoutez au moins un parent."
+  
+  panier_cancel: "Commande annulée."
+  
+  famille_mailer:
+    recu:
+      subject: "Recus d'impot federal de Piscine Dixie, Famille %{nom}"
+        
+        
+  activerecord:
+    attributes:
+      famille:
+        adresse1: "Adresse"
+        adresse2: "Adresse"
+        ville: "Ville"
+        province: "Province"
+        code_postal: "Code postal"
+        tel_soir: "Téléphone (soir)"
+        tel_jour: "Téléphone (jour)"
+        courriel1: "Courriel"
+        courriel2: "Autre courriel"
+        langue: "Langue de correspondance"
+        
+      membre:
+        ecussons:
+          Débutant: "Débutant"
+          Nageur: "Nageur"
+          Adulte: "Adulte"

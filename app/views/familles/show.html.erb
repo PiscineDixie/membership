@@ -109,7 +109,7 @@
     </div>
   </div>
 
-  <div class="panel panel-default" id="coordonneeFamille">
+  <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">Membres</h2>
     </div>
@@ -131,15 +131,15 @@
     </div>
   </div>
 
-  <div class="panel panel-default" id="coordonneeFamille">
+  <div class="panel panel-default">
     <div class="panel-heading">
-      <h2 class="panel-title">Cotisation & Paiements</h2>
+      <h2 class="panel-title">Cotisation</h2>
     </div>
     <div class="panel-body">
 
       <% if @famille.cotisation %>
-      <h5>Cotisation</h5>
-      <div class="form-horizontal">
+       <div class="form-horizontal">
+        
         <% if @famille.cotisation.cout_billets > 0 %>
         <div class="form-group" style="margin-bottom:0">
           <label class="control-label col-xs-2">Billets</label>
@@ -150,6 +150,7 @@
           </div>
         </div>
         <% end %>
+        
         <div class="form-group" style="margin-bottom:0">
           <label class="control-label col-xs-2">Total</label>
           <div class="col-xs-1">
@@ -158,22 +159,61 @@
             </p>
           </div>
         </div>
-        <div class="form-group" style="margin-bottom:0">
-          <label class="control-label col-xs-2">Montant dû</label>
-          <div class="col-xs-1">
-            <p class="form-control-static pull-right">
-              <%= number_with_precision(@famille.cotisationDue, :precision => 2) %>
-            </p>
-          </div>
-        </div>
+        
       </div>
+      
       <%= link_to 'Calculer cotisation', new_famille_cotisation_path(@famille) %>
       <% if @famille.cotisation %>
       | <%= link_to 'Afficher cotisation', famille_cotisation_path(@famille) %>
       <% end %>
 
+      <% end %>
+
+    </div>
+  </div>
+
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Commandes de produits</h2>
+    </div>
+    <div class="panel-body">
+      <table class="table table-condensed">
+        <thead>
+          <th>Numéro</th>
+          <th>Date</th>
+          <th class="number">Montant</th>
+          <th>Etat</th>
+          <th/>
+        </thead>
+        
+        <tbody>
+          
+          <% @famille.commandes.each do | c | %>
+            <tr>
+              <td><%= link_to c.id, c %></td>
+              <td><%= c.created_at.strftime("%F %T") %></td>
+              <td class="number"><%= number_with_precision(c.total, precision: 2) %></td>
+              <td><%= c.etat %></td>
+              <% if c.entree? %>
+                <td><%= button_to('Enlever', c, {data: {confirm: 'Etes-vous certain?'}, :method => :delete, class: "btn btn-danger btn-xs"}) %></td>
+              <% else %>
+                <td/>
+              <% end %>
+            </tr>
+            
+          <% end %>
+        </tbody>
+        </table>
+      
+    </div>
+  </div>
+  
+  <div class="panel panel-default">
+    <div class="panel-heading">
+      <h2 class="panel-title">Paiements</h2>
+    </div>
+    <div class="panel-body">
       <% unless @famille.paiements.empty? %>
-      <h5>Paiements</h5>
       <table class="table" id="listePaiements">
         <thead>
           <tr>
@@ -193,12 +233,11 @@
         </tbody>
       </table>
       <% end %>
-      <% end %>
-
+      <label>Total dû:</label>&nbsp;<%= number_with_precision(@famille.totalDu, :precision => 2) %>
     </div>
   </div>
 
-  <div class="panel panel-default" id="coordonneeFamille">
+  <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">Dossier</h2>
     </div>

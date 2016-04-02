@@ -1,0 +1,13 @@
+fr:
+  layouts:
+    public:
+      app_titre: "Dixie - Abonnements"
+      titre: "Abonnements"
+      menu_home: "Accueil"
+      menu_profile_display: "Mon profil"
+      menu_profile_edit: "Modifier mon profil"
+      menu_panier: "Produits Dixie"
+      menu_renouv: "Ré-inscription"
+      menu_recu: "Reçus"
+      menu_aide: "Aide"
+      menu_logout: "Déconnexion"

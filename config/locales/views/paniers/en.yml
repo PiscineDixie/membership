@@ -1,0 +1,31 @@
+en:
+  paniers:
+    show:
+      titre: "Purchasing Dixie Products"
+      label_prix: "Cost: "
+      label_prix_suff: "$ (includes taxes)"
+      label_taille: "Size"
+      label_qte: "Quantity"
+      ajouter: "Add to basket"
+      panier: "Basket"
+      vide: "Your basket is empty."
+      acheter: "Buy"
+      annuler: "Cancel"
+    panier:
+      label_produit: "Product"
+      label_total: "Total"
+      label_prix: "Cost"
+      label_taille: "Size"
+      label_qte: "Quantity"
+      enlever: "Remove"
+      conditions_title: "Terms of sale: "
+      conditions: "The orders are processed at the beginning of the summer and
+        delivered to your house (Lachine only) when they arrive. For those living
+        outside Lachine, the orders can be picked-up at the pool. The orders must
+        be pre-paid. Orders may be cancelled and re-imbursed if we don't have enough
+        volume for an item."
+    created:
+      titre: "Order completed"
+      status: "Your order has been registered. Thank you. The products will be ordered shortly after we process your payment."
+      cancel_msg: "You may cancel this order at this time if bought by error:"
+      cancel_btn: "Cancel this order"

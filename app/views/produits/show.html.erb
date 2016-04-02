@@ -1,0 +1,6 @@
+<h1>Données de: <%=@produit.titre_fr -%></h1>
+
+<%= render partial: @produit, locals: { readonly: true} %>
+
+<%= link_to 'Modifier', edit_produit_path(@produit) %> |
+<%= link_to 'Retour', produits_path %>

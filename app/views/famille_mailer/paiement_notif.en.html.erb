@@ -1,0 +1,24 @@
+<%= render(:partial => 'header', :locals => {:famille => @famille } ) %>
+
+    <tr>
+      <td width="90%"><br/>
+
+        
+<p>Hello,</p>
+
+<p>We have processed your payment of the amount <%= number_to_currency(@paiement.montant, :precision => 2) %>.</p>
+
+<p>Here is the updated status of your membership fees for Dixie:</p>
+
+<%= render :partial => "public/cotisation", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+
+<% if @famille.totalDu > 0 %>
+  <%= render :partial => "shared/cheque", :locals => {:famille => @famille } %>
+  
+  <p>Thanks.</p>
+<% end %>
+        
+      </td>
+    </tr>
+    
+<%= render(:partial => 'footer', :locals => {:famille => @famille } ) %>

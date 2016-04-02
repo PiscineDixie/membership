@@ -168,6 +168,10 @@ class FamillesController < ApplicationController
         valide = false
       end
       
+      @langue = 'ml' if @langue == 'Toutes'
+      
+      erreurs = Array.new
+      
       if valide
         # Expedie ce courriel a toutes les adresses
         cnt = 0
@@ -183,14 +187,23 @@ class FamillesController < ApplicationController
         else
           # Expedier ce courriel aux familles. Filtre sur les activites
           actId = params[:activite].to_i
-          familles = params[:langue] == 'Toutes' ? Famille.all : Famille.where("langue = ?", params[:langue])
           
-          if actId == 101 then
-            familles = familles.all { |f| !f.active? }
+          if actId == 100 then # Toutes les familles
+            familles = @langue == 'ml' ? Famille.all.find_each : Famille.langue(@langue).find_each 
+          elsif actId == 101 then
+            familles = Famille.inactives
+            familles = familles.langue(@langue) unless @langue == 'ml'
+            familles = familles.find_each
           elsif actId == 102 then
-            familles = familles.all { |f| f.active? }
-          elsif actId == 103 then
-            familles = familles.all { |f| f.cotisationDue > 0 }
+            familles = Famille.actives
+            familles = familles.langue(@langue) unless @langue == 'ml'
+            familles = familles.find_each
+          elsif actId == 103 then # Avec cotisation due
+            familles = Famille.actives
+            familles = familles.langue(@langue) unless @langue == 'ml'
+            familles = familles.to_a.select { |f| f.cotisationDue > 0 }
+          else
+            familles = @langue == 'ml' ? Famille.all.find_each : Famille.langue(@langue).find_each
           end
           
           familles.each do | f |
@@ -207,13 +220,24 @@ class FamillesController < ApplicationController
             
             # Expedier un courriel aux adresses de la famille
             if trouveMembre && !f.courriels.empty?
-              FamilleMailer.info(f, @sujet, f.courriels, @msg, @langue, cnt == 0).deliver_now
-              cnt = cnt + 1
+              begin
+                FamilleMailer.info(f, @sujet, f.courriels, @msg, @langue, cnt == 0).deliver_now
+                cnt = cnt + 1
+              rescue Exception => e
+                erreurs << f.courriels
+                logger.error("Exception dans mailer pour: #{f.courriels}")
+                logger.error(e)
+              end
             end
           end
         end
         
-        flash[:notice] = cnt.to_s + ' courriels expédiés.'
+        msg = cnt.to_s + ' courriels expédiés.'
+        unless erreurs.empty?
+          msg = msg + "; erreurs: " + erreurs.to_s
+        end
+        flash[:notice] = msg
+          
         redirect_to(familles_url)
         return
       end

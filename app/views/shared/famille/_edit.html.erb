@@ -1,0 +1,29 @@
+<%= form_for :famille, :url => url, :html => { :method => method }  do |f| %>
+
+<div id="famille_tout">
+  
+<% hasErrors = !@famille.errors.full_messages.empty? %>
+<% @famille.membres.each { | membre | hasErrors = hasErrors || !membre.errors.full_messages.empty? } %>
+<% if hasErrors %>
+  <div class="alert alert-danger">
+    <% @famille.errors.full_messages.each do |msg| %>
+    <p><%= msg %></p>
+  <% end %>
+  <% @famille.membres.each do | membre | %>
+    <% membre.errors.full_messages.each do | msg | %>
+      <%= msg %>
+    <% end %>
+  <% end %>
+  </div>
+<% end %>
+
+<%= render :partial => 'shared/famille/coordonnees', :locals => { :famille => @famille, :f => f } %>
+<%= render :partial => 'shared/famille/membres', :locals => { :famille => @famille, :f => f } %>
+<%= render :partial => 'shared/famille/autres', :locals => { :famille => @famille, :f => f, :url => url } %>
+
+</div> <!-- famille_tout -->
+
+<%= f.submit t('shared.famille.save'), :class => "btn btn-primary" %>
+<%= f.submit( t('shared.famille.cancel'), {name: 'cancel', class: "btn btn-default"}) %>
+
+<% end %>

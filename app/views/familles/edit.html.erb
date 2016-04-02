@@ -1,4 +1,4 @@
 <h1>Modifier famille</h1>
 
-<%= render :partial => "shared/famille/edit." + (@famille.english? ? 'en' : 'fr'), :locals => { :url => '/familles/' + @famille.id.to_s, :method => 'put', :button_name => "Enregistrer"} %>
+<%= render :partial => "shared/famille/edit", :locals => { :url => '/familles/' + @famille.id.to_s, :method => 'put'} %>
 

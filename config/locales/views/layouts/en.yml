@@ -1,0 +1,13 @@
+en:
+  layouts:
+    public:
+      app_titre: "Dixie - Membership"
+      menu_home: "Home"
+      menu_profile_display: "Display profile"
+      menu_profile_edit: "Update profile"
+      menu_panier: "Dixie Products"
+      menu_renouv: "Renewing your membership"
+      menu_recu: "Receipts"
+      menu_aide: "Help"
+      menu_logout: "Sign out"
+      

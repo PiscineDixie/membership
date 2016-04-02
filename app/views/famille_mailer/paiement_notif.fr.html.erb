@@ -1,0 +1,23 @@
+<%= render(:partial => 'header', :locals => {:famille => @famille } ) %>
+
+    <tr>
+       <td width="90%"><br/>
+      
+<p>Bonjour,</p>
+
+<p>Nous avons traité votre paiement au montant de <%= number_to_currency(@paiement.montant, :precision => 2) %>.</p>
+
+<p>Voici la mise à jour de votre cotisation à la Piscine Dixie:</p>
+
+<%= render :partial => "public/cotisation", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+
+<% if @famille.totalDu > 0 %>
+  <%= render :partial => "shared/cheque", :locals => {:famille => @famille } %>
+
+  <p>Merci.</p>
+<% end %>
+
+      </td>
+    </tr>
+    
+<%= render(:partial => 'footer', :locals => {:famille => @famille } ) %>

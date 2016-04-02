@@ -3,6 +3,8 @@ Membership::Application.routes.draw do
   # first created -> highest priority.
   resources :constantes
   resources :users
+  resources :produits
+  resources :commandes
   
   post 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: 'sessions#reject', via: [:post, :get]
@@ -10,6 +12,8 @@ Membership::Application.routes.draw do
   
   # Les actions accessibles par le public pour editer leur profil familial
   # "public" est comme "famille" mais avec des fontions reduites et orientee "membres"
+  get "public/", to: "public#home", as: "public/"
+  get "public/home", to: "public#home", as: "public/home"
   get "public/login_fr" => 'public#login_fr'
   get "public/login_en" => 'public#login_en'
   match "public/login"    => 'public#login', via: [:get, :post]
@@ -19,6 +23,13 @@ Membership::Application.routes.draw do
   get "public/:id/recupaiement" => 'public#recupaiement'
   resources :public
 
+
+  # Panier d'achats
+  get "paniers/:id/show", to: 'paniers#show', as: 'paniers/show'
+  post "paniers/:id/plus", to: 'paniers#add_item', as: 'paniers/plus'
+  post "paniers/:id/commande", to: 'paniers#create', as: 'paniers/commande'
+  post "paniers/:id/annuler", to: 'paniers#cancel', as: 'paniers/cancel'
+  
   # Les activites sportives offertes
   resources :activites do
     member do

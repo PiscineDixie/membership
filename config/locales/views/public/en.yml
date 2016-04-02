@@ -1,0 +1,40 @@
+en:
+  public:
+    
+    edit:
+      titre: "Profile update"
+      
+    home:
+      titre: "Your Dixie Account"
+      msg: "Use menu at the top of the page for your operations."
+      capt1: "Buy Dixie products"
+      capt2: "Take part in the activities. All free!"
+      
+    new:
+      titre: "New profile"
+      
+    recu:
+      cotisation_titre: "Membership Fee Receipt"
+      cotisation_bouton: "Generate receipt"
+      cotisation_na: "Once your payment is processed, you will be able to generate a receipt here."
+      impot_titre: "Income Tax Receipts"
+      impot_msg: "Enter the name of the person to which the receipts are written. A receipt is issued for each eligible child. 
+                  Receipts are sent to the email addresses in your family profile."
+      impot_label_nom: "Name"
+      impot_label_courriel: "Email"
+      impot_bouton: "Generate"
+      
+    show:
+      titre: "Profile"
+      coordonnees: "Family Information"
+      membres_titre: "Family Members"
+      membres_nom: "Name"
+      membres_naissance: "Birthday"
+      membres_activites: "Activities"
+      cotisation_titre: "Fees"
+      paiements_titre: "Payments"
+      paiements_date: "Date"
+      paiements_montant: "Amount"
+      notes_titre: "Notes"
+      notes_date: "Date"
+      notes_sommaire: "Note"

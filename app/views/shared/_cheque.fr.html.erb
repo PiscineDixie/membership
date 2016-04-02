@@ -1,0 +1,33 @@
+<% if Date.today() < Constantes.instance.finPreInscription && famille.cotisation.rabais_preinscription > 0 %>
+<p>Votre paiement doit nous parvenir avant le <%= Constantes.instance.finPreInscription %>
+   afin de profiter du rabais de pré-inscription.
+</p>
+<% end %>
+
+<h3>Paiement Interac</h3>
+<p>
+Vous pouvez régler votre abonnement par paiement Interac. Utiliser l'application
+de votre téléphone ou le site web de votre institution financière.
+</p>
+<p>
+Transférez <%= number_with_precision(famille.totalDu, :precision => 2) %> à 
+tresorier@piscinedixiepool.com avec la description <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>
+et une question où la réponse est <b>dixie</b>.
+</p>
+
+<h3>Paiement par chèque</h3>
+<p>Veuillez SVP libeller votre chèque à l'ordre de "Association Piscine Dixie Inc." et
+   l'expédier à l'adresse suivante:</p>
+
+<address style="padding-left: 20px;">
+  <strong>Association Piscine Dixie Inc.</strong><br/>
+  C.P. 34045, Galeries Lachine<br/>
+  Lachine, Qc<br/>
+  H8S 4H4<br/>
+</address>
+
+<p>
+  Ajouter une copie de ce courriel à votre envoi ou inscrivez sur votre chèque le numéro 
+  de référence suivant: <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>.
+</p>
+

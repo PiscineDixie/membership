@@ -1,0 +1,109 @@
+
+<div class="row">
+  <div class="col-sm-8 col-lg-5">
+
+    <%= form_for(@constantes, :url => constante_path) do |f| %>
+
+    <% unless @constantes.errors.full_messages.empty? %>
+    <div class="alert alert-danger">
+      <%  @constantes.errors.full_messages.each do |msg| %>
+      <p>
+        <%= msg %>
+      </p>
+      <% end %>
+    </div>
+    <% end %>
+
+    <div class="form-group">
+      <label>Base Sénior</label>
+      <%= f.text_field :baseSenior, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Base Individu</label>
+      <%= f.text_field :baseIndividu, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Base Famille</label>
+      <%= f.text_field :baseFamille, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Activité Sénior</label>
+      <%= f.text_field :activiteSenior, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Activité Individu</label>
+      <%= f.text_field :activiteIndividu, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Activité Famille</label>
+      <%= f.text_field :activiteFamille, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Rabais Pré-inscription Sénior</label>
+      <%= f.text_field :rabaisPreInscriptionSenior, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Rabais Pré-inscription Individu</label>
+      <%= f.text_field :rabaisPreInscriptionIndividu, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Rabais Pré-inscription Famille</label>
+      <%= f.text_field :rabaisPreInscriptionFamille, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Fin Pré-inscription</label>
+      <div class="form-inline">
+        <%= f.date_select(:finPreInscription, {readonly: readonly}, {class: 'form-control'})  %>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Code Leçon Natation</label>
+      <%= f.text_field :codeLeconNatation, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Coût d'un billet d'invité</label>
+      <%= f.text_field :cout_billet, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Age mininum pour cotisation individuel</label>
+      <%= f.text_field :age_min_individu, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Taux de TPS</label>
+      <%= f.text_field :tps, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Taux de TVQ</label>
+      <%= f.text_field :tvq, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group">
+      <label>Fin commandes de produits</label>
+      <div class="form-inline">
+        <%= f.date_select(:finCommandes, {readonly: readonly}, {class: 'form-control'})  %>
+      </div>
+    </div>
+
+<% unless readonly %>
+    <%= f.submit "Enregistrer", class: "btn btn-primary"%>
+    <%= f.submit( 'Annuler', {name: 'cancel', class: "btn btn-default"}) %>
+<% end %>
+
+    <% end %>
+
+  </div>
+</div>

@@ -1,0 +1,42 @@
+fr:
+  shared:
+    famille:
+      save: "Enregistrer"
+      cancel: 'Annuler'
+      coordonnees:
+        titre: "Coordonnées"
+        msg1: "Entrez les coordonnées de votre famille. Une adresse courriel est nécessaire
+          afin de recevoir un reçu d'impôt. Elle permet aussi à nos bénévoles de vous contacter
+          facilement (e.g., campagne de ré-abonnement)."
+          
+      membres:
+        titre: "Membres"
+        msg: "Inscrivez les noms de tous les membres de la famille qui habitent au même endroit (enfants, parents,
+              grand-parents). Les dates de naissances sont importantes pour les reçus d'impôt
+              et le calcul de la cotisation des séniors (65 ans ou plus le 1 août)."
+        ecusson:
+          titre: "Les écussons"
+          adulte: "Adulte: 13 ans et  plus"
+          nageur: "Nageur: A réussi l'épreuve de nage. Voir <a href=\"http://www.piscinedixiepool.com/ecussons\" target=\"_blank\">écussons</a>."
+          debutant: "Débutant: Jeune n'ayant pas encore réussi l'épreuve."
+        label_prenom: "Prénom"
+        label_nom: "Nom"
+        label_naissance: "Date de naissance"
+        label_ecusson: "Ecusson"
+        activites_titre: "Activités"
+        aide_titre: "Aide aux activités"
+        enlever: "Enlever ce membre"
+        ajouter: "Ajouter un autre membre"
+        
+      autres:
+        titre: "Autres"
+        billets:
+          titre: "Billets d'invités"
+          msg: "Les billets permettent à vos invités de vous accompagner à la piscine durant la fin de semaine puisque durant
+                ces périodes il n'est pas possible de se procurer un laissez-passer à la porte. Durant la semaine, les invités peuvent
+                utiliser ces billets ou se procurer des laissez-passers au coût de $5.00 chacun."
+          label: "Nombres de billets (livrets de 10 au coût de %{cout}$):"
+        note:
+          titre: "Note"
+          label: "Utilisez cet espace pour ajouter toutes informations supplémentaires."
+          

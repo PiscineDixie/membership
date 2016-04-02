@@ -1,0 +1,95 @@
+<div id="showProfil">
+<h1><%= t(".titre") %></h1>
+
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title"><%= t('.coordonnees') %></h2></div>
+<div class="panel-body">
+
+<dl class="dl-horizontal">
+  <dt><%= Famille.human_attribute_name("adresse1") %></dt><dd><%= @famille.adresse1 %></dd>
+<dt><%= Famille.human_attribute_name("adresse2") %></dt><dd><%= @famille.adresse2 %></dd>
+<dt><%= Famille.human_attribute_name("ville") %></dt><dd><%= @famille.ville %></dd>
+<dt><%= Famille.human_attribute_name("province") %></dt><dd><%= @famille.province %></dd>
+<dt><%= Famille.human_attribute_name("code_postal") %></dt><dd><%= code_postal_fmt(@famille.code_postal) %></dd>
+<dt><%= Famille.human_attribute_name("tel_soir") %></dt><dd><%= number_to_phone(@famille.tel_soir) %></dd>
+<dt><%= Famille.human_attribute_name("tel_jour") %></dt><dd><%= number_to_phone(@famille.tel_jour) %></dd>
+<dt><%= Famille.human_attribute_name("courriel1") %></td><dd><%= @famille.courriel1 %></dd>
+<dt><%= Famille.human_attribute_name("courriel2") %></td><dd><%= @famille.courriel2 %></dd>
+<dt><%= Famille.human_attribute_name("langue") %></dt><dd><%= @famille.langue %></td></tr>
+</dl>
+</div>
+</div>
+
+
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title"><%= t('.membres_titre') %></h2></div>
+<div class="panel-body">
+
+<% unless @famille.membres.empty? %>
+  <table class="table table-condensed">
+    <thead><tr>
+      <th><%= t('.membres_nom') %></th><th><%= t('.membres_naissance') %></th><th><%= t('.membres_activites') %></th><th></th><th></th>
+    </tr></thead>
+    <tbody>
+      <% @famille.membres.each do | membre | %>
+      <tr>
+        <td><%= membre.nomPrenom %></td>
+        <td><%= membre.naissance %></td>
+        <td><%= membre.listeActivites %></td>
+      <tr>
+      <% end %>
+   </tbody>
+  </table>
+<% end %>
+
+</div>
+</div>
+
+<% if @famille.cotisation %>
+  <div class="panel panel-default" id="coordonneeFamille">
+  <div class="panel-heading"><h2 class="panel-title"><%= t('.cotisation_titre') %></h2></div>
+  <div class="panel-body">
+  <%= render :partial => "cotisation", :object => @famille.cotisation, :locals => {:famille => @famille } %>
+  </div>
+  </div>
+<% end %>
+
+<% unless @famille.paiements.empty? %>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title"><%= t('.paiements_titre') %></h2></div>
+<div class="panel-body">
+  <table class="table table-condensed">
+    <thead><tr><th><%= t('.paiements_date') %></th><th class="number"><%= t('.paiements_montant') %></th><th></th><th></th></tr></thead>
+    <tbody>
+  <% @famille.paiements.each do | paiement | %>
+    <tr>
+      <td><%= paiement.date %> </td>
+      <td class="number"><%= number_with_precision(paiement.montant, :precision => 2) %></td>
+    <tr>
+  <% end %>
+  </tbody></table>
+</div>
+</div>
+<% end %>
+
+<% famNotes = @famille.notes.where(auteur: 'famille') %>
+<% unless famNotes.empty? %>
+<div class="panel panel-default" id="coordonneeFamille">
+<div class="panel-heading"><h2 class="panel-title"><%= t('.notes_titre') %></h2></div>
+<div class="panel-body">
+  <table lass="table table-condensed">
+    <thead>
+      <tr><th><%= t('.notes_date') %></th><th><%= t('.notes_sommaire') %></th></tr>
+    </thead>
+    <tbody>
+  <% famNotes.each do | note | %>
+    <tr>
+      <td><%= note.date %> </td>
+      <td><%= note.sommaire %> </td>
+    <tr>
+  <% end %>
+  </tbody>
+  </table>
+<% end %>
+
+</div>

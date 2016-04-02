@@ -10,19 +10,31 @@ class PublicController < ApplicationController
   # Une authentification pour la famille
   before_action :famille_authenticate, :except => [:login, :login_en, :login_fr, :new, :create]
   
+  before_action :set_locale, only: [:login, :login_en, :login_fr, :new, :create]
+    
+  def set_locale
+    I18n.locale =  english? ? :en : :fr
+  end
+   
   # Valider la permission de completer une activite
   def famille_authenticate
     @famille = nil
     
     # Recuperer le code d'acces de la famille des parametres de la query si present
-    id = params[:fam_id] ? params[:fam_id] : cookies[:fam_id]
+    id = params[:fam_id]
     if id && !id.empty? then
       @famille = Famille.where("code_acces = :code", {:code => id}).includes([:cotisation, :paiements, :membres, :notes]).take
       if @famille then
         langCookie(nil)
-        famIdCookie(id)
+        session[:familleId] = @famille.id;
       end
     end
+    
+    if @famille.nil? && session[:familleId]
+      @famille = Famille.find_by_id(session[:familleId]);
+    end
+    
+    set_locale
     
     # Permettre l'operation si une famille, sinon on va au login
     if @famille.nil? then
@@ -41,22 +53,22 @@ class PublicController < ApplicationController
         fs = Famille.where("courriel1 = :courriel1 or courriel2 = :courriel2", {:courriel1 => params[:courriel], :courriel2 => params[:courriel]})
         if !fs.empty?
           fs.each do |f|
-             msg = f.english? ? "Please use the link below to access your profile" : "SVP Utilisez le lien ci-dessous pour accéder à votre dossier."
-             sujet = f.english? ? "Link to Profile" : "Lien pour accès au dossier"
+             msg = t(:public_login_link)
+             sujet = t(:public_login_sujet)
              FamilleMailer.info(f, sujet, params[:courriel], msg, f.langue).deliver
           end
-          flash[:notice] = english? ? "Email was sent." : "Un courriel a été expédié."
+          flash[:notice] = t(:public_login_sent)
         else
-          flash[:notice] = english? ? "Unknown email address." : "Aucun profil ne correspond à cette adresse courriel."
+          flash[:notice] = t(:public_login_unk)
         end
       else
-        flash[:notice] = english? ? "Please enter a valid email address." : "Veuillez-SVP entrer une adresse courriel."
+        flash[:notice] = t(:public_login_inv) 
       end
       
     end
     
     # On recommence avec le meme formulaire de login
-    render :content_type => 'text/html', :template => localized('login', (english? ? 'en' : 'fr'))
+    render 'login'
   end
   
   # L'action equivalente qui affiche la page en anglais
@@ -73,8 +85,11 @@ class PublicController < ApplicationController
 
   
   def logout
-    famIdCookie(nil)
+    session.delete(:familleId)
     redirect_to :action => 'login'
+  end
+  
+  def home
   end
   
   # Creer un nouveau profil
@@ -83,7 +98,6 @@ class PublicController < ApplicationController
     @famille = Famille.new
     @famille.langue = inEnglish ? "EN" : "FR"
     @note = ''
-    render :content_type => 'text/html', :template => localized('new', @famille.langue)
   end
   
   # Enregistrer les donnees d'une nouvelle famille.
@@ -104,13 +118,13 @@ class PublicController < ApplicationController
     
     if !valid?(@famille) || !@famille.save
       @famille.membres.build if @famille.membres.empty?
-      render :content_type => 'text/html', :template => localized('new', @famille.langue)
+      render 'new'
       return
     end
     
     # Tout a fonctionne. Enregistrer la clef du logon
-    famIdCookie(@famille.code_acces)
     langCookie(nil)
+    session[:familleId] = @famille.id
     
     # Mettre la famille active. Ceci permet le calcule de la cotisation
     @famille.etat = Famille::Etats[0]
@@ -118,31 +132,27 @@ class PublicController < ApplicationController
     @famille.save!
     FamilleMailer.cotisation_notif(@famille, @famille.courriels).deliver
     
-    flash[:notice] = @famille.english? ? 
-      "Your profile is saved." :
-      "Votre profil est enregistré."
+    flash[:notice] = t(:public_create_saved)
 
     if (!@famille.membres.empty? and @famille.cotisationDue() > 0)
-      render :content_type => 'text/html', :template => "shared/abonnement_" + @famille.langue.downcase + ".text.html.erb", :locals => {:famille => @famille};
+      render "shared/_abonnement" , locals: {famille: @famille};
       return
     end
 
     # Afficher le profil
-    redirect_to :action => :show
+    redirect_to public_home_path
   end
   
   def show
-    render :content_type => 'text/html', :template => localized('show', @famille.langue)
   end
 
   def edit
-    render :content_type => 'text/html', :template => localized('edit', @famille.langue)
   end
 
   def update
 
     if params[:cancel]
-      show()
+      redirect_to public_home_path
       return
     end
     
@@ -155,7 +165,7 @@ class PublicController < ApplicationController
       if !valid?(@famille)
         @famille.save!  # Ceci sauve les corrections faites
         @famille.membres.build if @famille.membres.empty?
-        render :content_type => 'text/html', :template => localized('edit', @famille.langue)
+        render :edit
         return
       end
 
@@ -171,25 +181,23 @@ class PublicController < ApplicationController
         FamilleMailer.cotisation_notif(@famille, @famille.courriels).deliver
       end
       
-      flash[:notice] = @famille.english? ? 
-        "Your profile is updated." :
-        "Votre profil est modifié."
+      set_locale
+      flash[:notice] = t(:public_upd_saved)
 
       if (!@famille.membres.empty? and @famille.cotisationDue() > 0)
-        render :content_type => 'text/html', :template => "shared/abonnement_" + @famille.langue.downcase + ".text.html.erb", :locals => {:famille => @famille};
+        render "shared/_abonnement", :locals => {:famille => @famille};
       else
-        redirect_to :action => :show
+        redirect_to '/public/1'
       end
       return
     else
       @famille.membres.build if @famille.membres.empty?
-      render :content_type => 'text/html', :template => localized('edit', @famille.langue)
+      render :edit
       return
     end
   end
 
   def aide
-    render :content_type => 'text/html', :template => localized('aide', @famille.langue)
   end
   
   # Generer les recu d'impot d'une famille
@@ -201,25 +209,22 @@ class PublicController < ApplicationController
       to = params[:courriel]
       unless @famille.recus.nil? || @famille.recus.empty?
         FamilleMailer.recu(@famille, @famille.recus, to, parent).deliver
-        flash[:notice] = english? ? "Email sent to address: " + to : "Courriel expédié à l'adresse: " + to
+        flash[:notice] = t(:public_recu_sent, to: to)
       else
-        flash[:notice] = english? ? "Your family is not eligible for a receipt." : "Non éligible pour un reçu."
+        flash[:notice] = t(:public_recu_na)
       end
-      redirect_to :action => 'aide'
+      redirect_to public_home_path
       return;
     end
     
     # On doit avoir une adresse courriel
     if @famille.courriels.empty?
-      flash[:notice] = english? ? 
-        "You must first enter a valid email address in your profile." : 
-        "Vous devez d'abord ajouter une adresse courriel valide à votre profil."
+      flash[:notice] = t(:public_recu_email_needed)
       redirect_to :action => 'edit'
       return
     end
     
     # Si on parvient jusqu'ici, on affiche le formulaire
-    render :content_type => 'text/html', :template => localized('recu', @famille.langue)
   end
   
   # Generer un recu pour les paiements effectués
@@ -237,38 +242,27 @@ private
   # Retourne 'true' si le login s'est fait avec
   def english?
     return @famille.english? if @famille
-    return cookies[:lang] && cookies[:lang] == 'en'
-  end
-  
-  def localized(name, langue)
-    return'public/' + name + '.' + langue.downcase
+    return session[:lang] && session[:lang] == 'en'
   end
   
   # Validations pour les choses non-permises par l'interface public
   def valid?(famille)
     if famille.membres.empty?
-      flash[:notice] = famille.english? ?
-        "Please add family members to your profile." :
-        "SVP ajouter au moins un membre à votre profil familial."
+      flash[:notice] = t(:public_valid_membre)
       return false
     end
     
     plusAge = famille.plusVieuxMembre
     # S'assurer que des billets ne sont permis que si un membre a 10 ans ou plus
     if famille.nombreBillets > 0 && Date.civil(Date.today.year, 8, 1).years_ago(10) < plusAge.naissance
-      flash[:notice] = famille.english? ? 
-      "Tickets purchasing requires that one family member must be at least 10 years old on the first of August." : 
-      "L'achat de billets n'est permis que si un membre de la famille a plus de 10 ans le premier août."
-      famille.cotisation.nombre_billets = 0
+      flash[:notice] = t(:public_valid_ticket) 
       return false;
     end
     
     # S'assurer qu'il y a au moins un membre de la famille suffisament age
     minNaissance = Date.new(Date.today.year, 8, 1).years_ago(Constantes.instance.age_min_individu)
     if plusAge.naissance > minNaissance
-      flash[:notice] = famille.english? ? 
-        "At least one family member must be born before %s to create an individual membership. Please add at least one parent." % minNaissance :
-        "Au moins un membre de la famille doit être né avant le %s pour souscrire à un abonnement individuel. SVP ajoutez au moins un parent." % minNaissance
+      flash[:notice] = t(:public_valid_age, naissance: minNaissance)
       famille.etat = Famille::Etats[1]
       return false
     end
@@ -277,17 +271,10 @@ private
   
   def langCookie(value)
     if (value)
-      cookies[:lang] = { :value => value, :path => "/public"}
+      session[:lang] = value
     else
-      cookies.delete(:lang)
+      session.delete(:lang)
     end
   end
   
-  def famIdCookie(value)
-    if (value)
-      cookies[:fam_id] = { :value => value, :path => "/public"}
-    else
-      cookies.delete(:fam_id);
-    end
-  end
 end

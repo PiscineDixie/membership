@@ -1,0 +1,6 @@
+<h1>Commande <%=@commande.id %></h1>
+
+<%= render partial: @commande, locals: { readonly: true} %>
+
+<%= link_to 'Modifier', edit_commande_path(@commande) %> |
+<%= link_to 'Retour', commandes_path %>

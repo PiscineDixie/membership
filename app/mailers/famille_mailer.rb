@@ -8,8 +8,7 @@ class FamilleMailer < ActionMailer::Base
   def recu(famille, recus, to, parent)
     headers basicHeaders(Abonnement, to)
     
-    subject = famille.english? ? "Income tax receipt from Dixie Pool" : "Recus d'impot federal de Piscine Dixie"
-    subject << (famille.english? ? ", Family: ": ", Famille: ") << famille.nom
+    subject = default_i18n_subject(nom: famille.nom)
 
     doc = Prawn::Document.new(:skip_page_creation => true, :compress => true)
     recus.each { |r| r.toPDF(doc, parent) }
@@ -21,8 +20,7 @@ class FamilleMailer < ActionMailer::Base
     }
     
     @famille = famille
-    file = "recu_" + famille.langue.downcase + ".text"
-    mail(:subject => subject, :template_name => file)
+    mail(:subject => subject, :template_name => "recu")
   end
   
   # Methode pour expedier un courriel d'information
@@ -35,8 +33,10 @@ class FamilleMailer < ActionMailer::Base
       
     @famille = famille
     @msg = msg
-    file = "info_" + langCode(lang) + ".text"
-    mail(:subject => subject, :template_name => file)
+    l = I18n.locale
+    I18n.locale= lang.downcase
+    mail(:subject => subject, :template_name => "info")
+    I18n.locale = l
   end
   
   # Methode pour expedier un courriel lors de l'abonnement
@@ -45,8 +45,7 @@ class FamilleMailer < ActionMailer::Base
     subject = famille.english? ? "Membership" : "Abonnement"
 
     @famille = famille
-    file = "abonnement_" + famille.langue.downcase + ".text"
-    mail(:subject => subject, :template_path => 'shared', :template_name => file)
+    mail(:subject => subject, :template_path => 'shared', :template_name => "_abonnement")
   end
   
   # Methode pour expedier un courriel lors de la reception d'un paiement
@@ -56,8 +55,7 @@ class FamilleMailer < ActionMailer::Base
 
     @famille = famille
     @paiement = paiement
-    file = "paiement_notif_" + famille.langue.downcase + ".text"
-    mail(:subject => subject, :template_name => file)
+    mail(:subject => subject, :template_name => "paiement_notif")
   end
   
   # Methode pour expedier un courriel lors de l'annulation du rabais de pre-inscription
@@ -66,8 +64,7 @@ class FamilleMailer < ActionMailer::Base
     subject = famille.english? ? "Membership - end of pre-registration" : "Abonnement - fin de pre-inscription"
 
     @famille = famille
-    file = "rabais_notif_" + famille.langue.downcase + ".text"
-    mail(:subject => subject, :template_name => file)
+    mail(:subject => subject, :template_name => "rabais_notif")
   end
   
   # Informe le tresorier que la date d'un paiement fut modifiee
@@ -78,7 +75,7 @@ class FamilleMailer < ActionMailer::Base
     @famille = famille
     @paiement = paiement
     @dp = datePrecedente
-    mail(:subject => subject, :template_name => 'edit_paiement_fr.text')
+    mail(:subject => subject, :template_name => 'edit_paiement')
   end
   
  
@@ -93,11 +90,4 @@ private
     h
   end
   
-  def langCode(langue)
-    case
-      when langue == 'EN' || langue == 'FR' then return langue.downcase
-      else return "ml"
-    end
-  end
-
 end

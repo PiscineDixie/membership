@@ -3,3 +3,42 @@
 
 en:
   hello: "Hello world"
+  public_login_link: "Please use the link below to access your profile"
+  public_login_sujet: "Link to Profile"
+  public_login_sent: "Email was sent." 
+  public_login_unk: "Unknown email address."
+  public_login_inv: "Please enter a valid email address."
+  public_create_saved: "Your profile is saved."
+  public_upd_saved: "Your profile is updated."
+  public_recu_sent: "Email sent to address: %{to}"
+  public_recu_na: "Your family is not eligible for a receipt."
+  public_recu_email_needed: "You must first enter a valid email address in your profile."
+  public_valid_membre: "Please add family members to your profile."
+  public_valid_ticket: "Tickets purchasing requires that one family member must be at least 10 years old on the first of August."
+  public_valid_age: "At least one family member must be born before %{naissance} to create an individual membership. Please add at least one parent."
+
+  panier_cancel: "Order cancelled."
+  
+  famille_mailer:
+    recu:
+      subject: "Income tax receipt from Dixie Pool, Family %{nom}"
+        
+  activerecord:
+    attributes:
+      famille:
+        adresse1: "Address"
+        adresse2: "Address"
+        ville: "City"
+        province: "Province"
+        code_postal: "Postal Code"
+        tel_soir: "Phone (evening)"
+        tel_jour: "Phone (daytime)"
+        courriel1: "Email"
+        courriel2: "Alternate Email"
+        langue: "Language"
+        
+      membre:
+        ecussons:
+          Débutant: "Beginner"
+          Nageur: "Swimmer"
+          Adulte: "Adult"

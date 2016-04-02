@@ -144,3 +144,26 @@ input[type="text"], textarea {
 .membre-info .prenom, .membre-info .nom, .membre-info .ecusson-sel {
   width: 100%;
 }
+
+/* Panier d'achat */
+.produit .titre {
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 130%;
+  margin-bottom: 15px
+}
+
+.produit .prix {
+  font-size: 18px;
+  font-weight: 300;
+}
+
+.produit .desc {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Menu principal */
+#bs-example-navbar-collapse-1 .glyphicon {
+  color: red;
+}
