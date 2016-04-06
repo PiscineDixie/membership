@@ -1,0 +1,13 @@
+<h2><%= t('.titre') %></h2>
+
+<%= form_tag("/paniers/1/acheter") do %>
+
+  <%= render partial: "paniers/panier", locals: {panier: @panier, readonly: false} %>
+
+  <% unless @panier.empty? %>
+    <%= submit_tag t('.acheter'), :class => "btn btn-primary" %>
+  <% end %>
+  <%= submit_tag( t('.retour'), {name: 'retour', class: "btn btn-default"}) %>
+  <%= submit_tag( t('.annuler'), {name: 'cancel', class: "btn btn-default"}) %>
+
+<% end %>

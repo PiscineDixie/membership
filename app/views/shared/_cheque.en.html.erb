@@ -5,19 +5,24 @@
 </p>
 <% end %>
 
-<h3>Interac Payment</h3>
+<h3>Paying</h3>
 <p>
-  You can pay your membership fees using Interac payment. Use your financial
-  institution phone app or its web site. No stamps!
-</p>
-<p>
-  Transfer <%= number_with_precision(famille.totalDu, :precision => 2) %>
-  to tresorier@piscinedixiepool.com with the description 
-  <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>
-  and a question where the answer is <b>dixie</b>.
+  You can pay by Interac, by check, or cash at the pool. We prefer Interac if that that works
+  for you. (No check, no stamp, no envelope, no going to the mailbox... Could it get any better?)
 </p>
 
-<h3>Check</h3>
+<h4>Interac Payment</h4>
+<p>
+  Use your financial institution phone app or its web site.
+</p>
+<p>
+  Transfer <strong><%= number_with_precision(famille.totalDu, :precision => 2) %></strong>
+  to <strong>tresorier@piscinedixiepool.com</strong> with the description 
+  <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>
+  and a question where the answer is <strong>summer</strong>.
+</p>
+
+<h4>Check</h4>
 <p>Please write your check to "Association Piscine Dixie Inc." and send it to the following address:</p>
 
 <address style="padding-left: 20px;">
@@ -28,7 +33,7 @@
 </address>
 
 <p>
-  Add a copy of this email in your envelope ou write on your cheque the following
-  reference number: <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>.
+  Add a copy of this message in your envelope ou write on your cheque the following
+  reference number: <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>.
 </p>
         

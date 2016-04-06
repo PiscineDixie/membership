@@ -23,17 +23,33 @@ class PaniersController < ApplicationController
     render action: 'show'
   end
   
-  # Submit d'un panier lors pour l'achat de son contenu
-  def create
+  # Aller au checkout pour confirmer la commande
+  def checkout
     if (params[:cancel])
       session.delete(:panier)
       redirect_to public_home_path
       return;
     end
 
+    # Render 'checkout'
+  end
+  
+  # Confirmation de l'achat
+  def acheter  
+    if (params[:cancel])
+      session.delete(:panier)
+      redirect_to public_home_path
+      return;
+    end
+    
+    if (params[:retour])
+      redirect_to paniers_show_path(1)
+      return;
+    end
+    
     if (params[:rem])
       @panier.remItem(params[:rem][0].to_i)
-      redirect_to paniers_show_path(1)
+      render action: 'checkout'
       return
     end
     
@@ -48,7 +64,7 @@ class PaniersController < ApplicationController
       render action: 'created'
       session.delete(:panier)
     else
-      redirect_to paniers_show_path(1)
+      render action: 'checkout'
     end
   end
   

@@ -4,18 +4,23 @@
 </p>
 <% end %>
 
-<h3>Paiement Interac</h3>
+<h3>Effectuer votre paiement</h3>
+Vous pouvez payer par Interac, par chèque, ou comptant à la piscine. Nous préférons
+Interac si possible. (Pas de chèque, de timbre, d'enveloppe, de marche à la boîte aux lettres...
+Si ça n'existait pas, il faudrait l'inventer!)
+
+<h4>Paiement Interac</h4>
 <p>
-Vous pouvez régler votre abonnement par paiement Interac. Utiliser l'application
+Utiliser l'application
 de votre téléphone ou le site web de votre institution financière.
 </p>
 <p>
-Transférez <%= number_with_precision(famille.totalDu, :precision => 2) %> à 
-tresorier@piscinedixiepool.com avec la description <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>
-et une question où la réponse est <b>dixie</b>.
+Transférez <strong><%= number_with_precision(famille.totalDu, :precision => 2) %></strong> à 
+<strong>tresorier@piscinedixiepool.com</strong> avec la description <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>
+et une question où la réponse est <strong>piscine</strong>.
 </p>
 
-<h3>Paiement par chèque</h3>
+<h4>Paiement par chèque</h4>
 <p>Veuillez SVP libeller votre chèque à l'ordre de "Association Piscine Dixie Inc." et
    l'expédier à l'adresse suivante:</p>
 
@@ -27,7 +32,7 @@ et une question où la réponse est <b>dixie</b>.
 </address>
 
 <p>
-  Ajouter une copie de ce courriel à votre envoi ou inscrivez sur votre chèque le numéro 
-  de référence suivant: <b><%= Date.today.year.to_s + '-' + famille.id.to_s -%></b>.
+  Ajouter une copie de ce message à votre envoi ou inscrivez sur votre chèque le numéro 
+  de référence suivant: <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>.
 </p>
 

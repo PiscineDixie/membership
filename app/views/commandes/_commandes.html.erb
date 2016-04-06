@@ -16,7 +16,7 @@
         <td><%= link_to c.id, c %></td>
         <td><%= c.created_at.strftime("%F %T") %></td>
         <td><%= link_to c.famille.nom, c.famille %></td>
-        <td class="number"><%= c.total %></td>
+        <td class="number"><%= number_with_precision(c.total, precision: 2) %></td>
         <td><%= c.etat %></td>
         <td><%= button_to('Enlever', c, {data: {confirm: 'Etes-vous certain?'}, :method => :delete, class: "btn btn-danger btn-xs"}) %></td>
         <% tot = tot + c.total * 100 %>
@@ -29,7 +29,7 @@
     <td/>
     <td/>
     <td/>
-    <th class="number"> <%= number_with_precision(tot / 100, :precision => 2) %> </th>
+    <th class="number"> <%= number_with_precision(tot / 100, precision: 2) %> </th>
     <th/>
   </tfoot>
   

@@ -1,5 +1,12 @@
 fr:
   paniers:
+    
+    checkout:
+      titre: "Votre Panier"
+      acheter: "Acheter"
+      annuler: "Annuler la commande"
+      retour: "Continuer à magasiner"
+      
     show:
       titre: "Achats de produits Dixie"
       label_prix: "Prix: "
@@ -7,10 +14,9 @@ fr:
       label_taille: "Taille"
       label_qte: "Quantité"
       ajouter: "Ajouter au panier"
-      panier: "Panier"
-      vide: "Votre panier est vide."
-      acheter: "Acheter"
-      annuler: "Annuler"
+      annuler: "Annuler la commande"
+      checkout: "Passer la commande"
+      
     panier:
       label_produit: "Produit"
       label_total: "Total"
@@ -23,8 +29,8 @@ fr:
         et livrées à domicile (Lachine seulement) lorsqu'arrivées. Pour ceux habitant à l'extérieur de
         Lachine, les commandes pourront être ramassées à la piscine.
         Les commandes doivent être payées d'avance. Une commande pourra être
-        annulée à notre discretion et ré-emboursée si la demande pour un item est
-        trop faible."
+        annulée à notre discretion et ré-emboursée s'il n'y a pas suffisamment de demande."
+        
     created:
       titre: "Commande terminée"
       status: "Votre commande est enregistrée. Merci. Les produits seront commandés peu après réception de votre paiement."

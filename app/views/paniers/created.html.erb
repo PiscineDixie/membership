@@ -1,10 +1,14 @@
 <h2><%= t('.titre') %></h2>
 <%= t('.status') %>
-<p><%= t('.cancel_msg') %></p>
-<%= button_to( t('.cancel_btn'), paniers_cancel_path(@commande), {class: 'btn btn-warning'}) %>
-<div style="margin-bottom: 40px"></div>
 
 <%= render partial: "paniers/panier", locals: {panier: @panier, readonly: true} %>
+
+<div>
+ <p><%= t('.cancel_msg') %>
+   <%= button_to( t('.cancel_btn'), paniers_cancel_path(@commande), {class: 'btn btn-warning'}) %>
+ </p>
+ <div style="margin-bottom: 40px"></div>
+</div>
 
 <%= render partial: "shared/abonnement", :locals => {:famille => @famille} %>
 

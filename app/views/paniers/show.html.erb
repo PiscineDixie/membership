@@ -1,5 +1,12 @@
 <h1 style="margin-bottom:40px"><%= t('.titre') %></h1>
 
+  <% unless @panier.empty? %>
+  <%= form_tag("/paniers/1/checkout") do %>
+    <button name="checkout" class="btn btn-warning"><%= t('.checkout') %></button>
+  <% end %>
+  <div style="margin-bottom:40px"></div>
+  <% end %>
+  
 <% @produits.each do | p | %>
 
   <%= form_tag("/paniers/1/plus") do %>
@@ -10,7 +17,7 @@
         </div>
     
         <div class="prix">
-          <%= t('.label_prix') %><%= p.prix %><%= t('.label_prix_suff') %>
+          <%= t('.label_prix') %><%= number_with_precision(p.prix, precision: 2) %><%= t('.label_prix_suff') %>
         </div>
     
         <div class="desc">
@@ -21,7 +28,7 @@
         <div class="form-group">
           <label><%= t('.label_taille') %></label>
           <div class="row">
-            <div class="col-xs-3 col-lg-4">
+            <div class="col-xs-5">
               <%= select_tag(:desc, options_for_select(p.tailles_fr.split(',')), :class => 'form-control') %>
             </div>
           </div>
@@ -49,26 +56,18 @@
     
     </div>
     <%= hidden_field_tag :produit_id, p.id %>
-    <%= submit_tag t('.ajouter'), :class => "btn btn-default" %>
+    <button name="ajouter" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span><%= t('.ajouter') %></button>
     
     <hr />
   <% end %>
 
 <% end %>
 
-<h2><%= t('.panier') %></h2>
-
-<%= form_tag("/paniers/1/commande") do %>
-
-  <% if @panier.empty? %>
-    <div>
-      <%= t('.vide') %>
-    </div>
-  <% else %>
-    <%= render partial: "paniers/panier", locals: {panier: @panier, readonly: false} %>
-    <%= submit_tag t('.acheter'), :class => "btn btn-primary" %>
+<%= form_tag("/paniers/1/checkout") do %>
+  <% unless @panier.empty? %>
+    <button name="checkout" class="btn btn-warning"><%= t('.checkout') %></button>
   <% end %>
-  
   <%= submit_tag( t('.annuler'), {name: 'cancel', class: "btn btn-default"}) %>
-
 <% end %>
+
+

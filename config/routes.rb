@@ -27,7 +27,8 @@ Membership::Application.routes.draw do
   # Panier d'achats
   get "paniers/:id/show", to: 'paniers#show', as: 'paniers/show'
   post "paniers/:id/plus", to: 'paniers#add_item', as: 'paniers/plus'
-  post "paniers/:id/commande", to: 'paniers#create', as: 'paniers/commande'
+  post "paniers/:id/checkout", to: 'paniers#checkout', as: 'paniers/checkout'
+  post "paniers/:id/acheter", to: 'paniers#acheter', as: 'paniers/acheter'
   post "paniers/:id/annuler", to: 'paniers#cancel', as: 'paniers/cancel'
   
   # Les activites sportives offertes

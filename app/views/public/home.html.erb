@@ -4,14 +4,15 @@
 <p><%= t('.msg') %> </p>
 </div>
 
+<% if Date.today <= Constantes.instance.finCommandes %>
 <div>
     <h3 style="margin-left:20px;color:#428bca;"><%= t('.capt1') %></h3>
     <div>
-      <%= image_tag('/images/hoodies.jpg', {class: 'img-responsive center-block'}) %>
+      <%= link_to(image_tag('/images/hoodies.jpg', {class: 'img-responsive center-block'}), paniers_show_path(1)) %>
     </div>
 </div>
 <hr/>
-
+<% end %>
 
 <div>
     <h3 style="margin-left:20px;color:#428bca;"><%= t('.capt2') %></h3>
