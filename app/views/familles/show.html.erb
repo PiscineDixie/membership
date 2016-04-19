@@ -145,7 +145,7 @@
           <label class="control-label col-xs-2">Billets</label>
           <div class="col-xs-1">
             <p class="form-control-static pull-right">
-              <%= number_with_precision(@famille.cotisation.cout_billets, :precision => 2) %>
+              <%= number_to_currency(@famille.cotisation.cout_billets) %>
             </p>
           </div>
         </div>
@@ -155,7 +155,7 @@
           <label class="control-label col-xs-2">Total</label>
           <div class="col-xs-1">
             <p class="form-control-static pull-right">
-              <%= number_with_precision(@famille.cotisation.total, :precision => 2) %>
+              <%= number_to_currency(@famille.cotisation.total) %>
             </p>
           </div>
         </div>
@@ -233,7 +233,7 @@
         </tbody>
       </table>
       <% end %>
-      <label>Total dû:</label>&nbsp;<%= number_with_precision(@famille.totalDu, :precision => 2) %>
+      <label>Total dû:</label>&nbsp;<%= number_to_currency(@famille.totalDu) %>
     </div>
   </div>
 

@@ -1,52 +1,52 @@
 <table id="sommaireCotisation">
   <tbody>
 
-  <% if cotisation.frais1 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais1 == 0 %>
     <tr><td class="heading"><%= cotisation.frais1_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais1, :precision => 2) %></td></tr>
   <% end %>
   
-  <% if cotisation.frais2 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais2 == 0 %>
     <tr><td class="heading"><%= cotisation.frais2_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais2, :precision => 2) %></td></tr>
   <% end %>
   
-  <% if cotisation.frais3 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais3 == 0 %>
     <tr><td class="heading"><%= cotisation.frais3_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais3, :precision => 2) %></td></tr>
   <% end %>
   
-  <% if cotisation.frais4 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais4 == 0 %>
     <tr><td class="heading"><%= cotisation.frais4_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais4, :precision => 2) %></td></tr>
   <% end %>
   
-  <% if cotisation.frais5 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais5 == 0 %>
     <tr><td class="heading"><%= cotisation.frais5_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais5, :precision => 2) %></td></tr>
   <% end %>
   
-  <% if cotisation.frais6 != 0 %>
+  <% unless cotisation.nil? || cotisation.frais6 == 0 %>
     <tr><td class="heading"><%= cotisation.frais6_explication %>:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais6, :precision => 2) %></td></tr>
   <% end %>
 
-  <% if cotisation.cout_billets != 0 %>
+  <% unless cotisation.nil? || cotisation.cout_billets == 0 %>
     <tr><td class="heading">Billets d'invités:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.cout_billets, :precision => 2) %></td></tr>
   <% end %>
 
-  <% if cotisation.cotisation_exemption != 0 %>
+  <% unless cotisation.nil? || cotisation.cotisation_exemption == 0 %>
     <tr><td class="heading">Exemption:</th><td align="right" class="number">
     <%= number_with_precision(-1 * cotisation.cotisation_exemption, :precision => 2) %></td></tr>
   <% end %>
 
-  <% if cotisation.frais_supplementaires != 0 %>
+  <% unless cotisation.nil? || cotisation.frais_supplementaires == 0 %>
     <tr><td class="heading">Frais additionnels:</th><td align="right" class="number">
     <%= number_with_precision(cotisation.frais_supplementaires, :precision => 2) %></td></tr>
   <% end %>
 
-  <% if cotisation.rabais_preinscription != 0 %>
+  <% unless cotisation.nil? || cotisation.rabais_preinscription == 0 %>
     <tr><td class="heading">Rabais pré-inscription:</th><td align="right" class="number">
     <%= number_with_precision(-1 * cotisation.rabais_preinscription, :precision => 2) %></td></tr>
   <% end %>
@@ -56,11 +56,13 @@
     <%= number_with_precision(famille.commandesDues, :precision => 2) %></td></tr>
   <% end %>
 
-  <tr><td class="heading">Total:</th><td align="right" class="number">
-  <%= number_with_precision(cotisation.total + famille.commandesDues, :precision => 2) %></td></tr>
+  <% unless cotisation.nil? %>
+    <tr><td class="heading">Total:</th><td align="right" class="number">
+    <%= number_with_precision(cotisation.total + famille.commandesDues, :precision => 2) %></td></tr>
+  <% end %>
 
   <tr><td class="heading">Montant dû:</th>
-  <td align="right" class="number"><%= number_with_precision(famille.totalDu, :precision => 2) %> </td></tr>
+  <td align="right" class="number"><%= number_to_currency(famille.totalDu) %> </td></tr>
   
   </tbody>
 </table>

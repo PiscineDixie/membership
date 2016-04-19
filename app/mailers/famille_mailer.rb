@@ -10,6 +10,9 @@ class FamilleMailer < ActionMailer::Base
     
     subject = default_i18n_subject(nom: famille.nom)
 
+    l = I18n.locale
+    I18n.locale= famille.langue.downcase
+    
     doc = Prawn::Document.new(:skip_page_creation => true, :compress => true)
     recus.each { |r| r.toPDF(doc, parent) }
     
@@ -21,6 +24,8 @@ class FamilleMailer < ActionMailer::Base
     
     @famille = famille
     mail(:subject => subject, :template_name => "recu")
+    
+    I18n.locale = l
   end
   
   # Methode pour expedier un courriel d'information
@@ -36,6 +41,7 @@ class FamilleMailer < ActionMailer::Base
     l = I18n.locale
     I18n.locale= lang.downcase
     mail(:subject => subject, :template_name => "info")
+    
     I18n.locale = l
   end
   
@@ -44,8 +50,13 @@ class FamilleMailer < ActionMailer::Base
     headers basicHeaders(Abonnement, to)
     subject = famille.english? ? "Membership" : "Abonnement"
 
+    l = I18n.locale
+    I18n.locale= famille.langue.downcase
+    
     @famille = famille
     mail(:subject => subject, :template_path => 'shared', :template_name => "_abonnement")
+    
+    I18n.locale = l
   end
   
   # Methode pour expedier un courriel lors de la reception d'un paiement
@@ -53,9 +64,14 @@ class FamilleMailer < ActionMailer::Base
     headers basicHeaders(Abonnement, to)
     subject = famille.english? ? "Membership - payment received" : "Abonnement - reception d'un paiement"
 
+    l = I18n.locale
+    I18n.locale= famille.langue.downcase
+    
     @famille = famille
     @paiement = paiement
     mail(:subject => subject, :template_name => "paiement_notif")
+    
+    I18n.locale = l
   end
   
   # Methode pour expedier un courriel lors de l'annulation du rabais de pre-inscription
@@ -63,8 +79,13 @@ class FamilleMailer < ActionMailer::Base
     headers basicHeaders(Abonnement, to)
     subject = famille.english? ? "Membership - end of pre-registration" : "Abonnement - fin de pre-inscription"
 
+    l = I18n.locale
+    I18n.locale= famille.langue.downcase
+    
     @famille = famille
     mail(:subject => subject, :template_name => "rabais_notif")
+    
+    I18n.locale = l
   end
   
   # Informe le tresorier que la date d'un paiement fut modifiee

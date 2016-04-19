@@ -5,9 +5,9 @@
   <%= render partial: "paniers/panier", locals: {panier: @panier, readonly: false} %>
 
   <% unless @panier.empty? %>
-    <%= submit_tag t('.acheter'), :class => "btn btn-primary" %>
+    <button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-check"></span>&#x2000;<%= t('.acheter') %></button>
   <% end %>
-  <%= submit_tag( t('.retour'), {name: 'retour', class: "btn btn-default"}) %>
-  <%= submit_tag( t('.annuler'), {name: 'cancel', class: "btn btn-default"}) %>
+  <button name="retour" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-share-alt"></span>&#x2000;<%= t('.retour') %></button>
+  <button name="cancel" type="submit" class="btn btn-default"><span class="glyphicon glyphicon-trash"></span>&#x2000;<%= t('.annuler') %></button>
 
 <% end %>

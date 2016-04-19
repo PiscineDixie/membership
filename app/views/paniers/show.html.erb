@@ -2,7 +2,7 @@
 
   <% unless @panier.empty? %>
   <%= form_tag("/paniers/1/checkout") do %>
-    <button name="checkout" class="btn btn-warning"><%= t('.checkout') %></button>
+    <button name="checkout" class="btn btn-warning"><span class="glyphicon glyphicon-hand-right">&#x2000;</span><%= t('.checkout') %>&#x2001;<span class="badge"><%= pluralize(@panier.num, 'item') %></button>
   <% end %>
   <div style="margin-bottom:40px"></div>
   <% end %>
@@ -56,7 +56,7 @@
     
     </div>
     <%= hidden_field_tag :produit_id, p.id %>
-    <button name="ajouter" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span><%= t('.ajouter') %></button>
+    <button name="ajouter" class="btn btn-primary"><span class="glyphicon glyphicon-shopping-cart"></span>&#x2000;<%= t('.ajouter') %></button>
     
     <hr />
   <% end %>
@@ -65,9 +65,9 @@
 
 <%= form_tag("/paniers/1/checkout") do %>
   <% unless @panier.empty? %>
-    <button name="checkout" class="btn btn-warning"><%= t('.checkout') %></button>
+    <button name="checkout" class="btn btn-warning"><span class="glyphicon glyphicon-hand-right">&#x2000;</span><%= t('.checkout') %>&#x2001;<span class="badge"><%= pluralize(@panier.num, 'item') %></button>
   <% end %>
-  <%= submit_tag( t('.annuler'), {name: 'cancel', class: "btn btn-default"}) %>
+  <button name="cancel" class="btn btn-default"><span class="glyphicon glyphicon-trash">&#x2000;</span><%= t('.annuler') %></button>
 <% end %>
 
 

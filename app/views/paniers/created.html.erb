@@ -5,7 +5,9 @@
 
 <div>
  <p><%= t('.cancel_msg') %>
-   <%= button_to( t('.cancel_btn'), paniers_cancel_path(@commande), {class: 'btn btn-warning'}) %>
+  <%= form_tag(paniers_cancel_path(@commande)) do %>
+    <button name="checkout" class="btn btn-warning"><span class="glyphicon glyphicon-trash"></span>&#x2000;<%= t('.cancel_btn') %></button>
+  <% end %>
  </p>
  <div style="margin-bottom: 40px"></div>
 </div>

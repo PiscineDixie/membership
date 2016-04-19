@@ -19,6 +19,11 @@ class Panier
     return @items.reduce(0) { |t, a | t + a.montant }
   end
   
+  # Quantite total
+  def num
+    return @items.reduce(0) { |t, a | t + a.quantite }
+  end
+  
   # AJouter un item dans le panier
   def addItem(produit, desc, qty)
     item = Item.new
