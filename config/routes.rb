@@ -19,6 +19,7 @@ Membership::Application.routes.draw do
   match "public/login"    => 'public#login', via: [:get, :post]
   get "public/logout"   => 'public#logout'
   get "public/aide"     => 'public#aide'
+  get "public/payer"     => 'public#payer'
   match "public/:id/recu" => 'public#recu', via: [:get, :post]
   get "public/:id/recupaiement" => 'public#recupaiement'
   resources :public

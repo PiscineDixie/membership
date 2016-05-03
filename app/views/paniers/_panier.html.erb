@@ -19,7 +19,7 @@
         <td><%= produit.titre_fr %></td>
         <td><%= item.code %></td>
         <td><%= item.quantite %></td>
-        <td><%= produit.prix %></td>
+        <td><%= number_with_precision(produit.prix, precision: 2) %></td>
         <td><%= number_with_precision(produit.prix * item.quantite, precision: 2) %></td>
         <% unless readonly %>
           <td><%= submit_tag( t('.enlever'), {name: 'rem['+idx.to_s+']', class: "btn btn-default btn-xs"}) %></td>

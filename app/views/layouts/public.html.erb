@@ -48,6 +48,11 @@
             <li>
               <%= link_to  t('.menu_profile_edit'), :controller => '/public', :action => 'edit', :id => 1  %>
             </li>
+            <% if @famille.totalDu > 0 %>
+              <li>
+                <%= link_to  t('.menu_payer'), :controller => '/public', :action => 'payer', :id => 1  %>
+              </li>
+            <% end %>
             <% else %>
             <li>
               <%= link_to  t(".menu_renouv"), :controller => '/public', :action => 'edit', :id => 1   %>

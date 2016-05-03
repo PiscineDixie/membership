@@ -197,6 +197,10 @@ class PublicController < ApplicationController
     end
   end
 
+  def payer
+    render "shared/_abonnement", :locals => {:famille => @famille};
+  end
+  
   def aide
   end
   
@@ -233,6 +237,7 @@ class PublicController < ApplicationController
     doc = recu.toPDF()
     send_data doc.render, :type => 'application/pdf', :disposition => 'inline', :filename => 'recu-dixie.png'
   end
+  
 
 private
   def famille_params(params)
