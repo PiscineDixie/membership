@@ -39,6 +39,16 @@ class CommandesController < ApplicationController
     redirect_to(commandes_path)
   end
   
+  # Modifier l'etat d'une commande à la valeur du parametre "etat"
+  def etat
+    e = params[:etat]
+    @commande = Commande.find(params[:id])
+    @commande.etat = e;
+    @commande.save!
+    render nothing: true
+  end
+  
+    
   def commande_params(params)
     params.require(:commande).permit!
   end

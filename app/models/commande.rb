@@ -25,6 +25,11 @@ class Commande < ActiveRecord::Base
     self.save!
   end
   
+  # Le prochain etat logique de la commande
+  def prochainEtat
+    Commande.etats.key(Commande.etats[self.etat] + 1)
+  end
+  
   # Creer une commande a partir d'un panier
   # @return instance creee
   def self.fromPanier(panier, famille)

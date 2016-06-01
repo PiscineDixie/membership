@@ -19,3 +19,18 @@
 
 <h3>Produits payés</h3>
 <%= render(partial: "produits", locals: {achats: Achat.achats(@debut, @fin, [ Commande.etats[:payee] ]) } ) %>
+
+<script>
+$(document).ready(function() {
+  /* Ajouter un event handler pour faire des appels AJAX pour changer l'etat d'une commande */
+  $(".btn-etat").submit(function (event) {
+    var $form = $(this);
+    $.post($form.attr("action"), $form.serialize()).done(function () {
+      /* Enlever cette commande de la table */
+      $form.closest('tr').remove();
+    });
+    event.preventDefault();
+  });
+ 
+});
+</script

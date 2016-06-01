@@ -19,7 +19,14 @@
       <div class="form-group">
         <label>Famille</label>
         <p class="form-control-static">
-          <%= @commande.famille.nom %>
+          <%= @commande.famille.nom %><br/>
+          <%= @commande.famille.adresse1 %><br/>
+          <% unless commande.famille.adresse2.empty? %>
+            <%= @commande.famille.adresse2 %><br/>
+          <% end %>
+          <%= @commande.famille.ville %><br/>
+          <%= code_postal_fmt(@commande.famille.code_postal) %><br/>
+          <%= number_to_phone(@commande.famille.tel_soir) %><br/>
         </p>
       </div>
   

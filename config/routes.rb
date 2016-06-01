@@ -4,7 +4,12 @@ Membership::Application.routes.draw do
   resources :constantes
   resources :users
   resources :produits
-  resources :commandes
+  
+  resources :commandes do
+    member do
+      post "etat" # changer l'etat d'une commande
+    end
+  end
   
   post 'auth/:provider/callback', to: 'sessions#create'
   match 'auth/failure', to: 'sessions#reject', via: [:post, :get]

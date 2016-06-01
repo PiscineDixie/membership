@@ -42,3 +42,10 @@ en:
           Débutant: "Beginner"
           Nageur: "Swimmer"
           Adulte: "Adult"
+          
+      commande:
+        etat:
+          entree: entered
+          payee: paid
+          commandee: ordered
+          livree: delivered

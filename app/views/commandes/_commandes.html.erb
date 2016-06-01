@@ -7,6 +7,7 @@
     <th class="number">Montant</th>
     <th>Etat</th>
     <th/>
+    <th/>
   </thead>
   
   <tbody>
@@ -18,6 +19,7 @@
         <td><%= link_to c.famille.nom, c.famille %></td>
         <td class="number"><%= number_with_precision(c.total, precision: 2) %></td>
         <td><%= c.etat %></td>
+        <td><%= button_to("Marquer " + t_etat(c.prochainEtat), {action: 'etat', id: c.id, etat: c.prochainEtat}, {:method => :post, class: 'btn btn-default btn-xs', form_class: 'button_to btn-etat'}) %></td>
         <td><%= button_to('Enlever', c, {data: {confirm: 'Etes-vous certain?'}, :method => :delete, class: "btn btn-danger btn-xs"}) %></td>
         <% tot = tot + c.total * 100 %>
       </tr>
@@ -34,3 +36,4 @@
   </tfoot>
   
 </table>
+

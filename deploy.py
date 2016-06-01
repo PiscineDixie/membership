@@ -1,6 +1,6 @@
 #
 # fabric file for deploying
-#   fab -u root -f membership/deploy.py -H dixie backup deploy
+#   fab -u root -f deploy.py -H dixie backup deploy
 #
 
 import fabric.api
