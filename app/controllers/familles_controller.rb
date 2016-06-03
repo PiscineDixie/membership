@@ -105,6 +105,20 @@ class FamillesController < ApplicationController
     redirect_to(famille)
   end
   
+  # Noter que les ecussons sont remis
+  def ecussonsRemis
+    famille = Famille.find(params[:id])
+    famille.cotisation.ecussons_remis = true
+    famille.cotisation.save!
+    
+    note = famille.notes.new
+    note.info = 'Ecussons remis par moi'
+    note.auteur = User.sessionUserId(session[:user])
+    note.save!
+     
+    redirect_to(famille)
+  end
+  
   # Operations pour rechercher une famille grace a son numero de telephone a Lachine
   def recherche
     key = params[:key];
@@ -347,7 +361,7 @@ class FamillesController < ApplicationController
       |f| f.paiements.first.nil? ? f.cotisation.created_at : f.paiements.first.created_at
     }
   end
-
+  
   private
   
   def famille_params(params)

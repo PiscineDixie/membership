@@ -63,6 +63,7 @@ Membership::Application.routes.draw do
     member do
       get 'recu'               # Rapport d'impot pour une seule famille
       post 'desactive'           # Mettre inactive la famille
+      post 'ecussonsRemis'     # enregistrer que les ecussons sont remis
     end
     collection do
       post 'courriel'          # Expédier un courriel

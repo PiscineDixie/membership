@@ -25,6 +25,11 @@
       <li>
         <%= link_to 'Enlever famille', @famille, data: {confirm: 'Etes vous certain?'}, :method => :delete %>
       </li>
+      <% if @famille.active? && !@famille.cotisation.ecussons_remis %>
+        <li>
+          <%= button_to('Ecussons remis', ecussonsRemis_famille_path(@famille), {class: "btn btn-default navbar-btn", method: :post}) %>
+        </li>
+      <% end %>
     </ul>
   </nav>
 

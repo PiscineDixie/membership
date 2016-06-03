@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160402140606) do
+ActiveRecord::Schema.define(version: 20160602235750) do
 
   create_table "achats", force: :cascade do |t|
     t.integer  "commande_id", limit: 4
@@ -99,6 +99,7 @@ ActiveRecord::Schema.define(version: 20160402140606) do
     t.integer  "nombre_billets",        limit: 4,                           default: 0
     t.decimal  "cout_billets",                      precision: 8, scale: 2, default: 0.0
     t.decimal  "frais_supplementaires",             precision: 8, scale: 2, default: 0.0
+    t.boolean  "ecussons_remis",                                            default: false
   end
 
   add_index "cotisations", ["famille_id"], name: "par_famille", unique: true, using: :btree
