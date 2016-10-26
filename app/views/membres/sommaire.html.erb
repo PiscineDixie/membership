@@ -1,0 +1,24 @@
+<h1>Nombre de membres par code postaux</h1>
+
+<%
+=begin
+%>
+input: @data: Data sous forme d'array d'array tel que decrit dans membres.rb#codePostaux
+<%
+=end
+%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Nombre de Membres</th><th>Code Postal</th><th>Ville</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @data.each do | cp | %>
+    <tr>
+      <td><%= cp[0] %></td><td><%= cp[2] %></td><td><%= cp[1] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

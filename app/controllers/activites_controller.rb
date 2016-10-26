@@ -103,7 +103,7 @@ class ActivitesController < ApplicationController
   def listeMembre
     id = params[:activite].to_i
     @activite = Activite.find(id)
-    @membres = @activite.membres.all.order('nom, prenom')
+    @membres = @activite.membres.all.order(:nom, :prenom)
   end
 
   # Generer une liste des membres pour une activite
@@ -112,6 +112,11 @@ class ActivitesController < ApplicationController
     @activite = Activite::natation
   end
 
+  # Generer un rapport du nombre de membres par activite
+  def sommaire
+    @data = Activite.sommaire
+  end
+  
   private
   
   def activite_params(params)

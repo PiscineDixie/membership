@@ -16,6 +16,8 @@ class Famille < ActiveRecord::Base
   validates_format_of :courriel1, :courriel2, :allow_blank => true, :with => /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\Z/i, :on => :create, :message => 'adresse invalide'
   validates_length_of :province, :is => 2, :message => 'utiliser le code à deux lettres (e.g., QC)'
   validates_length_of :code_postal, :is => 6, :message => 'doit avoir 6 caractères'
+  validates :tel_soir, length: { maximum: 20}
+  validates :tel_jour, length: { maximum: 20}
   validates_format_of :code_postal, :with => /\A[A-Z][1-9][A-Z][1-9][A-Z][1-9]\z/, :message => 'doit contenir des chiffres et des majuscules'
   validates_size_of :membres, :minimum => 1, :on => :create, :message => '-- au moins un'
   
@@ -177,7 +179,7 @@ class Famille < ActiveRecord::Base
   
   # Retourne true si la famille est consideree en regle: cotisation au moins partiellement paye ou nulle
   def enRegle?
-    self.paiementTotal > 0 || self.cotisationDue == 0 || self.cotisation.cotisation_exemption > 50
+    self.paiementTotal > 0 || self.cotisationDue == 0 || (!self.cotisation.nil? && self.cotisation.cotisation_exemption > 50)
   end
   
   # Retourne true si la famille est inscrite mais n'a pas encore payee

@@ -1,0 +1,24 @@
+<h1>Nombre de membres par activité</h1>
+
+<%
+=begin
+%>
+input: @data: Data sous forme d'array d'array tel que decrit dans activite.rb#sommaire
+<%
+=end
+%>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Activité</th><th>Nombre de Membres</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @data.each do | act | %>
+    <tr>
+      <td><%= act[0] %></td><td><%= act[1] %></td>
+    </tr>
+    <% end %>
+  </tbody>
+</table>

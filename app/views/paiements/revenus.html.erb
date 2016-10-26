@@ -55,19 +55,13 @@
       <td>Total perçu:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :montant), :precision => 2) %></td>
     </tr>
     <tr>
-      <td>Revenu total:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable) + Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td>
-    </tr>
-    <tr>
-      <td>Revenu non taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :non_taxable), :precision => 2) %></td>
-    </tr>
-    <tr>
-      <td>Revenu taxable:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :taxable), :precision => 2) %></td>
-    </tr>
-    <tr>
       <td>TPS perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tps), :precision => 2) %></td>
     </tr>
     <tr>
       <td>TVQ perçue:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :tvq), :precision => 2) %></td>
+    </tr>
+    <tr>
+      <td>Revenu total:</td><td class="number"><%= number_with_precision(Paiement.sumRange(@debut, @fin, :montant) - Paiement.sumRange(@debut, @fin, :tps) - Paiement.sumRange(@debut, @fin, :tvq), :precision => 2) %></td>
     </tr>
   </tbody>
 </table>

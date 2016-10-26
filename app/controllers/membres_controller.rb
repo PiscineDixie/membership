@@ -2,7 +2,7 @@
 class MembresController < ApplicationController
   
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
-  before_action :load_famille, :except => [:seniors, :index]
+  before_action :load_famille, :except => [:seniors, :index, :sommaire]
   before_action :authenticate
   
   def load_famille
@@ -94,6 +94,11 @@ class MembresController < ApplicationController
     # Faire une liste approximative de la db
     @membres = Membre.where("naissance < ?", Date.civil(Date.today.year - 60, 12, 31).to_s(:db)).order('nom, prenom').to_a
     @membres.reject! { |m| !m.senior? } unless @membres.empty?
+  end
+  
+  # Generer une liste par code postal
+  def sommaire
+    @data = Membre.codePostaux
   end
   
   private

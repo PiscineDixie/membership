@@ -1,10 +1,16 @@
 <h1>Rapports</h1>
 
-<h4>Cours de Natation</h4>
-<%= link_to "Groupes de cours de natations", :id => Activite::natation.id, :controller => 'activites', :action => 'listeMembreNatation' %>
-<hr/>
-
 <h4>Activités</h4>
+
+<h5>Sommaire</h5>
+<%= link_to "Sommaires des activités", :controller => 'activites', :action => 'sommaire' %><br/>
+<div style="margin-bottom:20px"></div>
+
+<h5>Cours de Natation</h5>
+<%= link_to "Groupes de cours de natations", :id => Activite::natation.id, :controller => 'activites', :action => 'listeMembreNatation' %>
+<div style="margin-bottom:20px"></div>
+
+<h5>Une Activité</h5>
 <%= form_tag( {:controller => 'activites', :action => 'listeMembre'},  {class: "form-horizontal"}) do %>
   <div class="form-group">
       <label class="control-label col-xs-1">Activité:</label>
@@ -14,6 +20,7 @@
   </div>
   <%= submit_tag "Générer", :class => "btn btn-default" %>
 <% end %>
+
 <hr/>
 
 <h4>Participation communautaire</h4>
@@ -37,6 +44,7 @@
 <%= link_to "Liste des familles sans courriels", :controller => 'familles', :action => 'pas_courriels' %><br/>
 <%= link_to "Liste des familles inactives", :controller => 'familles', :action => 'inactifs' %><br/>
 <%= link_to "Liste des membres", :controller => 'membres', :action => 'index' %><br/>
+<%= link_to "Liste des membres par code postal", :controller => 'membres', :action => 'sommaire' %><br/>
 <hr/>
 
 <h4>Revenus</h4>

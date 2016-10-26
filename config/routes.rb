@@ -44,6 +44,7 @@ Membership::Application.routes.draw do
     end
     collection do
       post "listeMembre"
+      get "sommaire"
     end
   end
   
@@ -87,6 +88,7 @@ Membership::Application.routes.draw do
   post 'paiements/revenus' => 'paiements#revenus'
   post 'paiements/depots' => 'paiements#depots'
   get 'membres/seniors' => 'membres#seniors'
+  get 'membres/sommaire' => 'membres#sommaire' # rapport groupé par code postal
   get 'membres' => 'membres#index'
   post 'notes/rapport' => 'notes#rapport'
     

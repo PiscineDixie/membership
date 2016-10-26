@@ -41,4 +41,10 @@ class Activite < ActiveRecord::Base
   def self.nombreActivites
     return Activite.count
   end
+  
+  # Generer un tableau avec l'activite et son nombre de membres
+  # @return [[<activite>, <nombre de participants>], ...]
+  def self.sommaire
+    return Activite.joins(:membres).group(:description_fr).pluck("description_fr, count(*)")
+  end
 end
