@@ -7,7 +7,8 @@ en:
         titre: "Family Information"
         msg1: "Enter the following information for your family. An email address is required
           to receive income tax receipts. It also simplifies the work of the volunteers
-          that manage the pool because we can contact you easily when required."
+          that manage the pool because we can contact you easily when required. 
+          See our <a href=\"http://www.piscinedixiepool.com/privacy-policy\" target=\"_blank\">Privacy Policy</a>."
 
       membres:
         titre: "Family Members"

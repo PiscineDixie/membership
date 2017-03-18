@@ -7,7 +7,7 @@ fr:
         titre: "Coordonnées"
         msg1: "Entrez les coordonnées de votre famille. Une adresse courriel est nécessaire
           afin de recevoir un reçu d'impôt. Elle permet aussi à nos bénévoles de vous contacter
-          facilement (e.g., campagne de ré-abonnement)."
+          facilement (e.g., campagne de ré-abonnement). Voir notre <a href=\"http://www.piscinedixiepool.com/politique-de-confidentialite\" target=\"_blank\">Politique de Confidentialité</a>."
           
       membres:
         titre: "Membres"

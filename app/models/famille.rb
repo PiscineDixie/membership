@@ -198,6 +198,10 @@ class Famille < ActiveRecord::Base
     res
   end
   
+  def adressePostale
+   [self.adresse1, self.adresse2, self.ville, self.province, self.code_postal].join(' ')
+  end
+  
   # Retourne une array avec les adresses courriels valides de la famille
   def courriels
     addrs = []

@@ -11,7 +11,7 @@
   <tbody>
     <% @membres.each do | membre | %>
     <tr>
-      <td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adresse1 %></td><td><%= membre.famille.enRegle? ? 'oui' : 'non' %></td>
+      <td><%= link_to membre.prenomNom, membre.famille %></td><td><%= membre.famille.adressePostale %></td><td><%= membre.famille.enRegle? ? 'oui' : 'non' %></td>
     </tr>
     <% end%>
   </tbody>
