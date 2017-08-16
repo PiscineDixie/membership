@@ -64,7 +64,7 @@
             <% if Date.today <= Constantes.instance.finCommandes %>
               <li>
                 <%= link_to paniers_show_path(1) do %>
-                  <span class="glyphicon glyphicon-star"></span><%= t('.menu_panier') %>
+                  <%= t('.menu_panier') %>
                 <% end %>
               </li>
             <% end %>

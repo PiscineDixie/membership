@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160602235750) do
+ActiveRecord::Schema.define(version: 20170629004532) do
 
   create_table "achats", force: :cascade do |t|
     t.integer  "commande_id", limit: 4
@@ -213,5 +213,7 @@ ActiveRecord::Schema.define(version: 20160602235750) do
     t.string   "courriel",   limit: 255
     t.string   "nom",        limit: 255
   end
+
+  add_index "users", ["courriel"], name: "users_unique_courriel", unique: true, using: :btree
 
 end
