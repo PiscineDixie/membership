@@ -314,7 +314,11 @@ class FamillesController < ApplicationController
     else
       annee = annee.to_i
     end
-    famille.genereRecus(annee)
+ 
+    if annee == Date.today.year
+      famille.genereRecus(annee)
+    end
+
     recus = famille.recus.where("annee = :annee", {:annee => annee});
     if !recus.empty?
       parent = params[:parent] || famille.membres.order(:naissance).take.prenomNom
