@@ -1,4 +1,4 @@
-class AddLivretsToCotisation < ActiveRecord::Migration
+class AddLivretsToCotisation < ActiveRecord::Migration[5.0]
   def self.up
     add_column :cotisations, :nombre_billets, :integer, {:default => 0}
     add_column :cotisations, :cout_billets, :decimal, {:precision => 8, :scale => 2, :default => 0}

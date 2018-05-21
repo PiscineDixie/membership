@@ -1,4 +1,4 @@
-class CreateProducts < ActiveRecord::Migration
+class CreateProducts < ActiveRecord::Migration[5.0]
   def change
     create_table :produits do |t|
       t.string :titre_fr

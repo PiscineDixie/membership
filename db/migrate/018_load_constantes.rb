@@ -1,4 +1,4 @@
-class LoadConstantes < ActiveRecord::Migration
+class LoadConstantes < ActiveRecord::Migration[5.0]
   def self.up
     c = Constantes.new
     c.baseSenior = 50

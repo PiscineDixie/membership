@@ -1,4 +1,4 @@
-class AddCotisationRabais < ActiveRecord::Migration
+class AddCotisationRabais < ActiveRecord::Migration[5.0]
   def self.up
     add_column :cotisations, :rabais_preinscription, :decimal, {:precision => 8, :scale => 2, :default => 0}
   end

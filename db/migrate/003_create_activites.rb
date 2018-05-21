@@ -1,4 +1,4 @@
-class CreateActivites < ActiveRecord::Migration
+class CreateActivites < ActiveRecord::Migration[5.0]
   def self.up
     create_table :activites, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.string :code,            :null => false

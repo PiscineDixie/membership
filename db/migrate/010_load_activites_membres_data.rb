@@ -1,4 +1,4 @@
-class LoadActivitesMembresData < ActiveRecord::Migration
+class LoadActivitesMembresData < ActiveRecord::Migration[5.0]
   def self.up
     down
     Membre.find(:all).each do | m |

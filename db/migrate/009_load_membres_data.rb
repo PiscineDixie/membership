@@ -1,4 +1,4 @@
-class LoadMembresData < ActiveRecord::Migration
+class LoadMembresData < ActiveRecord::Migration[5.0]
   def self.up
     down
     

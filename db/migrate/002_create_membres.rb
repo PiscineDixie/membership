@@ -1,4 +1,4 @@
-class CreateMembres < ActiveRecord::Migration
+class CreateMembres < ActiveRecord::Migration[5.0]
   def self.up
     create_table :membres, :id => true, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.references :famille

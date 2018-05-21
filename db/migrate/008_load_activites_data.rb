@@ -1,4 +1,4 @@
-class LoadActivitesData < ActiveRecord::Migration
+class LoadActivitesData < ActiveRecord::Migration[5.0]
   def self.up
     down
       a = Activite.new(

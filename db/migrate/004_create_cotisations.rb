@@ -1,7 +1,7 @@
 #
 # Represente un paiement envers la cotisation annuelle et des activites
 #
-class CreateCotisations < ActiveRecord::Migration
+class CreateCotisations < ActiveRecord::Migration[5.0]
   def self.up
     create_table :cotisations, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.references :famille

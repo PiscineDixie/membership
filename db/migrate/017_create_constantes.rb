@@ -1,4 +1,4 @@
-class CreateConstantes < ActiveRecord::Migration
+class CreateConstantes < ActiveRecord::Migration[5.0]
   def self.up
     create_table :constantes do |t|
       t.decimal :baseSenior,                     :precision => 8, :scale => 2, :default => 0.0

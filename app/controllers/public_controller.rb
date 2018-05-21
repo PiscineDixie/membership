@@ -161,7 +161,7 @@ class PublicController < ApplicationController
     if @famille.update(famille_params(params))
       
       # Validation specifique pour le public. Notez que la db est deja a jour.
-      @famille.membres(true)
+      @famille.membres
       if !valid?(@famille)
         @famille.save!  # Ceci sauve les corrections faites
         @famille.membres.build if @famille.membres.empty?

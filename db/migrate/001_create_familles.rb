@@ -1,4 +1,4 @@
-class CreateFamilles < ActiveRecord::Migration
+class CreateFamilles < ActiveRecord::Migration[5.0]
   def self.up
     create_table :familles, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.string :adresse1

@@ -1,4 +1,4 @@
-class AddWhoCashToPaiements < ActiveRecord::Migration
+class AddWhoCashToPaiements < ActiveRecord::Migration[5.0]
   def self.up
     add_column :paiements, :par, :string, {:default => ''}
     add_column :paiements, :no_cheque, :integer, {:default => 0}

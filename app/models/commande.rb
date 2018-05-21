@@ -3,7 +3,7 @@ class Commande < ActiveRecord::Base
   
   belongs_to :famille, inverse_of: :commandes;
   has_many :achats, inverse_of: :commande, dependent: :delete_all
-  belongs_to  :paiement 
+  belongs_to  :paiement, optional: true 
   
   enum etat: [:entree, :payee, :commandee, :livree]
     

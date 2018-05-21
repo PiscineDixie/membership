@@ -16,7 +16,7 @@ class Cotisation < ActiveRecord::Base
   belongs_to :famille, inverse_of: :cotisation
   
   # Calculer automatiquement le cout des billets d'apres leur nombre
-  def initialize(parms = nil, options = {})
+  def initialize(parms)
     super
     if (parms && parms[:nombre_billets])
       self.cout_billets = Constantes.instance.cout_billet * parms[:nombre_billets].to_i

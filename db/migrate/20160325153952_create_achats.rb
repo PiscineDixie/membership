@@ -1,4 +1,4 @@
-class CreateAchats < ActiveRecord::Migration
+class CreateAchats < ActiveRecord::Migration[5.0]
   def change
     
     add_column :constantes, :tps, :decimal, precision: 8, scale: 6, default: 0.05

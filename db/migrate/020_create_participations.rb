@@ -1,4 +1,4 @@
-class CreateParticipations < ActiveRecord::Migration
+class CreateParticipations < ActiveRecord::Migration[5.0]
   def self.up
     create_table :participations, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.string :description_fr,  :null => false

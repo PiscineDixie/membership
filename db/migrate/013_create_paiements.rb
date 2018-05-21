@@ -1,4 +1,4 @@
-class CreatePaiements < ActiveRecord::Migration
+class CreatePaiements < ActiveRecord::Migration[5.0]
   def self.up
     create_table :paiements, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.references :famille

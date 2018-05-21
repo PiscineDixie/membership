@@ -4,7 +4,7 @@
 # Ces tables n'ont pas de colonne "id"
 #
 
-class CreateActivitesMembres < ActiveRecord::Migration
+class CreateActivitesMembres < ActiveRecord::Migration[5.0]
   def self.up
     create_table :activites_membres, :id => false, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
 

@@ -42,7 +42,8 @@ class Famille < ActiveRecord::Base
   
   
   # Creer une famille avec certains champs par default
-  def initialize(parms = nil, options = {})
+  # Override d'une method Rails. Souvent problematique lors update de versions.
+  def initialize(parms)
     tmpMembres = parms && parms.delete(:membres) || nil
     tmpCotisation = parms && parms.delete(:cotisation) || nil
     cleanParms(parms)

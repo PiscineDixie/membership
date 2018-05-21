@@ -1,4 +1,4 @@
-class LoadUsersData < ActiveRecord::Migration
+class LoadUsersData < ActiveRecord::Migration[5.0]
   def self.up
     aUser = User.new({:user_id => 'pierre', :roles => 'admin'})
       aUser.password='pierre'

@@ -39,8 +39,9 @@ class Membre < ActiveRecord::Base
   end
   
   
-  # Initializer.
-  def initialize(parms = nil, options = {})
+  # Initializer. This overrides a Rails method.
+  # Historical error prone when Rails changes its implementation
+  def initialize(parms)
     
     # Enlever les activites
     tmpActivites = parms && parms.delete(:activites) || nil
@@ -217,7 +218,7 @@ class Membre < ActiveRecord::Base
   # Retourner le nombre de membre par code postal
   # @return [[<qte de membres>, <ville>, <code post], ...]
   def self.codePostaux
-    return Famille.joins(:membres).group(:code_postal).order(:code_postal).pluck("count(*), ville, code_postal")
+    return Famille.joins(:membres).group(:code_postal, :ville).order(:code_postal).pluck("count(*), ville, code_postal")
   end
   
 end

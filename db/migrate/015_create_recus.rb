@@ -1,4 +1,4 @@
-class CreateRecus < ActiveRecord::Migration
+class CreateRecus < ActiveRecord::Migration[5.0]
   def self.up
     create_table :recus, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       t.references :famille

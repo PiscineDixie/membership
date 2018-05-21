@@ -1,4 +1,4 @@
-class CreateNotes < ActiveRecord::Migration
+class CreateNotes < ActiveRecord::Migration[5.0]
   def self.up
     create_table :notes, :options => 'ENGINE=InnoDB DEFAULT CHARSET=UTF8' do |t|
       
