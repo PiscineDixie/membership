@@ -3,7 +3,7 @@
 #
 class Employe < ActiveRecord::Base
       
-  establish_connection("#{Rails.env}_paie")
+  establish_connection("#{Rails.env}_paie".to_sym)
   
   def actif?
     return self.etat == 'actif'

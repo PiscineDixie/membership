@@ -94,7 +94,7 @@ Rails.application.configure do
   
   config.action_mailer.default_url_options = {
       :protocol => 'https',
-      :host => "apps.piscinedixiepool.com:8482"
+      :host => "apps.piscinedixiepool.com:8484"
   }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.default_options = { bcc: 'archives@piscinedixiepool.com' }
