@@ -1,6 +1,6 @@
 #
 # fabric file for deploying
-#   fab -u root -f deploy.py -H dixie backup deploy
+#   fab -H ec2-user@apps.piscinedixiepool.com deploy
 #
 
 import fabric.api
