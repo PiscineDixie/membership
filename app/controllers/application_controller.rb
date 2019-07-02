@@ -22,7 +22,7 @@ class ApplicationController < ActionController::Base
     def check_admin
         # Verifie que l'usager a le droit d'utiliser ce module
         unless session[:user] and User.hasAdminPriviledge(session[:user])
-          flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
+          flash[:error] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
           redirect_to(root_url)
           return false;
         end
@@ -32,7 +32,7 @@ class ApplicationController < ActionController::Base
     def check_su
         # Verifie que l'usager a le droit d'utiliser ce module
         unless session[:user] and User.hasSuperUserPriviledge(session[:user])
-          flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
+          flash[:error] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
           redirect_to(root_url)
           return false;
         end

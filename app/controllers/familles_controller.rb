@@ -4,8 +4,8 @@
 #
 class FamillesController < ApplicationController
   
-  before_action :check_su, :only =>[:debutAnnee, :annulerRabais]
-  before_action :check_admin, :only => [:courriel, :recus, :recu, :dues, :destroy, :exp_recus ]
+  before_action :check_su, only: [:debutAnnee, :annulerRabais]
+  before_action :check_admin, only: [:courriel, :recus, :recu, :dues, :destroy, :exp_recus ]
   before_action :authenticate, except: :instructions
   
   # GET /familles

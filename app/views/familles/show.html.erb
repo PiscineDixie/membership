@@ -19,11 +19,11 @@
       </li>
       <% if @famille.active? %>
       <li>
-        <%= link_to 'Rendre inactive', desactive_famille_path(@famille), method: :post %>
+        <%= button_to('Rendre inactive', desactive_famille_path(@famille), {class: "btn btn-default navbar-btn", method: :post}) %>
       </li>
       <% end %>
       <li>
-        <%= link_to 'Enlever famille', @famille, data: {confirm: 'Etes vous certain?'}, :method => :delete %>
+        <%= button_to('Enlever famille', @famille, {class: "btn btn-default navbar-btn", data: {confirm: 'Etes vous certain?'}, method: :delete}) %>
       </li>
       <% if @famille.active? && !@famille.cotisation.ecussons_remis %>
         <li>
