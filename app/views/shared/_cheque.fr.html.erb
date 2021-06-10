@@ -5,9 +5,7 @@
 <% end %>
 
 <h3>Effectuer votre paiement</h3>
-Vous pouvez payer par Interac, par chèque, ou comptant à la piscine. Nous préférons
-Interac si possible. (Pas de chèque, de timbre, d'enveloppe, de marche à la boîte aux lettres...
-Si ça n'existait pas, il faudrait l'inventer!)
+Nous n'acceptons plus que les paiements Interac.
 
 <h4>Paiement Interac</h4>
 <p>
@@ -18,21 +16,5 @@ de votre téléphone ou le site web de votre institution financière.
 Transférez <strong><%= number_with_precision(famille.totalDu, :precision => 2) %></strong> à 
 <strong>tresorier@piscinedixiepool.com</strong> avec la description <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>
 et une question où la réponse est <strong>piscine</strong>.
-</p>
-
-<h4>Paiement par chèque</h4>
-<p>Veuillez SVP libeller votre chèque à l'ordre de "Association Piscine Dixie Inc." et
-   l'expédier à l'adresse suivante:</p>
-
-<address style="padding-left: 20px;">
-  <strong>Association Piscine Dixie Inc.</strong><br/>
-  C.P. 34045, Galeries Lachine<br/>
-  Lachine, Qc<br/>
-  H8S 4H4<br/>
-</address>
-
-<p>
-  Ajouter une copie de ce message à votre envoi ou inscrivez sur votre chèque le numéro 
-  de référence suivant: <strong><%= Date.today.year.to_s + '-' + famille.id.to_s -%></strong>.
 </p>
 
