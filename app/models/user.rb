@@ -6,8 +6,8 @@ class User < ActiveRecord::Base
   validates_uniqueness_of :courriel
   validates_inclusion_of :roles, :in => User::Roles
   
-  def self.omniauth(auth)
-    courriel = auth.info.email
+  def self.from_google(google_sign_in)
+    courriel = google_sign_in.email_address
     # on cherche dans la table des usagers
     u = User.find_by(courriel: courriel);
     return u unless u.nil?;

@@ -218,7 +218,12 @@ class Membre < ActiveRecord::Base
   # Retourner le nombre de membre par code postal
   # @return [[<qte de membres>, <ville>, <code post], ...]
   def self.codePostaux
-    return Famille.joins(:membres).group(:code_postal, :ville).order(:code_postal).pluck("count(*), ville, code_postal")
+    r = Famille.joins(:membres).group(:code_postal, :ville).order(:code_postal).count
+    a = []
+    r.each do |code_ville, count | 
+      a.append([count, code_ville[0], code_ville[1]])
+    end
+    a
   end
   
 end

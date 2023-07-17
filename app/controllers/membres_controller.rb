@@ -61,7 +61,7 @@ class MembresController < ApplicationController
     @membre.saveActivites(params)
 
     respond_to do |format|
-      if @membre.update_attributes(membre_params(params))
+      if @membre.update(membre_params(params))
         flash[:notice] = 'Membre was successfully updated.'
         format.html { redirect_to([@famille, @membre]) }
         format.xml  { head :ok }

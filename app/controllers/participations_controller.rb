@@ -74,7 +74,7 @@ class ParticipationsController < ApplicationController
     end
     
     respond_to do |format|
-      if @participation.update_attributes(participation_params(params))
+      if @participation.update(participation_params(params))
         flash[:notice] = 'Activite was successfully updated.'
         format.html { redirect_to(@participation) }
         format.xml  { head :ok }

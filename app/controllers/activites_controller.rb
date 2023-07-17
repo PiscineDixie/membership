@@ -75,7 +75,7 @@ class ActivitesController < ApplicationController
     end
     
     respond_to do |format|
-      if @activite.update_attributes(activite_params(params))
+      if @activite.update(activite_params(params))
         flash[:notice] = 'Activite was successfully updated.'
         format.html { redirect_to(@activite) }
         format.xml  { head :ok }

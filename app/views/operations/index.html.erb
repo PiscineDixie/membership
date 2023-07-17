@@ -12,7 +12,7 @@
 <p>
   Cette opération élimine le rabais de pré-inscription pour tous les membres qui se sont abonnés lors
   de la période de pré-inscription mais qui n'ont pas envoyé au moins un paiement. Un courriel est expédié.
-  <%= button_to("Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'}, {class: "btn btn-default"}) %>
+  <%= button_to("Re-calcule cotisation", {:action => "annulerRabais", :controller => 'familles'}, {method: :post, class: "btn btn-default"}) %>
 </p>
 <div style="padding-bottom: 30px"></div>
 
@@ -28,11 +28,11 @@ profitent pour se ré-abonner.</p>
 
 <p>Je suggère la procédure suivante:</p>
 <ol>
-  <li>Générer les reçus: <%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {class: "btn btn-default"}) %></li>
+  <li>Générer les reçus: <%= button_to("Générer reçus", {:action => "recus", :controller => 'familles'}, {method: :post, class: "btn btn-default"}) %></li>
   <li>Attendre une journée. Ceci permet au backup de compléter avec toutes les données de l'année précédente.</li>
   <li>Modifier les constantes pour inscrire les nouveaux tarifs et la nouvelle date pour la fin du rabais de pré-inscription: <%= link_to 'Modifier constantes', edit_constante_path(Constantes.instance) %></li>
   <li>Remettre les données d'abonnement à zéro. Vous devez avoir le privilège de super user (voir la table des usagers) pour effectuer cette opération. Prend quelques minutes.<%= button_to("Remise à zéro", {:action => "debutAnnee", :controller => 'familles'},
-  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, class: "btn btn-danger"}) %></li>
+  {data: {confirm: "ATTENTION: Ceci efface toutes les données de l'année courante. Etes-vous certain?"}, method: :post, class: "btn btn-danger"}) %></li>
   <li>Expédier les reçus d'impôts: <%= button_to("Expédier reçus", {action: "exp_recus", controller: 'familles'},
-{data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, class: "btn btn-default"}) %></li>
+{data: {confirm: "ATTENTION: Ceci envoie un courriel à tous. Etes-vous certain?"}, method: :post, class: "btn btn-default"}) %></li>
 </ol>

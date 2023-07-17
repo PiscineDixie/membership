@@ -2,4 +2,8 @@
 
 <%= render partial: @constantes, locals: { button_name: "Enregistrer", readonly: true} %>
 
-<%= link_to 'Modifier', edit_constante_path(@constantes) %>
+<% if User.hasSuperUserPriviledge(session[:user]) %>
+  <%= link_to 'Modifier', edit_constante_path(@constantes) %>
+<% else %>
+  <p>Seul le "super-user" peut modifier.</p>
+<% end %>

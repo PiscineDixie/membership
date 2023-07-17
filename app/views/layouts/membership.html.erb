@@ -7,8 +7,6 @@
     <title>Abonnements</title>
     <%= stylesheet_link_tag "application", :media => "all", "data-turbolinks-track" => "reload" %>
     <%= javascript_include_tag "application", "data-turbolinks-track" => "reload" %>
-
-    <script src="https://apis.google.com/js/platform.js"></script
     <%= csrf_meta_tags %>
   </head>
 
@@ -108,11 +106,8 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right">
-            <li class="hidden">
-              <a href="" id="facebook_signin">Login avec Facebook</a>
-            </li>
             <li>
-              <a href="" id="google_signin">Login avec Google</a>
+              <%= google_sign_in_button 'Login avec Google', proceed_to: create_login_path %>
             </li>
           </ul>
         </div><!-- /.navbar-collapse -->

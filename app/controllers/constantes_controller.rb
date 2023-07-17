@@ -23,7 +23,7 @@ class ConstantesController < ApplicationController
     end
     
     @constantes = Constantes.instance
-    if @constantes.update_attributes(params[:constantes].permit!)
+    if @constantes.update(params[:constantes].permit!)
       flash[:notice] = 'Constantes was successfully updated.'
       redirect_to constante_path
     else

@@ -109,7 +109,7 @@ class PaiementsController < ApplicationController
     end
     
     datePrecedente = @paiement.date
-    if @paiement.update_attributes(paiement_params(params))
+    if @paiement.update(paiement_params(params))
       FamilleMailer.edit_paiement(@famille, @paiement, datePrecedente).deliver_now
       flash[:notice] = "Paiement modifié"
       redirect_to(@famille)
