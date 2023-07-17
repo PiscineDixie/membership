@@ -13,9 +13,10 @@
 <dt><%= Famille.human_attribute_name("code_postal") %></dt><dd><%= code_postal_fmt(@famille.code_postal) %></dd>
 <dt><%= Famille.human_attribute_name("tel_soir") %></dt><dd><%= number_to_phone(@famille.tel_soir) %></dd>
 <dt><%= Famille.human_attribute_name("tel_jour") %></dt><dd><%= number_to_phone(@famille.tel_jour) %></dd>
-<dt><%= Famille.human_attribute_name("courriel1") %></td><dd><%= @famille.courriel1 %></dd>
-<dt><%= Famille.human_attribute_name("courriel2") %></td><dd><%= @famille.courriel2 %></dd>
-<dt><%= Famille.human_attribute_name("langue") %></dt><dd><%= @famille.langue %></td></tr>
+<dt><%= Famille.human_attribute_name("courriel1") %></dt><dd><%= @famille.courriel1 %></dd>
+<dt><%= Famille.human_attribute_name("courriel2") %></dt><dd><%= @famille.courriel2 %></dd>
+<dt><%= Famille.human_attribute_name("courriel_desabonne") %></dt><dd><%= courriel_desabonne_fmt(@famille.courriel_desabonne) %></dd>
+<dt><%= Famille.human_attribute_name("langue") %></dt><dd><%= @famille.langue %></dd>
 </dl>
 </div>
 </div>

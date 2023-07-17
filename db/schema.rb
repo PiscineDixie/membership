@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_17_130220) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_17_162154) do
   create_table "achats", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "commande_id"
     t.integer "produit_id"
@@ -114,6 +114,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_130220) do
     t.string "code_acces", default: ""
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.boolean "courriel_desabonne", default: false, null: false
     t.index ["code_acces"], name: "par_code_acces", unique: true
   end
 

@@ -26,6 +26,7 @@ Rails.application.routes.draw do
   get "public/payer"     => 'public#payer'
   match "public/:id/recu" => 'public#recu', via: [:get, :post]
   get "public/:id/recupaiement" => 'public#recupaiement'
+  get "public/courriels_bloques" => 'public#courriels_bloques'
   resources :public
 
 

@@ -13,6 +13,8 @@ fr:
   public_valid_membre: "SVP ajouter au moins un membre à votre profil familial."
   public_valid_ticket: "L'achat de billets n'est permis que si un membre de la famille a plus de 10 ans le premier août."
   public_valid_age: "Au moins un membre de la famille doit être né avant le %{naissance} pour souscrire à un abonnement individuel. SVP ajoutez au moins un parent."
+  true: oui
+  false: non
   
   panier_cancel: "Commande annulée."
   
@@ -34,6 +36,7 @@ fr:
         courriel1: "Courriel"
         courriel2: "Autre courriel"
         langue: "Langue de correspondance"
+        courriel_desabonne: "Courriels bloqués"
         
       membre:
         ecussons:

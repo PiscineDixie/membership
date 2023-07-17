@@ -39,81 +39,22 @@
     </div>
     <div class="panel-body">
 
-      <dl class="dl-horizontal">
-        <dt>
-          Adresse
-        </dt>
-        <dd>
-          <%= @famille.adresse1 %>
-        </dd>
-        <dt>
-          Adresse
-        </dt>
-        <dd>
-          <%= @famille.adresse2 %>
-        </dd>
-        <dt>
-          Ville
-        </dt>
-        <dd>
-          <%= @famille.ville %>
-        </dd>
-        <dt>
-          Province
-        </dt>
-        <dd>
-          <%= @famille.province %>
-        </dd>
-        <dt>
-          Code postal
-        </dt>
-        <dd>
-          <%= code_postal_fmt(@famille.code_postal) %>
-        </dd>
-        <dt>
-          Tél soir
-        </dt>
-        <dd>
-          <%= number_to_phone(@famille.tel_soir) %>
-        </dd>
-        <dt>
-          Tél jour
-        </dt>
-        <dd>
-          <%= number_to_phone(@famille.tel_jour) %>
-        </dd>
-        <dt>
-          Courriel1</td>
-          <% if @famille.courriel1.empty? %>
-          <dd />
-          <% else %>
-          <dd>
-            <%= link_to @famille.courriel1, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel1 %>
-          </dd>
-          <% end %>
-        <dt>
-          Courriel2</td>
-          <% if @famille.courriel2.empty? %>
-          <dd />
-          <% else %>
-          <dd>
-            <%= link_to @famille.courriel2, :action => 'courriel', :langue => @famille.langue, :testAddr => @famille.courriel2 %>
-          </dd>
-          <% end %>
-        <dt>
-          Langue
-        </dt>
-        <dd>
-          <%= @famille.langue %></td></tr>
-          <dt>
-            Etat
-          </dt>
-        <dd>
-          <%= @famille.etat %></td></tr>
-      </dl>
-    </div>
+    <dl class="dl-horizontal">
+    <dt><%= Famille.human_attribute_name("adresse1") %></dt><dd><%= @famille.adresse1 %></dd>
+    <dt><%= Famille.human_attribute_name("adresse2") %></dt><dd><%= @famille.adresse2 %></dd>
+    <dt><%= Famille.human_attribute_name("ville") %></dt><dd><%= @famille.ville %></dd>
+    <dt><%= Famille.human_attribute_name("province") %></dt><dd><%= @famille.province %></dd>
+    <dt><%= Famille.human_attribute_name("code_postal") %></dt><dd><%= code_postal_fmt(@famille.code_postal) %></dd>
+    <dt><%= Famille.human_attribute_name("tel_soir") %></dt><dd><%= number_to_phone(@famille.tel_soir) %></dd>
+    <dt><%= Famille.human_attribute_name("tel_jour") %></dt><dd><%= number_to_phone(@famille.tel_jour) %></dd>
+    <dt><%= Famille.human_attribute_name("courriel1") %></dt><dd><%= @famille.courriel1 %></dd>
+    <dt><%= Famille.human_attribute_name("courriel2") %></dt><dd><%= @famille.courriel2 %></dd>
+    <dt><%= Famille.human_attribute_name("courriel_desabonne") %></dt><dd><%= courriel_desabonne_fmt(@famille.courriel_desabonne) %></dd>
+    <dt><%= Famille.human_attribute_name("langue") %></dt><dd><%= @famille.langue %></td>
+  </dl>
   </div>
-
+  </div>
+  
   <div class="panel panel-default">
     <div class="panel-heading">
       <h2 class="panel-title">Membres</h2>

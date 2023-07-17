@@ -90,6 +90,7 @@
       </div>
     </div>
 
+
     <div class="form-group">
       <label><%= Famille.human_attribute_name("langue") %></label>
       <div class="row">
@@ -99,6 +100,10 @@
           </select>
         </div>
       </div>
+    </div>
+
+    <div class="form-group">
+      <label><%= Famille.human_attribute_name("courriel_desabonne") =%></label>: <%= f.check_box :courriel_desabonne %>
     </div>
 
     <%= f.hidden_field :etat, :size => 2 %></td></tr>

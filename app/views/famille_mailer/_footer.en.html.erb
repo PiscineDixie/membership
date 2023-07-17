@@ -4,13 +4,16 @@
           <p>
             To access your membership profile: 
             <a href="<%= url_for(:only_path => false, :controller => 'public', :action => 'home', :fam_id => famille.code_acces) %>"> 
-            My profile</a> 
+            My profile</a>.
+
+            You may also <a href="<%= url_for(:only_path => false, :controller => 'public', :action => 'courriels_bloques', :fam_id => famille.code_acces) %>">
+            unsubscribe</a> from emails.
          </p>
         </td>
       </tr>
     <% end %>
     <tr>
-      <td align="center" height="40px" width="600px" background="http://www.piscinedixiepool.com/home/courriel_footer.jpg">
+      <td align="center" height="40px" width="600px" background="https://sites.google.com/a/piscinedixiepool.com/www/home/courriel_footer.jpg">
         <span style="font-weight:bold; font-size:18px;">Stay cool at Dixie!</span>
       </td>
     </tr>

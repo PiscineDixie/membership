@@ -16,6 +16,7 @@ class ApplicationController < ActionController::Base
           redirect_to(root_url)
           return false
         end
+        I18n.locale = :fr
         return true
     end
     

@@ -3,6 +3,8 @@ class FamilleMailer < ActionMailer::Base
 
   Tresorier = 'Piscine Dixie - Tresorier <tresorier@piscinedixiepool.com>'
   Abonnement = 'Piscine Dixie - Abonnements <abonnements@piscinedixiepool.com>'
+
+  helper :email
   
   # Methode pour expedier un courriel avec les recus d'impot
   def recu(famille, recus, to, parent)
@@ -39,7 +41,9 @@ class FamilleMailer < ActionMailer::Base
     @famille = famille
     @msg = msg
     l = I18n.locale
-    I18n.locale= lang.downcase
+    if lang.downcase != "ml"
+      I18n.locale= lang.downcase
+    end
     mail(:subject => subject, :template_name => "info")
     
     I18n.locale = l

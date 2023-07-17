@@ -219,6 +219,9 @@ class FamillesController < ApplicationController
           else
             familles = @langue == 'ml' ? Famille.all.find_each : Famille.langue(@langue).find_each
           end
+
+          # exclure ceux qui ne recoivent pas de courriels
+          familles = familles.select { |f| !f.courriel_desabonne }
           
           familles.each do | f |
             # Exclure les familles qui ne participent pas a cette activite

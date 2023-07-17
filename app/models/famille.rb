@@ -139,6 +139,12 @@ class Famille < ActiveRecord::Base
     
     return errors.empty?
   end
+
+  # Desabonner de l'envoi des courriels
+  def desabonner_courriels
+    self.courriel_desabonne = true
+    self.save!
+  end
   
   # Modifier les input parms pour eviter les erreurs stupides
   def cleanParms(parms)
@@ -207,7 +213,7 @@ class Famille < ActiveRecord::Base
   def courriels
     addrs = []
     addrs << self.courriel1 unless self.courriel1.nil? or self.courriel1.empty?
-    addrs << self.courriel2 unless self.courriel2.nil? or self.courriel2.empty?
+    addrs << self.courriel2 unless self.courriel2.nil? or self.courriel2.empty? or self.courriel2 == self.courriel1
     addrs
   end
   
