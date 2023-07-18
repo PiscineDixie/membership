@@ -208,16 +208,14 @@ class FamillesController < ApplicationController
             familles = Famille.inactives
             familles = familles.langue(@langue) unless @langue == 'ml'
             familles = familles.find_each
-          elsif actId == 102 then
-            familles = Famille.actives
-            familles = familles.langue(@langue) unless @langue == 'ml'
-            familles = familles.find_each
           elsif actId == 103 then # Avec cotisation due
             familles = Famille.actives
             familles = familles.langue(@langue) unless @langue == 'ml'
             familles = familles.to_a.select { |f| f.cotisationDue > 0 }
-          else
-            familles = @langue == 'ml' ? Famille.all.find_each : Famille.langue(@langue).find_each
+          else # familles actives (act_id = 102) ou vrai activity id
+            familles = Famille.actives
+            familles = familles.langue(@langue) unless @langue == 'ml'
+            familles = familles.find_each
           end
 
           # exclure ceux qui ne recoivent pas de courriels

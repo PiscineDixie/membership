@@ -3,23 +3,26 @@
 # accomplir eux-memes
 #
 
-class PublicController < ApplicationController
+class PublicController < ActionController::Base
 
   layout "public"
-  
+  helper :all # include all helpers, all the time
+  protect_from_forgery
+
   # Une authentification pour la famille
   before_action :famille_authenticate, :except => [:login, :login_en, :login_fr, :new, :create]
   
-  before_action :set_locale, only: [:login, :login_en, :login_fr, :new, :create]
-    
-  def set_locale
-    I18n.locale =  english? ? :en : :fr
+  # init locale apres authentication
+  around_action :set_locale
+  def set_locale(&action)
+    puts "set locale"
+    I18n.with_locale(english? ? :en : :fr, &action)
   end
    
   # Valider la permission de completer une activite
   def famille_authenticate
     @famille = nil
-    
+
     # Recuperer le code d'acces de la famille des parametres de la query si present
     id = params[:fam_id]
     if id && !id.empty? then
@@ -33,9 +36,7 @@ class PublicController < ApplicationController
     if @famille.nil? && session[:familleId]
       @famille = Famille.find_by_id(session[:familleId]);
     end
-    
-    set_locale
-    
+
     # Permettre l'operation si une famille, sinon on va au login
     if @famille.nil? then
       redirect_to :action => 'login'
@@ -181,11 +182,10 @@ class PublicController < ApplicationController
         FamilleMailer.cotisation_notif(@famille, @famille.courriels).deliver
       end
       
-      set_locale
       flash[:notice] = t(:public_upd_saved)
 
       if (!@famille.membres.empty? and @famille.cotisationDue() > 0)
-        render "shared/_abonnement", :locals => {:famille => @famille};
+        redirect_to '/public/payer'
       else
         redirect_to '/public/1'
       end

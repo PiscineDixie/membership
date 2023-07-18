@@ -42,7 +42,7 @@ class Cotisation < ActiveRecord::Base
   end
 
   def total
-    return self.cotisation_calculee + ajustements + billets;
+    return self.cotisation_calculee + self.ajustements() + self.billets();
   end
   
   # Argument est une instance de la class Famille.
@@ -53,10 +53,10 @@ class Cotisation < ActiveRecord::Base
     mFam = MontantCotisation.new
     mInd.asIndividu(self.famille)
     mFam.asFamille(self.famille)
-    familiale = mFam.total < mInd.total
+    familiale = mFam.net()  < mInd.net()
     mc =  familiale ? mFam : mInd
-    self.cotisation_calculee = mc.total
-    self.non_taxable = mc.totalNonTaxable
+    self.cotisation_calculee = mc.total()
+    self.non_taxable = mc.totalNonTaxable()
  
     # Si c'etait une cotisation familiale et maintenant individuel, on
     # enleve le rabais de pre-inscription
@@ -68,7 +68,7 @@ class Cotisation < ActiveRecord::Base
     self.familiale = familiale
 
     # Sauver les details de la cotisation pour affichage. Pas utilise par la logique.
-    desc = mc.description(self.famille.english?)
+    desc = mc.description(self.famille.english? ? :en : :fr)
     self.frais1 = desc[0][1]
     self.frais1_explication = desc[0][0]
     self.frais2 = desc.size > 1 ? desc[1][1] : 0

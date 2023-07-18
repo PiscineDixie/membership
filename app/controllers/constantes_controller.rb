@@ -24,7 +24,7 @@ class ConstantesController < ApplicationController
     
     @constantes = Constantes.instance
     if @constantes.update(params[:constantes].permit!)
-      flash[:notice] = 'Constantes was successfully updated.'
+      flash[:notice] = 'Constantes mises à jour.'
       redirect_to constante_path
     else
       render :action => "edit"

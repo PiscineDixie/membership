@@ -30,16 +30,21 @@
     </div>
 
     <div class="form-group">
+      <label>Adulte Additionel (>2 par famille)</label>
+      <%= f.text_field :adulte_additionel, readonly: readonly, class: 'form-control'  %>
+    </div>
+
+    <div class="form-group hidden">
       <label>Activité Sénior</label>
       <%= f.text_field :activiteSenior, readonly: readonly, class: 'form-control'  %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group hidden">
       <label>Activité Individu</label>
       <%= f.text_field :activiteIndividu, readonly: readonly, class: 'form-control'  %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group hidden">
       <label>Activité Famille</label>
       <%= f.text_field :activiteFamille, readonly: readonly, class: 'form-control'  %>
     </div>

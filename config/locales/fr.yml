@@ -22,7 +22,13 @@ fr:
     recu:
       subject: "Recus d'impot federal de Piscine Dixie, Famille %{nom}"
         
-        
+  cotisation:
+    base:      "Cotisation de base"
+    activite:  "Cotisation pour activités"
+    natation:  "Leçons de natation"
+    medailles: "Médaille/Croix de Bronze"
+    adultes_supp: "Adultes additionels en sus de famille de base"
+
   activerecord:
     attributes:
       famille:

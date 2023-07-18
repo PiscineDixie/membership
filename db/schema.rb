@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_18_145511) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_155950) do
   create_table "achats", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "commande_id"
     t.integer "produit_id"
@@ -70,6 +70,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_18_145511) do
     t.decimal "tps", precision: 8, scale: 6, default: "0.05"
     t.decimal "tvq", precision: 8, scale: 6, default: "0.09975"
     t.date "finCommandes"
+    t.decimal "adulte_additionel", precision: 8, scale: 2, default: "25.0", null: false
   end
 
   create_table "cotisations", id: :integer, charset: "utf8", force: :cascade do |t|

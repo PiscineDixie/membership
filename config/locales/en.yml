@@ -44,15 +44,22 @@ en:
   public_valid_membre: "Please add family members to your profile."
   public_valid_ticket: "Tickets purchasing requires that one family member must be at least 10 years old on the first of August."
   public_valid_age: "At least one family member must be born before %{naissance} to create an individual membership. Please add at least one parent."
-  true: true
-  false: false
+  true: yes
+  false: no
 
   panier_cancel: "Order cancelled."
   
   famille_mailer:
     recu:
       subject: "Income tax receipt from Dixie Pool, Family %{nom}"
-        
+
+  cotisation:
+    base:      "Base membership"
+    activite:  "Activity membership"
+    natation:  "Swimming lessons"
+    medailles: "Bronze Medal/Cross"
+    adultes_supp: "Extra adults beyond base membership"
+
   activerecord:
     attributes:
       famille:

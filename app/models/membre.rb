@@ -118,6 +118,11 @@ class Membre < ActiveRecord::Base
   def senior?
     Date.civil(Date.today().year, 8, 1).years_ago(65) > self.naissance 
   end
+
+  # Membre adulte dans l'annee courante avant le debut aout
+  def adulte?
+    Date.civil(Date.today().year, 8, 1).years_ago(18) > self.naissance
+  end
   
   # Membre eligible pour un recu d'impot pour la condition physique des enfants
   def eligibleRecu(annee = Date.today().year)

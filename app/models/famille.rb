@@ -191,7 +191,7 @@ class Famille < ActiveRecord::Base
   
   # Retourne true si la famille est inscrite mais n'a pas encore payee
   def inscrite?
-    self.paiementsTotal == 0 and !self.enRegle
+    self.paiementsTotal == 0 and !self.enRegle?
   end
   
   def english?
