@@ -219,11 +219,9 @@ class Membre < ActiveRecord::Base
   # @return [[<qte de membres>, <ville>, <code post], ...]
   def self.codePostaux
     r = Famille.joins(:membres).group(:code_postal, :ville).order(:code_postal).count
-    a = []
-    r.each do |code_ville, count | 
-      a.append([count, code_ville[0], code_ville[1]])
+    r.map do |code_ville, count | 
+      [count, code_ville[1], code_ville[0]]
     end
-    a
   end
   
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_07_17_162154) do
+ActiveRecord::Schema[7.0].define(version: 2023_07_18_145511) do
   create_table "achats", id: :integer, charset: "utf8", force: :cascade do |t|
     t.integer "commande_id"
     t.integer "produit_id"
@@ -31,6 +31,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_07_17_162154) do
     t.decimal "cout", precision: 8, scale: 2, default: "0.0"
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
+    t.decimal "cout2", precision: 8, scale: 2, default: "0.0", null: false
     t.index ["code"], name: "par_code", unique: true
   end
 

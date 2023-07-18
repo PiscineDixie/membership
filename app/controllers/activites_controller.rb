@@ -30,11 +30,8 @@ class ActivitesController < ApplicationController
   # GET /activites/new.xml
   def new
     @activite = Activite.new
-
-    respond_to do |format|
-      format.html # new.html.erb
-      format.xml  { render :xml => @activite }
-    end
+    # au debut on pouvait avoir un frais d'activite pour une famille. n'existe plus. hidden dans la view.
+    @activite.gratuite = true
   end
 
   # GET /activites/1/edit
@@ -51,16 +48,11 @@ class ActivitesController < ApplicationController
     end
     
     @activite = Activite.new(activite_params(params))
-
-    respond_to do |format|
-      if @activite.save
-        flash[:notice] = 'Activite was successfully created.'
-        format.html { redirect_to(@activite) }
-        format.xml  { render :xml => @activite, :status => :created, :location => @activite }
-      else
-        format.html { render :action => "new" }
-        format.xml  { render :xml => @activite.errors, :status => :unprocessable_entity }
-      end
+    if @activite.save
+      flash[:notice] = 'Activite mise à jour.'
+      redirect_to(@activite)
+    else
+      render :action => "new"
     end
   end
 
@@ -74,15 +66,11 @@ class ActivitesController < ApplicationController
       return;
     end
     
-    respond_to do |format|
-      if @activite.update(activite_params(params))
-        flash[:notice] = 'Activite was successfully updated.'
-        format.html { redirect_to(@activite) }
-        format.xml  { head :ok }
-      else
-        format.html { render :action => "edit" }
-        format.xml  { render :xml => @activite.errors, :status => :unprocessable_entity }
-      end
+    if @activite.update(activite_params(params))
+      flash[:notice] = 'Activite mise à jour.'
+      redirect_to(@activite)
+    else
+      render :action => "edit"
     end
   end
 
@@ -91,11 +79,7 @@ class ActivitesController < ApplicationController
   def destroy
     @activite = Activite.find(params[:id])
     @activite.destroy
-
-    respond_to do |format|
-      format.html { redirect_to(activites_url) }
-      format.xml  { head :ok }
-    end
+    redirect_to(activites_url)
   end
   
   # Generer une liste des membres pour une activite
@@ -106,8 +90,7 @@ class ActivitesController < ApplicationController
     @membres = @activite.membres.all.order(:nom, :prenom)
   end
 
-  # Generer une liste des membres pour une activite
-  # L'activite est dans le parametre "activite"
+  # rapport des groupes de natation
   def listeMembreNatation
     @activite = Activite::natation
   end
@@ -120,7 +103,7 @@ class ActivitesController < ApplicationController
   private
   
   def activite_params(params)
-    params.require(:activite).permit([:code, :description_fr, :description_en, :url_fr, :url_en, :gratuite, :cout])
+    params.require(:activite).permit([:code, :description_fr, :description_en, :url_fr, :url_en, :gratuite, :cout, :cout2])
   end
 
 end

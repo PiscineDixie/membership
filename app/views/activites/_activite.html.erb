@@ -37,14 +37,19 @@
       <%= f.text_field :url_en, class: 'form-control' %>
     </div>
 
-    <div class="form-group">
+    <div class="form-group hidden">
       <label>Gratuit</label>
       <%= f.select(:gratuite, {'oui' => 1, 'non' => 0}, {selected: (@activite.gratuite ? 1 : 0)}, {class: 'form-control'}) %>
     </div>
 
     <div class="form-group">
-      <label>Coût</label>
+      <label>Coût pour le premier membre</label>
       <%= f.text_field :cout, class: 'form-control' %>
+    </div>
+
+    <div class="form-group">
+      <label>Coût par membre additionel</label>
+      <%= f.text_field :cout2, class: 'form-control' %>
     </div>
 
     <%= f.submit button_name, :class => "btn btn-primary" %>

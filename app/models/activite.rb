@@ -1,7 +1,7 @@
 # coding: utf-8
 class Activite < ActiveRecord::Base
   
-  validates_numericality_of :cout
+  validates_numericality_of :cout, :cout2
   validates_uniqueness_of :code
   validates_presence_of :code, :description_fr
   
