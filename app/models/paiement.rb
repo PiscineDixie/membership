@@ -1,6 +1,9 @@
 # coding: utf-8
-class Paiement < ActiveRecord::Base
-
+class Paiement < ApplicationRecord
+  
+  include ActiveModel::Serializers::Xml
+  include ActiveModel::Serializers::JSON
+  
   enum methode: [ :cheque, :comptant, :interac ]
 
   validates_presence_of :montant, :date
@@ -83,7 +86,7 @@ class Paiement < ActiveRecord::Base
   end
   
   def self.paiements(debut, fin)
-    return Paiement.
+    Paiement.
       where("date >= :minDate and date <= :endDate", 
         {:minDate => debut.to_s(:db), :endDate => fin.to_s(:db)}).
       order(:created_at)

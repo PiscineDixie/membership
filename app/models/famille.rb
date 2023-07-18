@@ -2,7 +2,7 @@
 require 'digest/sha2'
 require 'recu'
 
-class Famille < ActiveRecord::Base
+class Famille < ApplicationRecord
   # Etats d'une famille:
   #  - inactif: famille connue mais non-re-inscrite
   #  - actif:   ayant complété son inscription

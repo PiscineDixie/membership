@@ -28,7 +28,7 @@
   </tfoot>
   
   <tbody>
-    <% Paiement.paiements(@debut, @fin).each do | p | %>
+    <% @paiements.each do | p | %>
     <tr>
       <td><%= p.updated_at.strftime("%m-%d %H:%M") %></td>
       <td><%= p.date.strftime("%m-%d") %></td>

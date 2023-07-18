@@ -1,5 +1,5 @@
 # coding: utf-8
-class Participation < ActiveRecord::Base
+class Participation < ApplicationRecord
   
   validates_presence_of :description_fr, :description_en
   

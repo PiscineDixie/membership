@@ -1,5 +1,5 @@
 # coding: utf-8
-class Membre < ActiveRecord::Base
+class Membre < ApplicationRecord
   
   Ecussons = ["Débutant", "Nageur", "Adulte"]
   

@@ -2,7 +2,7 @@
 # coding: utf-8
 # Class singleton pour les constantes d'operations
 #
-class Constantes < ActiveRecord::Base
+class Constantes < ApplicationRecord
   
   def self.instance
     cte = Constantes.take

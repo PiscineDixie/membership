@@ -1,5 +1,5 @@
 # coding: utf-8
-class Note < ActiveRecord::Base
+class Note < ApplicationRecord
 
   belongs_to :famille, inverse_of: :notes
   

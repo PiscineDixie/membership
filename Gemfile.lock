@@ -51,6 +51,10 @@ GEM
       globalid (>= 0.3.6)
     activemodel (7.0.6)
       activesupport (= 7.0.6)
+    activemodel-serializers-xml (1.0.2)
+      activemodel (> 5.x)
+      activesupport (> 5.x)
+      builder (~> 3.1)
     activerecord (7.0.6)
       activemodel (= 7.0.6)
       activesupport (= 7.0.6)
@@ -129,7 +133,7 @@ GEM
     method_source (1.0.0)
     mini_mime (1.1.2)
     minitest (5.18.1)
-    msgpack (1.7.1)
+    msgpack (1.7.2)
     multi_xml (0.6.0)
     mysql2 (0.5.5)
     net-imap (0.3.6)
@@ -241,6 +245,7 @@ PLATFORMS
   x86_64-darwin-22
 
 DEPENDENCIES
+  activemodel-serializers-xml
   autoprefixer-rails
   bootsnap
   byebug

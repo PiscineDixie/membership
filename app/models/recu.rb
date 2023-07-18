@@ -3,7 +3,7 @@
 #   yum install prawn
 
 # Class qui represente un recu pour l'impot
-class Recu < ActiveRecord::Base
+class Recu < ApplicationRecord
   
   belongs_to :famille, inverse_of: :recus
   

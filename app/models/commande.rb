@@ -1,5 +1,5 @@
 # coding: utf-8
-class Commande < ActiveRecord::Base
+class Commande < ApplicationRecord
   
   belongs_to :famille, inverse_of: :commandes;
   has_many :achats, inverse_of: :commande, dependent: :delete_all

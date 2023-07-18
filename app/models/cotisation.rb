@@ -11,7 +11,7 @@ require 'montant_cotisation'
 #  - exemption: Montant positif qui soustrait la cotisation. Permet d'offrir des cadeaux.
 #
 
-class Cotisation < ActiveRecord::Base
+class Cotisation < ApplicationRecord
 
   belongs_to :famille, inverse_of: :cotisation
   

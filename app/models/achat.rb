@@ -1,5 +1,5 @@
 # coding: utf-8
-class Achat < ActiveRecord::Base
+class Achat < ApplicationRecord
   
   validates_numericality_of :montant, :quantite
   

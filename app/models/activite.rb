@@ -1,5 +1,5 @@
 # coding: utf-8
-class Activite < ActiveRecord::Base
+class Activite < ApplicationRecord
   
   validates_numericality_of :cout, :cout2
   validates_uniqueness_of :code

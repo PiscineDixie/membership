@@ -38,7 +38,11 @@
 
 <h4>Membres</h4>
 <%= link_to "Statistiques", stats_familles_path  %><br/>
-<%= link_to "Cotisations",  cotisations_familles_path %><br/>
+Cotisations: 
+<%= link_to "HTML",  cotisations_familles_path %> /
+<%= link_to "XML", url_options = {controller: 'familles', action: 'cotisations', params: { fmt: :xml}} %> /
+<%= link_to "JSON", url_options = {controller: 'familles', action: 'cotisations', params: { fmt: :json}} %>
+<br/>
 <%= link_to "Ecussons et billets",  ecussons_familles_path %><br/>
 <%= link_to "Liste des membres séniors", :controller => 'membres', :action => 'seniors' %><br/>
 <%= link_to "Liste des familles sans courriels", :controller => 'familles', :action => 'pas_courriels' %><br/>
@@ -61,7 +65,9 @@
       <%= text_field_tag('fin', Date.today, {type: 'date', class: "form-control"})  %>
      </div>
   </div>
-  <%= submit_tag "Générer", :class => "btn btn-default"  %>
+  <%= submit_tag "HTML", :class => "btn btn-default"  %>
+  <%= submit_tag "XML", {name: 'xml', :class => "btn btn-default"}  %>
+  <%= submit_tag "JSON", {name: 'json', :class => "btn btn-default"}  %>
 <% end %>
 <hr/>
 

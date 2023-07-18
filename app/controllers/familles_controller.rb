@@ -334,6 +334,25 @@ class FamillesController < ApplicationController
   # Produire un rapport pour toutes les familles ayant calcule une cotisation
   def cotisations
     @familles = Famille.where("etat = ?", Famille::Etats[0]).sort_by { |f| [f.cotisation.created_at, f.nom] }
+    if params[:fmt]
+      recs = @familles.map { |f| { 
+          created_at: f.cotisation.created_at,
+          id: f.id, 
+          nom: f.nom, 
+          adresse: f.adressePostale,
+          cotisation: f.cotisation.total, 
+          paiements: f.paiementTotal,
+          du: f.cotisationDue
+        }
+      }
+      if params[:fmt] == 'xml'
+        send_data recs.to_xml, filename: 'cotisations.xml', type: "application/xml" 
+      else
+        send_data recs.to_json, filename: 'cotisations.json', type: "application/json"
+      end
+      return
+    end
+    # continue pour html
   end
 
 

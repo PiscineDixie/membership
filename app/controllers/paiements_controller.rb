@@ -124,6 +124,15 @@ class PaiementsController < ApplicationController
   def revenus
     @debut = Date.parse(params['debut'])
     @fin   = Date.parse(params['fin'])
+    @paiements = Paiement.paiements(@debut, @fin)
+    if params[:xml]
+      render :xml => @paiements
+      return
+    elsif params[:json]
+      render :json => @paiements
+      return
+    end
+
   end
 
   # Les dépots bancaire à préparer pour l'interval donné
