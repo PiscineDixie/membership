@@ -18,7 +18,7 @@ fr:
       cotisation_expl: "Obtenez un reçu pour le paiement de votre cotisation."
       cotisation_bouton: "Obtenir un reçu pour paiement"
       cotisation_na: "Suite à vos paiements, vous pourrez obtenir un reçu officiel ici."
-      impot_titre: "Reçu d'impôt"
+      impot_titre: "Reçu d'impôt pour activités des enfants"
       impot_msg: "Entrez le nom de la personne au nom de laquelle le reçu sera émis. Ce reçu s'applique
             aux frais payés par tous les membres éligibles. Il est expédié par courriel."
       impot_label_nom: "Nom"

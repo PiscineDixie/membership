@@ -18,7 +18,7 @@ en:
       cotisation_expl: "Generate a receipt for your membership fees."
       cotisation_bouton: "Generate receipt"
       cotisation_na: "Once your payment is processed, you will be able to generate a receipt here."
-      impot_titre: "Income Tax Receipts"
+      impot_titre: "Income Tax Receipts for Childen's Activities"
       impot_msg: "Enter the name of the person to which the receipts are written. A receipt is issued for each eligible child. 
                   Receipts are sent to the email addresses in your family profile."
       impot_label_nom: "Name"
