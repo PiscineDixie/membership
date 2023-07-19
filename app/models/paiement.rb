@@ -3,7 +3,7 @@ class Paiement < ApplicationRecord
   
   include ActiveModel::Serializers::Xml
   include ActiveModel::Serializers::JSON
-  
+
   enum methode: [ :cheque, :comptant, :interac ]
 
   validates_presence_of :montant, :date
@@ -58,14 +58,14 @@ class Paiement < ApplicationRecord
   def self.sumRange(debut, fin, colonne)
     Paiement.
       where("date >= :minDate and date <= :endDate", 
-        {:minDate => debut.to_s(:db), :endDate => fin.to_s(:db)}).
+        {:minDate => debut.to_formatted_s(:db), :endDate => fin.to_formatted_s(:db)}).
       sum(colonne)
   end
 
   def self.sumMontantMethode(debut, fin, methode)
     Paiement.
       where("date >= :minDate and date <= :endDate and methode = :methode", 
-        {minDate: debut.to_s(:db), endDate: fin.to_s(:db), methode: Paiement.methodes[methode]}).
+        {minDate: debut.to_formatted_s(:db), endDate: fin.to_formatted_s(:db), methode: Paiement.methodes[methode]}).
       sum(:montant)
   end
   
@@ -88,7 +88,7 @@ class Paiement < ApplicationRecord
   def self.paiements(debut, fin)
     Paiement.
       where("date >= :minDate and date <= :endDate", 
-        {:minDate => debut.to_s(:db), :endDate => fin.to_s(:db)}).
+        {:minDate => debut.to_formatted_s(:db), :endDate => fin.to_formatted_s(:db)}).
       order(:created_at)
   end
 end

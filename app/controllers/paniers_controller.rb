@@ -3,6 +3,7 @@ class PaniersController < ApplicationController
   layout "public"
   
   before_action :create_panier
+  around_action :set_locale
   
   def create_panier
     @panier = session[:panier];
@@ -10,10 +11,12 @@ class PaniersController < ApplicationController
       @panier = session[:panier] = Panier.new
     end
     @famille = Famille.find_by_id(session[:familleId])
-    I18n.locale= @famille.english?  ? :en : :fr
-    
   end
   
+  def set_locale(&action)
+    I18n.with_locale(@famille.english? ? :en : :fr, &action)
+  end
+
   def show
     @produits = Produit.all
   end

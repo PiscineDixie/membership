@@ -1,5 +1,5 @@
 # coding: utf-8
-class PaiementsController < ApplicationController
+class PaiementsController < AdminController
 
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
   before_action :load_famille, :except => [:revenus, :depots]
@@ -127,9 +127,10 @@ class PaiementsController < ApplicationController
     @paiements = Paiement.paiements(@debut, @fin)
     if params[:xml]
       render :xml => @paiements
+      send_data @paiements.to_xml, filename: 'paiements.xml', type: "application/xml" 
       return
     elsif params[:json]
-      render :json => @paiements
+      send_data @paiements.to_json filename: 'paiements.json', type: "application/json" 
       return
     end
 

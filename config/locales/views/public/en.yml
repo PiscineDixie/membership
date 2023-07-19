@@ -28,7 +28,7 @@ en:
     show:
       titre: "Profile"
       coordonnees: "Family Information"
-      membres_titre: "Family Members"
+      membres_titre: "Members"
       membres_nom: "Name"
       membres_naissance: "Birthday"
       membres_activites: "Activities"

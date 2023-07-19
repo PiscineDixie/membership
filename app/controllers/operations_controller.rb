@@ -1,7 +1,7 @@
 # coding: utf-8
 # Classe pour preparer une demande de rapports
 #
-class OperationsController < ApplicationController
+class OperationsController < AdminController
 
   before_action :authenticate
   

@@ -1,5 +1,5 @@
 # coding: utf-8
-class ProduitsController < ApplicationController
+class ProduitsController < AdminController
   
   before_action :check_admin
   

@@ -1,6 +1,6 @@
 # coding: utf-8
 
-class CommandesController < ApplicationController
+class CommandesController < AdminController
 
   before_action :authenticate
 

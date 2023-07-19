@@ -1,7 +1,7 @@
 #
 # Controller pour faire le login/logout des usagers
 #
-class SessionsController < ApplicationController
+class SessionsController < AdminController
   # This avoids CSRF checking when posting the auth code
   skip_before_action :verify_authenticity_token, :only => [:create, :reject]
     

@@ -2,7 +2,7 @@
 #
 # Controlleur pour les operations d'une famille
 #
-class FamillesController < ApplicationController
+class FamillesController < AdminController
   
   before_action :check_su, only: [:debutAnnee, :annulerRabais]
   before_action :check_admin, only: [:courriel, :recus, :recu, :dues, :destroy, :exp_recus ]

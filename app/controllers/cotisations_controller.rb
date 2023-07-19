@@ -1,5 +1,5 @@
 # coding: utf-8
-class CotisationsController < ApplicationController
+class CotisationsController < AdminController
 
   before_action :check_admin, :only => [:edit, :update, :destroy]
   before_action :authenticate, :except => [:edit, :update, :destroy]

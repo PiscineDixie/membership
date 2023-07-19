@@ -1,5 +1,5 @@
 # coding: utf-8
-class UsersController < ApplicationController
+class UsersController < AdminController
   
   before_action :check_admin
   

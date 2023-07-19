@@ -48,7 +48,7 @@ class Commande < ApplicationRecord
       achat.quantite = item.quantite
       achat.montant = item.montant
       commande.total = commande.total + achat.montant
-      achat.save!(achat)
+      achat.save!
     end
     
     commande.save!

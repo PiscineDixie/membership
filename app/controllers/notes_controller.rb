@@ -1,5 +1,5 @@
 # coding: utf-8
-class NotesController < ApplicationController
+class NotesController < AdminController
 
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
   before_action :load_famille, :only => [:show, :new, :create]
@@ -65,7 +65,7 @@ class NotesController < ApplicationController
     @fin   = Date.parse(params['fin'])
     @notes = Note.order("famille_id, date").
               where("date >= :minDate and date <= :endDate", 
-              {:minDate => @debut.to_s(:db), :endDate => @fin.to_s(:db)})
+              {:minDate => @debut.to_formatted_s(:db), :endDate => @fin.to_formatted_s(:db)})
   end
 
 end

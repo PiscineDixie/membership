@@ -3,11 +3,9 @@
 # accomplir eux-memes
 #
 
-class PublicController < ActionController::Base
+class PublicController < ApplicationController
 
   layout "public"
-  helper :all # include all helpers, all the time
-  protect_from_forgery
 
   # Une authentification pour la famille
   before_action :famille_authenticate, :except => [:login, :login_en, :login_fr, :new, :create]
@@ -15,7 +13,6 @@ class PublicController < ActionController::Base
   # init locale apres authentication
   around_action :set_locale
   def set_locale(&action)
-    puts "set locale"
     I18n.with_locale(english? ? :en : :fr, &action)
   end
    

@@ -1,7 +1,7 @@
 # coding: utf-8
 # Controller pour forcer le login de l'application
 #
-class LoginController < ApplicationController
+class LoginController < AdminController
   
   layout "membership"
 

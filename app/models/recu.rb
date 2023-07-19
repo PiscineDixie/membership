@@ -27,9 +27,9 @@ class Recu < ApplicationRecord
   
   def oneRecu(doc, parent)
     # Les images pour le background, le logo, la signature du tresorier
-    doc.image "public/images/recu.png", :at => [0, 200]
-    doc.image "public/images/logo112x87.png", :at => [370, 195], :fit => [56, 44]
-    doc.image "public/images/signature_recu.png", :at => [280, 80], :fit => [147,42]
+    doc.image "public/images/recus/recu.png", :at => [0, 200]
+    doc.image "public/images/recus/logo112x87.png", :at => [370, 195], :fit => [56, 44]
+    doc.image "public/images/recus/signature_recu.png", :at => [280, 80], :fit => [147,42]
 
     # Boite avec les informations principales du recu
     doc.bounding_box([5,180], :width => 500) do
@@ -42,10 +42,10 @@ class Recu < ApplicationRecord
       doc.move_down 10
       doc.text "Nom/Name: " + parent
       doc.text "Enfant/Child: " + self.prenom + ' ' + self.nom
-      doc.text "Date de naissance/Date of birth: " + self.naissance.to_s(:db)
+      doc.text "Date de naissance/Date of birth: " + self.naissance.to_formatted_s(:db)
       doc.text "Montant reçu/Total amount: " + sprintf('$%6.2f', self.montant)
       doc.text "Montant éligible/Deductible amount: " + sprintf('$%6.2f', self.montant)
-      doc.text "Date d'inscription/Date received: " + self.montant_recu.to_s(:db)
+      doc.text "Date d'inscription/Date received: " + self.montant_recu.to_formatted_s(:db)
     end
     
     # Boite avec les coordonnes de la piscine. En haut a droite avec le logo dedans

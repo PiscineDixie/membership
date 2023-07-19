@@ -6,30 +6,28 @@ ruby "3.2.2"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.6"
 gem 'activemodel-serializers-xml'
+gem 'rails-i18n'
 
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use the Puma web server [https://github.com/puma/puma]
-gem "puma", "~> 5.0"
-
 gem 'mysql2'
-gem 'prawn'
-gem 'google_sign_in'
 
+gem 'google_sign_in'
 
 gem 'coffee-rails'
 gem 'jquery-rails'
 gem "twitter-bootstrap-rails"
 gem 'autoprefixer-rails'
-gem 'rails-i18n'
 gem 'bootsnap'
 gem "sassc-rails"
 
-# missing dep in sprawn
+# pdf generation
+gem 'prawn'
 gem 'matrix'
 
 group :development do
+  gem "puma", "~> 5.0"
   gem 'web-console'
   gem 'byebug'
   gem 'listen'

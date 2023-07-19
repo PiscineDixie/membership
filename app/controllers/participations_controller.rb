@@ -1,5 +1,5 @@
 # coding: utf-8
-class ParticipationsController < ApplicationController
+class ParticipationsController < AdminController
   before_action :check_admin, except: :index
   before_action :authenticate, only: :index
 

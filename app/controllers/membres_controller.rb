@@ -1,5 +1,5 @@
 # coding: utf-8
-class MembresController < ApplicationController
+class MembresController < AdminController
   
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
   before_action :load_famille, :except => [:seniors, :index, :sommaire]
@@ -87,12 +87,13 @@ class MembresController < ApplicationController
   # Rapport de tous les membres
   def index
     @membres = Membre.order('nom, prenom')
+
   end
   
   # Rapport des membres seniors.
   def seniors
     # Faire une liste approximative de la db
-    @membres = Membre.where("naissance < ?", Date.civil(Date.today.year - 60, 12, 31).to_s(:db)).order('nom, prenom').to_a
+    @membres = Membre.where("naissance < ?", Date.civil(Date.today.year - 60, 12, 31).to_formatted_s(:db)).order('nom, prenom').to_a
     @membres.reject! { |m| !m.senior? } unless @membres.empty?
   end
   

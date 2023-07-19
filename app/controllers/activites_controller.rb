@@ -1,5 +1,5 @@
 # coding: utf-8
-class ActivitesController < ApplicationController
+class ActivitesController < AdminController
   before_action :check_su, :only => :update
   before_action :authenticate, :except => :update
   
