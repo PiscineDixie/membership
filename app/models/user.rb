@@ -6,8 +6,7 @@ class User < ApplicationRecord
   validates_uniqueness_of :courriel
   validates_inclusion_of :roles, :in => User::Roles
   
-  def self.from_google(google_sign_in)
-    courriel = google_sign_in.email_address
+  def self.from_courriel(courriel)
     # on cherche dans la table des usagers
     u = User.find_by(courriel: courriel);
     return u unless u.nil?;

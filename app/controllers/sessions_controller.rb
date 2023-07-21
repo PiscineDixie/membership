@@ -2,13 +2,11 @@
 # Controller pour faire le login/logout des usagers
 #
 class SessionsController < AdminController
-  # This avoids CSRF checking when posting the auth code
-  skip_before_action :verify_authenticity_token, :only => [:create, :reject]
-    
+
   def create
     if id_token = flash[:google_sign_in][:id_token]
       id = GoogleSignIn::Identity.new(id_token)
-      user = User.from_google(id)
+      user = User.from_courriel(id.email_address)
       if user.nil?
         flash[:notice] = "Accès refusé à #{id.email_address}."
       else
