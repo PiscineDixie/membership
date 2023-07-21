@@ -126,11 +126,10 @@ class PaiementsController < AdminController
     @fin   = Date.parse(params['fin'])
     @paiements = Paiement.paiements(@debut, @fin)
     if params[:xml]
-      render :xml => @paiements
-      send_data @paiements.to_xml, filename: 'paiements.xml', type: "application/xml" 
+      send_data @paiements.to_xml, filename: 'revenus.xml', type: "application/xml" 
       return
     elsif params[:json]
-      send_data @paiements.to_json filename: 'paiements.json', type: "application/json" 
+      send_data @paiements.to_json, filename: 'revenus.json', type: "application/json" 
       return
     end
 
