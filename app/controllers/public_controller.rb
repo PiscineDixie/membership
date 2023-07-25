@@ -37,9 +37,6 @@ class PublicController < ApplicationController
     # Permettre l'operation si une famille, sinon on va au login
     if @famille.nil? then
       redirect_to :action => 'login'
-      return false
-    else
-      return true 
     end
   end
   

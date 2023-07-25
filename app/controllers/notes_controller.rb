@@ -2,8 +2,8 @@
 class NotesController < AdminController
 
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
-  before_action :load_famille, :only => [:show, :new, :create]
   before_action :authenticate
+  before_action :load_famille, :only => [:show, :new, :create]
   
   def load_famille
     @famille = Famille.find(params[:famille_id])

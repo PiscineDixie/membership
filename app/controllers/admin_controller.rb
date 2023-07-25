@@ -14,31 +14,25 @@ class AdminController < ApplicationController
     end
     
     def authenticate
-        unless session[:user]
-          redirect_to(root_url)
-          return false
-        end
-        return true
+      unless session[:user]
+        redirect_to(root_url)
+       end
     end
     
     def check_admin
-        # Verifie que l'usager a le droit d'utiliser ce module
-        unless session[:user] and User.hasAdminPriviledge(session[:user])
-          flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
-          redirect_to(root_url)
-          return false;
-        end
-        return true
+      # Verifie que l'usager a le droit d'utiliser ce module
+      unless session[:user] and User.hasAdminPriviledge(session[:user])
+        flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
+        redirect_to(root_url)
+      end
     end
     
     def check_su
         # Verifie que l'usager a le droit d'utiliser ce module
-        unless session[:user] and User.hasSuperUserPriviledge(session[:user])
-          flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
-          redirect_to(root_url)
-          return false;
-        end
-        return true
+      unless session[:user] and User.hasSuperUserPriviledge(session[:user])
+        flash[:notice] = "Vous n'avez pas le niveau de privilège suffisant pour ces opérations."
+        redirect_to(root_url)
+      end
     end
     
 end

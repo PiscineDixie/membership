@@ -2,8 +2,8 @@
 class PaiementsController < AdminController
 
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
-  before_action :load_famille, :except => [:revenus, :depots]
   before_action :check_admin
+  before_action :load_famille, :except => [:revenus, :depots]
   
   def load_famille
     @famille = Famille.find(params[:famille_id])

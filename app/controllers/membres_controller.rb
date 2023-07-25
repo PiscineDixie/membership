@@ -2,8 +2,8 @@
 class MembresController < AdminController
   
   # Pour permettre d'acceder lorsque precede d'une famille dans le URL (REST)
-  before_action :load_famille, :except => [:seniors, :index, :sommaire]
   before_action :authenticate
+  before_action :load_famille, :except => [:seniors, :index, :sommaire]
   
   def load_famille
     @famille = Famille.find(params[:famille_id])
