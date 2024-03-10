@@ -11,7 +11,7 @@ class Activite < ApplicationRecord
   #
   # Constantes
   #
-  CoursDeNatation = ["Etoile de mer", "Canard", "Tortue", "Loutre de mer", "Salamandre", "Poisson-lune", "Crocodile", "Baleine", "Junior 1", "Junior 2", "Junior 3", "Junior 4", "Junior 5", "Junior 6", "Junior 7", "Junior 8", "Junior 9", "Junior 10", "Etoile de Bronze"]
+  CoursDeNatation = ["Parent et enfant 1", "Parent et enfant 2", "Parent et enfant 3", "Préscolaire 1", "Préscolaire 2", "Préscolaire 3", "Préscolaire 4", "Préscolaire 5", "Nageur 1", "Nageur 2", "Nageur 3","Nageur 4","Nageur 5","Nageur 6","Jeune  Initié", "Jeune Sauveteur Averti","Jeune Sauveteur Expert"]
   SessionCoursDeNatation = ["matin en semaine", "soir en semaine"]
   
   # Ces codes doivent etre dans la base de donnees.
