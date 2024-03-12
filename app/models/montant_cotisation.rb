@@ -163,7 +163,7 @@ class MontantCotisation
     elsif !act.gratuite
       raise "La Croix de Bronze doit être gratuite dans Activites."
     elsif act.cout == 0 or act.cout2 == 0
-      raise "La Croix de Bronze doit avoir un coût dans Activites."
+      # raise "La Croix de Bronze doit avoir un coût dans Activites."
     end
     
     act = Activite.find_by_code(Activite::CodeMedailleDeBronze)
@@ -172,7 +172,7 @@ class MontantCotisation
     elsif !act.gratuite
       raise "La Médaille de Bronze doit être gratuite dans Activites."
     elsif act.cout == 0 or act.cout2 == 0
-      raise "La Médaille de Bronze doit avoir un coût dans Activites."
+      # raise "La Médaille de Bronze doit avoir un coût dans Activites."
     end
   end
 
