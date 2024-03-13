@@ -114,14 +114,14 @@ class Membre < ApplicationRecord
     Date.civil(Date.today().year, 8, 1).years_ago(15) < self.naissance
   end
   
-  # Membre ayant plus de 65 ans dans l'annee courante avant le debut aout
+  # Membre ayant plus de 65 ans dans l'annee courante avant le debut juin
   def senior?
-    Date.civil(Date.today().year, 8, 1).years_ago(65) > self.naissance 
+    Date.civil(Date.today().year, 6, 1).years_ago(65) > self.naissance 
   end
 
-  # Membre adulte dans l'annee courante avant le debut aout
+  # Membre adulte dans l'annee courante avant le debut juin
   def adulte?
-    Date.civil(Date.today().year, 8, 1).years_ago(18) > self.naissance
+    Date.civil(Date.today().year, 6, 1).years_ago(18) > self.naissance
   end
   
   # Membre eligible pour un recu d'impot pour la condition physique des enfants
