@@ -18,7 +18,7 @@ class Famille < ApplicationRecord
   validates_length_of :code_postal, :is => 6, :message => 'doit avoir 6 caractères'
   validates :tel_soir, length: { maximum: 20}
   validates :tel_jour, length: { maximum: 20}
-  validates_format_of :code_postal, :with => /\A[A-Z][1-9][A-Z][1-9][A-Z][1-9]\z/, :message => 'doit contenir des chiffres et des majuscules'
+  validates_format_of :code_postal, :with => /\A[A-Z][0-9][A-Z][0-9][A-Z][0-9]\z/, :message => 'doit contenir des chiffres et des majuscules'
   validates_size_of :membres, :minimum => 1, :on => :create, :message => '-- au moins un'
   
   has_many :membres, inverse_of: :famille, dependent: :destroy  # Destroy pour mettre a jour le lien avec les activites
