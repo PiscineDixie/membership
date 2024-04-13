@@ -1,6 +1,43 @@
 <h1>Accès à votre profil</h1>
 <%= link_to "English", {:action => "login_en", :controller => 'public'} %>
 <br/><br/>
+
+<p>
+Ce logiciel est utilisé pour gérer les abonnements de la Piscine Dixie.
+</p>
+
+
+<h3>Inscription</h3>
+<p>Vous devez créer un profil familial contenant votre adresse,
+les membres de la famille, leurs activités, etc. Le logiciel calcule ensuite votre cotisation et vous l'expédie par
+courriel.
+</p>
+<%= button_to "Je désire m'inscrire", {action: "new", controller: 'public'}, {method: :get, class: 'btn btn-primary'} %>
+
+
+<h3>Accès à votre profil</h3>
+<p>Les courriels que vous recevez de Piscine Dixie incluent un lien pour accéder directement à votre
+profil. Si vous avez une adresse courriel inscrite à votre profil, vous pouvez entrer cette
+adresse pour obtenir immédiatement un nouveau courriel avec votre lien personnel:</p>
+</p>
+
+<%= form_tag :action => 'login' do %>
+<div class="form-group">
+ <label>Adresse Courriel</label>
+ <div class="row">
+ <div class="col-xs-4 col-lg-2">
+  <%= text_field_tag :courriel, params[:courriel], class: 'form-control' %>
+ </div>
+ </div>
+</div>
+
+<%= submit_tag "Expédier courriel",  class: 'btn btn-default' %>
+<% end %>
+
+<div style="padding-bottom: 20px;"></div>
+
+
+<div style="display:none">
 <p>
   Ce logiciel est utilisé pour gérer les abonnements de la Piscine Dixie. Si vous êtes déjà
   membre vous pouvez accéder à votre profil. Les nouveaux membres peuvent créer un profil.
@@ -39,3 +76,4 @@ courriel.
 <%= button_to "Je désire m'inscrire", {action: "new", controller: 'public'}, {method: :get, class: 'btn btn-primary'} %>
 
 
+</div>

@@ -1,6 +1,45 @@
 <h1>Profile login</h1>
 <%= link_to "Français", {:action => "login_fr", :controller => 'public'} %>
 <br/><br/>
+
+
+<p>
+  This program is used by Dixie Pool members to manage their membership information.
+</p>
+
+<h3>Becoming a Memmber</h3>
+<p>
+  You have to create a family profile. This
+  profile includes your address, the family members and their activities, etc.
+  From this your membership fee is computed and emailed to you.
+</p>
+<%= button_to "Register", {:action => "new", :controller => 'public'}, {method: :get, class: 'btn btn-primary'} %>
+
+
+<h3>Accessing your Profile</h3>
+<p>The emails that you receive from Dixie Pool include a link that gets you directly into
+your profile. If your profile includes an email address, you can enter it below to obtain
+immediately a new email with your personal link.
+</p>
+
+<%= form_tag :action => 'login' do %>
+  <div class="form-group">
+   <label>Email address</label>
+   <div class="row">
+   <div class="col-xs-4 col-lg-2">
+    <%= text_field_tag :courriel, params[:courriel], class: 'form-control' %>
+   </div>
+   </div>
+  </div>
+  <%= submit_tag "Send email",  class: 'btn btn-default'  %>
+<% end %>
+
+<div style="padding-bottom: 20px;"></div>
+<br/>
+
+
+<div style="hidden">
+
 <p>
   This program is used by Dixie Pool members to update their membership information. New members can create their profile.
 </p>
@@ -38,3 +77,4 @@ If we do not recognize your email address, you may create a new profile using th
 <%= button_to "Register", {:action => "new", :controller => 'public'}, {method: :get, class: 'btn btn-primary'} %>
 
 
+</div>
